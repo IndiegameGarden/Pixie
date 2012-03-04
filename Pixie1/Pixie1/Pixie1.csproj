@@ -109,6 +109,9 @@
   <ItemGroup>
     <Compile Include="BadPixel.cs" />
     <Compile Include="BlinikBehaviour.cs" />
+    <Compile Include="ColorCycleBehavior.cs" />
+    <Compile Include="SubtitleText.cs" />
+    <Compile Include="Toy.cs" />
     <Compile Include="PixieControl.cs" />
     <Compile Include="PixieKeyControl.cs" />
     <Compile Include="Pixie.cs" />

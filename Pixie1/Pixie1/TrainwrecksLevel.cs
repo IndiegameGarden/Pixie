@@ -61,12 +61,27 @@ namespace Pixie1
             Add(bp);
         }
 
+        void InitToys()
+        {
+            Toy test = new Toy();
+            test.MotionP.Target = PIXIE_STARTING_POS + new Vector2(10f, 0f);
+            test.MotionP.TargetSpeed = 18.0f; // TODO
+            Add(test);
+        }
+
         protected override void OnNewParent()
         {
             base.OnNewParent();
 
             InitPixie();
             InitBadPixels();
+            InitToys();
+
+            // just testing
+            SubtitleText t = new SubtitleText("Hi! I'm Pixie.");
+            t.StartTime = 2.0f;
+            t.Duration = 4.0f;
+            Add(t);
 
             debugMsg = new DebugMessage("debug");
             debugMsg.DrawInfo.DrawColor = Color.CornflowerBlue;
