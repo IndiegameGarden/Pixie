@@ -18,12 +18,8 @@ namespace Pixie1
         {
             cyclePeriod = RandomMath.RandomBetween(0.2f, 1.82f);
             ColorCycleBehavior cycl = new ColorCycleBehavior(cyclePeriod);
-            cycl.minR = RandomMath.RandomBetween(0.3f, 0.5734f); ;
-            cycl.maxR = 0.9434f;
-            cycl.minG = 0f;
-            cycl.maxG = RandomMath.RandomBetween(0.7f, 1f); ;
-            cycl.minB = RandomMath.RandomBetween(0.1f, 0.54f); ;
-            cycl.maxB = 0.9f;
+            cycl.minColor = new Color(RandomMath.RandomBetween(0.3f, 0.5734f), RandomMath.RandomBetween(0.7f, 1f), RandomMath.RandomBetween(0.1f, 0.54f));
+            cycl.maxColor = new Color(0.9434f, 0.9f, RandomMath.RandomBetween(0.8f,1.0f) );
             cycl.timePeriodR = cyclePeriod * RandomMath.RandomBetween(1.02f, 1.537f); ;
             cycl.timePeriodG = cyclePeriod * RandomMath.RandomBetween(0.7f, 0.93f); ;
             Add(cycl);

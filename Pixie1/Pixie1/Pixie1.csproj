@@ -111,7 +111,9 @@
     <Compile Include="BlinikBehaviour.cs" />
     <Compile Include="ColorCycleBehavior.cs" />
     <Compile Include="Level.cs" />
+    <Compile Include="PixieLogo.cs" />
     <Compile Include="SubtitleText.cs" />
+    <Compile Include="TitleScreen.cs" />
     <Compile Include="Toy.cs" />
     <Compile Include="PixieControl.cs" />
     <Compile Include="PixieKeyControl.cs" />

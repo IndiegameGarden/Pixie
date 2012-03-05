@@ -59,6 +59,12 @@ namespace Pixie1
             //level
             Gamelet level = new TrainwrecksLevel();
             mainScreenlet.Add(level);
+            level.Active = false;
+
+            // title screen
+            TitleScreen titles = new TitleScreen();
+            mainScreenlet.Add(titles);
+            titles.Active = true;
 
             base.LoadContent();
         }

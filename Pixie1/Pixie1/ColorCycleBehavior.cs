@@ -11,7 +11,9 @@ namespace Pixie1
     {
         public float timePeriod;
         public float timePeriodR, timePeriodG, timePeriodB;
-        public float minB, maxB, minG, maxG, minR, maxR;
+        //public float minB, maxB, minG, maxG, minR, maxR;
+        public Color minColor;
+        public Color maxColor;
 
         public ColorCycleBehavior(float timePeriod)
         {
@@ -26,7 +28,10 @@ namespace Pixie1
             float t = 2 * (SimTime % timePeriod); // TODO SimTime is not the time related to the Draw!
             if (t > timePeriod ) // gen sawtooth wave
                 t = 2*timePeriod - t;
-            Color col = new Color((t / timePeriodR) * (maxR - minR) + minR, (t / timePeriodG) * (maxG - minG) + minG, (t / timePeriodB) * (maxB - minB) + minB);
+            Color col = new Color( (int)  ((t / timePeriodR) * (maxColor.R - minColor.R) + minColor.R),
+                                   (int)  ((t / timePeriodG) * (maxColor.G - minColor.G) + minColor.G),
+                                   (int)  ((t / timePeriodB) * (maxColor.B - minColor.B) + minColor.B)
+                                 );
             Parent.DrawInfo.DrawColor = col;
             
         }

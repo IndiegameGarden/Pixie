@@ -25,15 +25,29 @@ namespace Pixie1
         /// <summary>
         /// displacement (in pixels) of the shadow below subtitles
         /// </summary>
-        public Vector2 ShadowVector = new Vector2(1f, 1f);
+        public Vector2 ShadowVector = new Vector2(2f, 2f);
 
-        protected string text;
+        protected string[] text;
+        protected float[] timings;
         protected SpriteFont spriteFont;
+        bool doReplace;
 
         public SubtitleText( string initialText)
             : base()
         {
-            text = initialText;
+            text = new string[] { initialText };
+            timings = new float[] { 0f };
+            doReplace = false;
+            DrawInfo.DrawColor = Color.White;
+            spriteFont = TTengineMaster.ActiveGame.Content.Load<SpriteFont>("Subtitles1");
+            AutoPosition();
+        }
+
+        public SubtitleText(string[] multiText, float[] timings, bool doReplace)
+        {
+            this.text = multiText;
+            this.timings = timings;
+            this.doReplace = doReplace;
             DrawInfo.DrawColor = Color.White;
             spriteFont = TTengineMaster.ActiveGame.Content.Load<SpriteFont>("Subtitles1");
             AutoPosition();
@@ -43,11 +57,12 @@ namespace Pixie1
         {
             get
             {
-                return text;
+                return text[0];
             }
             set
             {
-                text = value;
+                text[0] = value;
+                timings = new float[] { 0f };
                 AutoPosition();
             }
         }
@@ -60,9 +75,24 @@ namespace Pixie1
         protected override void OnDraw(ref DrawParams p)
         {
             Vector2 pos = DrawInfo.DrawPosition;
-            MySpriteBatch.DrawString(spriteFont, text, pos + ShadowVector, Color.Black, 0f, Vector2.Zero, ScaleVector, SpriteEffects.None, DrawInfo.LayerDepth + 0.001f);
-            MySpriteBatch.DrawString(spriteFont, text, pos - ShadowVector, Color.DarkGray, 0f, Vector2.Zero, ScaleVector, SpriteEffects.None, DrawInfo.LayerDepth + 0.001f); 
-            MySpriteBatch.DrawString(spriteFont, text, pos, DrawInfo.DrawColor, 0f, Vector2.Zero, ScaleVector, SpriteEffects.None, DrawInfo.LayerDepth);
+            String curText = "";
+            if (text.Length > 0)
+            {
+                for (int i = 0; i < text.Length; i++ )
+                {
+                    if (timings[i] <= SimTime)
+                    {
+                        if (doReplace)
+                            curText = text[i];
+                        else
+                            curText += "\n" + text[i];
+                    }
+                }
+            }
+            float sc = Motion.ScaleAbs;
+            MySpriteBatch.DrawString(spriteFont, curText, pos + ShadowVector, Color.Black, 0f, Vector2.Zero, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth + 0.001f);
+            MySpriteBatch.DrawString(spriteFont, curText, pos - ShadowVector, Color.DarkGray, 0f, Vector2.Zero, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth + 0.001f);
+            MySpriteBatch.DrawString(spriteFont, curText, pos, DrawInfo.DrawColor, 0f, Vector2.Zero, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth);
         }
     }
 }
