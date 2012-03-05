@@ -15,7 +15,7 @@ namespace Pixie1
         public Pixie()
             : base("pixie")
         {
-            DrawInfo.DrawColor = new Color(251, 101, 159); // pink
+            DrawInfo.DrawColor = Level.PIXIE_COLOR; // 
         }
 
         protected override void OnUpdate(ref UpdateParams p)

@@ -110,6 +110,7 @@
     <Compile Include="BadPixel.cs" />
     <Compile Include="BlinikBehaviour.cs" />
     <Compile Include="ColorCycleBehavior.cs" />
+    <Compile Include="Level.cs" />
     <Compile Include="SubtitleText.cs" />
     <Compile Include="Toy.cs" />
     <Compile Include="PixieControl.cs" />

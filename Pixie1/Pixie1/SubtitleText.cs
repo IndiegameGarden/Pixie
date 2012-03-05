@@ -17,6 +17,16 @@ namespace Pixie1
      */
     public class SubtitleText : Drawlet
     {
+        /// <summary>
+        /// scaling vector for subtitles text (horizontal scale, vertical scale)
+        /// </summary>
+        public Vector2 ScaleVector = new Vector2(2f, 1.5f);
+
+        /// <summary>
+        /// displacement (in pixels) of the shadow below subtitles
+        /// </summary>
+        public Vector2 ShadowVector = new Vector2(1f, 1f);
+
         protected string text;
         protected SpriteFont spriteFont;
 
@@ -50,9 +60,9 @@ namespace Pixie1
         protected override void OnDraw(ref DrawParams p)
         {
             Vector2 pos = DrawInfo.DrawPosition;
-            MySpriteBatch.DrawString(spriteFont, text, pos + new Vector2(1f,1f), Color.Black, 0f, Vector2.Zero, 2f, SpriteEffects.None, DrawInfo.LayerDepth + 0.001f);
-            MySpriteBatch.DrawString(spriteFont, text, pos + new Vector2(-1f, -1f), Color.DarkGray, 0f, Vector2.Zero, 2f, SpriteEffects.None, DrawInfo.LayerDepth + 0.001f); 
-            MySpriteBatch.DrawString(spriteFont, text, pos, DrawInfo.DrawColor, 0f, Vector2.Zero, 2f, SpriteEffects.None, DrawInfo.LayerDepth);
+            MySpriteBatch.DrawString(spriteFont, text, pos + ShadowVector, Color.Black, 0f, Vector2.Zero, ScaleVector, SpriteEffects.None, DrawInfo.LayerDepth + 0.001f);
+            MySpriteBatch.DrawString(spriteFont, text, pos - ShadowVector, Color.DarkGray, 0f, Vector2.Zero, ScaleVector, SpriteEffects.None, DrawInfo.LayerDepth + 0.001f); 
+            MySpriteBatch.DrawString(spriteFont, text, pos, DrawInfo.DrawColor, 0f, Vector2.Zero, ScaleVector, SpriteEffects.None, DrawInfo.LayerDepth);
         }
     }
 }

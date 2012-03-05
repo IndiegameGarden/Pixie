@@ -20,8 +20,7 @@ namespace Pixie1
     /// </summary>
     public class PixieGame : Game
     {
-        public static Gamelet TreeRoot;
-        public static Vector2 ViewPos;
+        public static Gamelet TreeRoot;        
 
         GraphicsDeviceManager graphics;
         int myWindowWidth = 1024; 

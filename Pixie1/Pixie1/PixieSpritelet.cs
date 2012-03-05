@@ -25,7 +25,7 @@ namespace Pixie1
             base.OnUpdate(ref p);
 
             //PixieGame.ViewPos in pixels
-            Motion.Position = Screen.Center + Motion.ScaleAbs * (  FromPixels( MotionP.Position - PixieGame.ViewPos)); // TODO ViewPos smoothing using Draw cache
+            Motion.Position = Screen.Center + Motion.ScaleAbs * (  FromPixels( MotionP.Position - Level.ViewPos)); // TODO ViewPos smoothing using Draw cache
 
             /* JUST DOC
                             // calculate Position from Motion
