@@ -12,11 +12,13 @@ namespace Pixie1
     public class TitleScreen: Drawlet
     {
         public MotionBehavior MotionB;
-        SubtitleText cuteText;
+        SubtitleText cuteText, helpText;
         float timeEscDown = 0f;
         const float DEFAULT_SCALE = 1f;
         PixieLogo pixieLogo;
         Pixie pixie;
+        GameMusic gameMusic;
+        Spritelet ttLogo;
 
         public TitleScreen()
         {
@@ -32,6 +34,14 @@ namespace Pixie1
             cuteText.Duration = 12.5f;
             Add(cuteText);
 
+            helpText = new SubtitleText("SPACE  Play!\n  C         Credits\n ESC       Exit");
+            helpText.StartTime = 13.5f;
+            helpText.Motion.Scale = 0.7f;
+            helpText.DrawInfo.DrawColor = Color.AntiqueWhite;
+            helpText.Motion.Position = new Vector2(0.2f, 0.6f);
+            Add(helpText);
+
+
             pixieLogo = new PixieLogo();
             pixieLogo.Motion.Scale = 20.0f;
             pixieLogo.Motion.Position = new Vector2(0.65f, 0.4f);
@@ -40,6 +50,13 @@ namespace Pixie1
 
             MotionB = new MotionBehavior();
             Add(MotionB);
+
+            gameMusic = new GameMusic();
+            Add(gameMusic);
+
+            ttLogo = new Spritelet("tt-logo-4");
+            ttLogo.Motion.Position = new Vector2(1.05f, 0.02f);
+            Add(ttLogo);
         }
 
         protected override void OnUpdate(ref UpdateParams p)
@@ -55,14 +72,16 @@ namespace Pixie1
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 timeEscDown += p.Dt;
-                MotionB.ScaleTarget = 1.4f * DEFAULT_SCALE;
-                MotionB.ScaleSpeed = 0.00002f;
+                MotionB.ScaleTarget = 0.7f * DEFAULT_SCALE;
+                MotionB.ScaleSpeed = 0.003f;
+                gameMusic.Volume = (1f - timeEscDown);
             }
             else
             {
                 timeEscDown = 0f;
                 MotionB.ScaleTarget = DEFAULT_SCALE; // TODO
-                MotionB.ScaleSpeed = 0.00003f;
+                MotionB.ScaleSpeed = 0.0045f;
+                gameMusic.Volume = 1.0f;
             }
             if (timeEscDown > 1.0f)
                 TTengineMaster.ActiveGame.Exit();

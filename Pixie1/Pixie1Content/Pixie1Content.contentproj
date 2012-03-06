@@ -90,8 +90,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="psych256.png">
-      <Name>psych256</Name>
+    <Compile Include="B01.mp3">
+      <Name>B01</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="A01.mp3">
+      <Name>A01</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="tt-logo-4.png">
+      <Name>tt-logo-4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
