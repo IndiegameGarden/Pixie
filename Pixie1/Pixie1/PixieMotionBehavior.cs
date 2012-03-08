@@ -11,7 +11,7 @@ namespace TTengine.Util
 {
     public class PixieMotionBehavior : Motion
     {
-        public const float MIN_VELOCITY = 1.0f;
+        public const float MIN_VELOCITY = 0.1f;
 
         /// <summary>
         /// sets a target position for cursor to move towards in pixels
@@ -52,8 +52,8 @@ namespace TTengine.Util
             // motion towards target
             Vector2 vDif = (Target - Position);
             Velocity = vDif * TargetSpeed; 
-            if (Velocity.Length() < MIN_VELOCITY)
-                Velocity *= ( MIN_VELOCITY / Velocity.Length() );
+            if (Velocity.Length() < MIN_VELOCITY*TargetSpeed)
+                Velocity *= ( MIN_VELOCITY*TargetSpeed / Velocity.Length() );
             if (vDif.Length() < 0.1f) // TODO const
             {
                 Velocity = Vector2.Zero;

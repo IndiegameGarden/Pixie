@@ -11,6 +11,8 @@ using Microsoft.Xna.Framework.Media;
 using TTengine.Core;
 using TTengine.Util;
 using TTengine.Modifiers;
+using TTMusicEngine;
+using TTMusicEngine.Soundevents;
 
 
 namespace Pixie1
@@ -26,6 +28,10 @@ namespace Pixie1
         int myWindowWidth = 1024; 
         int myWindowHeight = 768; 
         PixieScreenlet mainScreenlet;
+        MusicEngine musicEngine;
+        static Level level;
+        static TitleScreen titleScreen;
+        static FinalScreen finalScreen;
 
         public PixieGame()
         {
@@ -41,6 +47,12 @@ namespace Pixie1
         {
             TTengineMaster.Create(this);
 
+            // open the TTMusicEngine
+            musicEngine = MusicEngine.GetInstance();
+            musicEngine.AudioPath = "Content";
+            if (!musicEngine.Initialize())
+                throw new Exception(musicEngine.StatusMsg);
+
             // from here on, main screen
             mainScreenlet = new PixieScreenlet(myWindowWidth, myWindowHeight);
             TTengineMaster.ActiveScreen = mainScreenlet;
@@ -53,20 +65,43 @@ namespace Pixie1
 
         protected override void LoadContent()
         {
-            mainScreenlet.Add(new FrameRateCounter(1.0f, 0f)); // TODO
-            mainScreenlet.Add(new ScreenZoomer()); // TODO remove
+            //mainScreenlet.Add(new FrameRateCounter(1.0f, 0f)); // TODO
+            //mainScreenlet.Add(new ScreenZoomer()); // TODO remove
 
             //level
-            Gamelet level = new TrainwrecksLevel();
+            level = new TrainwrecksLevel();
             mainScreenlet.Add(level);
             level.Active = false;
 
             // title screen
-            TitleScreen titles = new TitleScreen();
-            mainScreenlet.Add(titles);
-            titles.Active = true;
+            titleScreen = new TitleScreen();
+            mainScreenlet.Add(titleScreen);
+            titleScreen.Active = true;
+
+            // test final screen
+            finalScreen = new FinalScreen();
+            mainScreenlet.Add(finalScreen);
+            finalScreen.Active = false;
 
             base.LoadContent();
+        }
+
+        public static void StartPlay()
+        {
+            titleScreen.Active = false;
+            level.Active = true;
+        }
+
+        public static void StopPlay()
+        {
+            titleScreen.Active = true;
+            level.Active = false;
+        }
+
+        public static void WinGame()
+        {
+            level.Active = false;
+            finalScreen.Active = true;
         }
 
         protected override void Update(GameTime gameTime)

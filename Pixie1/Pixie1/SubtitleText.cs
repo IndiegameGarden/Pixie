@@ -27,9 +27,11 @@ namespace Pixie1
         /// </summary>
         public Vector2 ShadowVector = new Vector2(2f, 2f);
 
+        public bool Shadow = true;
+
         protected string[] text;
         protected float[] timings;
-        protected SpriteFont spriteFont;
+        public SpriteFont SubtitleFont;
         bool doReplace;
 
         public SubtitleText( string initialText)
@@ -39,7 +41,7 @@ namespace Pixie1
             timings = new float[] { 0f };
             doReplace = false;
             DrawInfo.DrawColor = Color.White;
-            spriteFont = TTengineMaster.ActiveGame.Content.Load<SpriteFont>("Subtitles1");
+            SubtitleFont = TTengineMaster.ActiveGame.Content.Load<SpriteFont>("Subtitles1");
             AutoPosition();
         }
 
@@ -49,7 +51,7 @@ namespace Pixie1
             this.timings = timings;
             this.doReplace = doReplace;
             DrawInfo.DrawColor = Color.White;
-            spriteFont = TTengineMaster.ActiveGame.Content.Load<SpriteFont>("Subtitles1");
+            SubtitleFont = TTengineMaster.ActiveGame.Content.Load<SpriteFont>("Subtitles1");
             AutoPosition();
         }
 
@@ -90,9 +92,12 @@ namespace Pixie1
                 }
             }
             float sc = Motion.ScaleAbs;
-            MySpriteBatch.DrawString(spriteFont, curText, pos + ShadowVector, Color.Black, 0f, Vector2.Zero, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth + 0.001f);
-            MySpriteBatch.DrawString(spriteFont, curText, pos - ShadowVector, Color.DarkGray, 0f, Vector2.Zero, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth + 0.001f);
-            MySpriteBatch.DrawString(spriteFont, curText, pos, DrawInfo.DrawColor, 0f, Vector2.Zero, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth);
+            if (Shadow)
+            {
+                MySpriteBatch.DrawString(SubtitleFont, curText, pos + ShadowVector, Color.Black, 0f, Vector2.Zero, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth + 0.0001f);
+                MySpriteBatch.DrawString(SubtitleFont, curText, pos - ShadowVector, Color.DarkGray, 0f, Vector2.Zero, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth + 0.0002f);
+            }
+            MySpriteBatch.DrawString(SubtitleFont, curText, pos, DrawInfo.DrawColor, 0f, Vector2.Zero, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth);
         }
     }
 }

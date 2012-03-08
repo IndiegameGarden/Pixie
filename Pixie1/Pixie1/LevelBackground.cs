@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace Pixie1
         MotionBehavior MotionB;
 
         public LevelBackground(string bitmapFileName, float motionSpeed)
-            : base(bitmapFileName)
+            : base("bg2045.png")
         {
             MotionB = new MotionBehavior();
             Add(MotionB);

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TTengine.Core;
 using TTengine.Util;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Pixie1
 {
@@ -13,11 +15,37 @@ namespace Pixie1
         public PixieMotionBehavior MotionP;
 
         public PixieSpritelet(string bitmapFile)
-            : base(bitmapFile)
-        {            
+            : base()
+        {
+            if (bitmapFile.Contains("."))
+                LoadBitmap(bitmapFile);
+            this.fileName = bitmapFile;
+            InitTextures();
+
             MotionP = new PixieMotionBehavior();
             Add(MotionP);
 
+        }
+
+        protected void LoadBitmap(string fn)
+        {
+            // load texture
+            FileStream fs = null;
+            try
+            {
+                fs = new FileStream(TTengineMaster.ActiveGame.Content.RootDirectory + "\\" + fn, FileMode.Open);
+                Texture2D t = Texture2D.FromStream(Screen.graphicsDevice, fs);
+                Texture = t;
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+            finally
+            {
+                if (fs != null)
+                    fs.Close();
+            }            
         }
 
         protected override void OnUpdate(ref UpdateParams p)

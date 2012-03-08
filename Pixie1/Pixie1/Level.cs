@@ -113,18 +113,19 @@ namespace Pixie1
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 timeEscDown += p.Dt;
-                MotionB.ScaleTarget = 3f*DEFAULT_SCALE;
-                MotionB.ScaleSpeed = 0.01f;
+                MotionB.ScaleTarget = 1.5f*DEFAULT_SCALE;
+                MotionB.ScaleSpeed = 0.0004f;
                 //Motion.RotateModifier = timeEscDown * 0.05f;
             }
             else
             {
                 timeEscDown = 0f;
                 MotionB.ScaleTarget = DEFAULT_SCALE; // TODO
-                //MotionB.ZoomSpeed = 0.0018f;
             }
             if (timeEscDown > 1.0f)
-                TTengineMaster.ActiveGame.Exit();
+            {
+                PixieGame.StopPlay();
+            }
 
         }
 

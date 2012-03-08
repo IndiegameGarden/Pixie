@@ -11,16 +11,17 @@ namespace Pixie1
 {
     public class PixieLogo: Spritelet
     {
-        Spritelet bg;
+        public Spritelet bg;
         SpriteBatch spriteBatch;
         float bgColMultiplier = 0.3f;
 
-        public PixieLogo(): base("pixielogo")
+        public PixieLogo(string logoGraphics)
+            : base(logoGraphics)
         {
             bg = new Spritelet("psych");
             bg.DrawInfo.DrawColor = Color.White * bgColMultiplier;
             bg.Motion.Scale = 2.0f;
-            Add(bg);
+            //Add(bg);
             bg.Visible = false; // do draw ourselves
             spriteBatch = new SpriteBatch(Screen.graphicsDevice);
 
@@ -40,10 +41,10 @@ namespace Pixie1
 
 
             //
-            float f = (SimTime % 4.0f) / 4.0f ;
+            //float f = (SimTime % 4.0f) / 4.0f ;
             //if (bg.MotionP.Target.X < bg.MotionP.Position.X)
             //    bg.MotionP.Position.X = bg.MotionP.Target.X;
-            float g = (SimTime % 20.0f)/20.0f;
+            //float g = (SimTime % 20.0f)/20.0f;
             //Vector2 v = new Vector2(bg.Texture.Width * (0.2f + 0.7f * f), bg.Texture.Height * (0.1f + 0.8f * g));
             float freq = 0.0123f;
             Vector2 v = new Vector2( (float) Math.Cos(MathHelper.TwoPi * freq * SimTime), (float) Math.Sin(MathHelper.TwoPi * freq * SimTime) );
@@ -56,12 +57,11 @@ namespace Pixie1
         {
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null,null);
 
-            spriteBatch.Draw(bg.Texture, bg.DrawInfo.DrawPosition, null, bg.DrawInfo.DrawColor,
-                   bg.Motion.RotateAbs, /*MotionP.Position*/ Vector2.Zero, bg.DrawInfo.DrawScale, SpriteEffects.None, 0.9f);
+            //spriteBatch.Draw(bg.Texture, bg.DrawInfo.DrawPosition, null, bg.DrawInfo.DrawColor,
+            //       bg.Motion.RotateAbs, /*MotionP.Position*/ Vector2.Zero, bg.DrawInfo.DrawScale, SpriteEffects.None, 0.9f);
             spriteBatch.Draw(Texture, DrawInfo.DrawPosition, null, DrawInfo.DrawColor,
                Motion.RotateAbs, DrawInfo.DrawCenter, DrawInfo.DrawScale, SpriteEffects.None, 0.1f);
             spriteBatch.End();
-
             
         }
 
