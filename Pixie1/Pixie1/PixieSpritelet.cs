@@ -23,6 +23,7 @@ namespace Pixie1
             InitTextures();
 
             MotionP = new PixieMotionBehavior();
+            MotionP.TargetSpeed = 1f;
             Add(MotionP);
 
         }

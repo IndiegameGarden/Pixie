@@ -71,7 +71,7 @@ namespace Pixie1
 
         protected void AutoPosition()
         {
-            Motion.Position = new Vector2(0.1f, 0.8f);
+            Motion.Position = new Vector2(0.05f, 0.8f);
         }
 
         protected override void OnDraw(ref DrawParams p)
@@ -92,12 +92,13 @@ namespace Pixie1
                 }
             }
             float sc = Motion.ScaleAbs;
+            Vector2 origin = Vector2.Zero; // new Vector2(((float)curText.Length) / 40f, 0f);
             if (Shadow)
             {
-                MySpriteBatch.DrawString(SubtitleFont, curText, pos + ShadowVector, Color.Black, 0f, Vector2.Zero, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth + 0.0001f);
-                MySpriteBatch.DrawString(SubtitleFont, curText, pos - ShadowVector, Color.DarkGray, 0f, Vector2.Zero, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth + 0.0002f);
+                MySpriteBatch.DrawString(SubtitleFont, curText, pos + ShadowVector, Color.Black, 0f, origin, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth + 0.0001f);
+                MySpriteBatch.DrawString(SubtitleFont, curText, pos - ShadowVector, Color.DarkGray, 0f, origin, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth + 0.0002f);
             }
-            MySpriteBatch.DrawString(SubtitleFont, curText, pos, DrawInfo.DrawColor, 0f, Vector2.Zero, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth);
+            MySpriteBatch.DrawString(SubtitleFont, curText, pos, DrawInfo.DrawColor, 0f, origin, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth);
         }
     }
 }

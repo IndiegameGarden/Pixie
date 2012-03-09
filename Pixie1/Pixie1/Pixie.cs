@@ -21,8 +21,7 @@ namespace Pixie1
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
-            //MotionB.Target = TargetPos; // FIXME mappin to screen
-            //MotionB.TargetSpeed = 1f;
         }
+
     }
 }

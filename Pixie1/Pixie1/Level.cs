@@ -38,6 +38,7 @@ namespace Pixie1
         protected Pixie pixie;
         protected PixieControl keyControl; // for pixie
         protected DebugMessage debugMsg;
+        protected SubtitleText subTitles;
 
         float timeEscDown = 0f;
         
@@ -46,6 +47,7 @@ namespace Pixie1
         {
             MotionB = new MotionBehavior();
             Add(MotionB);
+
         }
 
         /// <summary>
@@ -93,10 +95,11 @@ namespace Pixie1
         protected override void OnNewParent()
         {
             base.OnNewParent();
-
-            debugMsg = new DebugMessage("debug");
-            debugMsg.DrawInfo.DrawColor = Color.CornflowerBlue;
+            debugMsg = new DebugMessage();
             Parent.Add(debugMsg);
+
+            //subTitles = new SubtitleText();
+            //Parent.Add(subTitles);
 
             Motion.Scale = DEFAULT_SCALE;
             InitLevel();
@@ -104,7 +107,6 @@ namespace Pixie1
             InitBadPixels();
             InitToys();
             InitLevelSpecific();
-
         }
 
         /// check keys specific for level

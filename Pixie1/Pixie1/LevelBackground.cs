@@ -14,16 +14,16 @@ namespace Pixie1
     {
         Vector2 HALF_PIXEL_OFFSET = new Vector2(0.5f, 0.0f);
         SpriteBatch spriteBatch;
-        MotionBehavior MotionB;
+        //PixieMotionBehavior MotionB;
 
         public LevelBackground(string bitmapFileName, float motionSpeed)
             : base("bg2045.png")
         {
-            MotionB = new MotionBehavior();
-            Add(MotionB);
+            //MotionB = new PixieMotionBehavior();
+            //Add(MotionB);
 
             spriteBatch = new SpriteBatch(Screen.graphicsDevice);
-            MotionB.TargetSpeed = motionSpeed;
+            //MotionB.TargetSpeed = motionSpeed;
             MotionP.TargetSpeed = motionSpeed;
 
         }
@@ -54,7 +54,8 @@ namespace Pixie1
         protected override void OnUpdate(ref UpdateParams p)
         {
             // move towards target
-            MotionB.Target = Screen.Center - Motion.ScaleAbs * FromPixels(MotionP.Target + HALF_PIXEL_OFFSET);
+            //MotionB.Target = Screen.Center - Motion.ScaleAbs * FromPixels(MotionP.Target + HALF_PIXEL_OFFSET);
+            Motion.Position = Screen.Center - Motion.ScaleAbs * FromPixels(MotionP.Position + HALF_PIXEL_OFFSET);
             //MotionB.Target = Screen.Center / 2.0f;
             
         }

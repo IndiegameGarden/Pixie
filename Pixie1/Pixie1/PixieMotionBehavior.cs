@@ -11,7 +11,7 @@ namespace TTengine.Util
 {
     public class PixieMotionBehavior : Motion
     {
-        public const float MIN_VELOCITY = 0.1f;
+        public const float MIN_VELOCITY = 0.5f;
 
         /// <summary>
         /// sets a target position for cursor to move towards in pixels
@@ -22,21 +22,6 @@ namespace TTengine.Util
         /// speed for moving towards Target
         /// </summary>
         public float TargetSpeed = 0f;
-
-        /// <summary>
-        /// set target for Scale
-        /// </summary>
-        public float ScaleTarget = 1.0f;
-
-        /// <summary>
-        /// speed for scaling towards ScaleTarget
-        /// </summary>
-        public float ScaleSpeed = 0f;
-
-        // zoom, scale etc. related vars for panel
-        public float ZoomTarget = 1.0f;
-
-        public float ZoomSpeed = 0f;
 
         protected override void OnNewParent()
         {
@@ -49,66 +34,18 @@ namespace TTengine.Util
         {
             base.OnUpdate(ref p);
 
-            // motion towards target
-            Vector2 vDif = (Target - Position);
-            Velocity = vDif * TargetSpeed; 
-            if (Velocity.Length() < MIN_VELOCITY*TargetSpeed)
-                Velocity *= ( MIN_VELOCITY*TargetSpeed / Velocity.Length() );
-            if (vDif.Length() < 0.1f) // TODO const
+            if (TargetSpeed > 0f && !Position.Equals(Target))
             {
-                Velocity = Vector2.Zero;
-                Position = Target;
-            }
-            // handle scaling over time
-            //ScaleToTarget(ScaleTarget, ScaleSpeed, 0.01f);
-
-            // handle dynamic zooming
-            //ZoomToTarget();
-        }
-
-        private void ZoomToTarget()
-        {
-            // handle dynamic zooming
-            if (ZoomSpeed > 0f)
-            {
-                if (Motion.Zoom < ZoomTarget)
+                // motion towards target
+                Vector2 vDif = (Target - Position);
+                Velocity = vDif * TargetSpeed;
+                if (Velocity.Length() < MIN_VELOCITY * TargetSpeed)
+                    Velocity *= (MIN_VELOCITY * TargetSpeed / Velocity.Length());
+                if (vDif.Length() < 0.5f) // TODO const
                 {
-                    Motion.Zoom *= (1.0f + ZoomSpeed);
-                    if (Motion.Zoom > ZoomTarget)
-                        Motion.Zoom = ZoomTarget;
+                    Velocity = Vector2.Zero;
+                    Position = Target;
                 }
-                else if (Motion.Zoom > ZoomTarget)
-                {
-                    Motion.Zoom /= (1.0f + ZoomSpeed);
-                    if (Motion.Zoom < ZoomTarget)
-                        Motion.Zoom = ZoomTarget;
-                }
-            }
-        }
-
-        // scaling logic during OnUpdate()
-        private void ScaleToTarget(float targetScale, float spd, float spdMin)
-        {
-            if (spd > 0)
-            {
-                if (Motion.Scale < targetScale)
-                {
-                    Motion.Scale += spdMin + spd * (targetScale - Motion.Scale); //*= 1.01f;
-                    if (Motion.Scale > targetScale)
-                    {
-                        Motion.Scale = targetScale;
-                    }
-                }
-                else if (Motion.Scale > targetScale)
-                {
-                    Motion.Scale += -spdMin + spd * (targetScale - Motion.Scale); //*= 1.01f;
-                    if (Motion.Scale < targetScale)
-                    {
-                        Motion.Scale = targetScale;
-                    }
-                }
-                if (DrawInfo != null)
-                    DrawInfo.LayerDepth = 0.8f - Motion.Scale / 1000.0f;
             }
         }
 

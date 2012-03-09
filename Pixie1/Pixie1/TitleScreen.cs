@@ -145,7 +145,7 @@ namespace Pixie1
                 timeCDown = 0f;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && SimTime > TIME_LOGO_APPEAR)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && SimTime > 0f*TIME_LOGO_APPEAR) // FIXME
             {
                 timeSpaceDown += p.Dt;
             }

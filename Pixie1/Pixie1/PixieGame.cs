@@ -22,13 +22,13 @@ namespace Pixie1
     /// </summary>
     public class PixieGame : Game
     {
-        public static Gamelet TreeRoot;        
+        public static Gamelet TreeRoot;
 
-        GraphicsDeviceManager graphics;
-        int myWindowWidth = 1024; 
-        int myWindowHeight = 768; 
-        PixieScreenlet mainScreenlet;
-        MusicEngine musicEngine;
+        static GraphicsDeviceManager graphics;
+        static int myWindowWidth = 1024;
+        static int myWindowHeight = 768; 
+        static PixieScreenlet mainScreenlet;
+        static MusicEngine musicEngine;
         static Level level;
         static TitleScreen titleScreen;
         static FinalScreen finalScreen;
@@ -68,7 +68,6 @@ namespace Pixie1
             //mainScreenlet.Add(new FrameRateCounter(1.0f, 0f)); // TODO
             //mainScreenlet.Add(new ScreenZoomer()); // TODO remove
 
-            //level
             level = new TrainwrecksLevel();
             mainScreenlet.Add(level);
             level.Active = false;
@@ -89,7 +88,8 @@ namespace Pixie1
         public static void StartPlay()
         {
             titleScreen.Active = false;
-            level.Active = true;
+            level.Active = true;            
+            PixieGame.mainScreenlet.Add(level);
         }
 
         public static void StopPlay()
