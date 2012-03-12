@@ -19,15 +19,11 @@ namespace Pixie1
         public static Color DEFAULT_BG_COLOR = Color.Black;
 
         public float DEFAULT_SCALE = 20.0f;
-        public float SCREEN_MOTION_SPEED = 1.0f;
+        public float SCREEN_MOTION_SPEED = 10.0f;
 
         public Vector2 PIXIE_STARTING_POS ; // in pixels        
         public Vector2 BG_STARTING_POS ; // in pixels; bg=background
 
-        /// <summary>
-        /// public exposed position of the scrolling level (where are we viewing now)
-        /// </summary>
-        public static Vector2 ViewPos;
         /// <summary>
         /// draw color of the background
         /// </summary>
@@ -63,8 +59,8 @@ namespace Pixie1
         protected virtual void InitPixie()
         {
             pixie = new Pixie();      
-            pixie.MotionP.Target = PIXIE_STARTING_POS;
-            pixie.MotionP.TargetSpeed = 18.0f; // TODO 
+            pixie.Target = PIXIE_STARTING_POS;
+            pixie.TargetSpeed = 18.0f; // TODO 
             Add(pixie);
 
             keyControl = new PixieKeyControl();
@@ -142,7 +138,7 @@ namespace Pixie1
             if (pixiePos.X < BOUND_X || pixiePos.X > (Screen.Width - BOUND_X) ||
                 pixiePos.Y < BOUND_Y || pixiePos.Y > (Screen.Height - BOUND_Y))
             {
-                bg.MotionP.Target = pixie.MotionP.Position;
+                bg.Target = pixie.Position;
             }
         }
 
@@ -151,21 +147,21 @@ namespace Pixie1
             base.OnUpdate(ref p);
 
             // important: reflect the global viewpos (for sprites to use)
-            ViewPos = bg.MotionP.Position;
+            PixieSpritelet.ViewPos = bg.Position;
 
             // do some level tasks
             LevelKeyControl(ref p);
             ScrollBackground(ref p);
 
             // take steering input and move pixie
-            Vector2 newPos = pixie.MotionP.Target + keyControl.TargetMove;
+            Vector2 newPos = pixie.Target + keyControl.TargetMove;
             bool isWalkable = bg.IsWalkable(newPos);
             if (isWalkable)
-                pixie.MotionP.Target += keyControl.TargetMove;
-            TTutil.Round(pixie.MotionP.Target);
+                pixie.Target += keyControl.TargetMove;
+            TTutil.Round(pixie.Target);
 
             // DEBUG sample pixel
-            Color c= bg.SamplePixel(pixie.MotionP.Target);
+            Color c= bg.SamplePixel(pixie.Target);
             debugMsg.Text = "Color: " + c.R + "," + c.G + "," + c.B + "," + c.A;
 
         }

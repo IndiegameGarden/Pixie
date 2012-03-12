@@ -121,7 +121,6 @@
     <Compile Include="PixieControl.cs" />
     <Compile Include="PixieKeyControl.cs" />
     <Compile Include="Pixie.cs" />
-    <Compile Include="PixieMotionBehavior.cs" />
     <Compile Include="PixieScreenlet.cs" />
     <Compile Include="PixieSpritelet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

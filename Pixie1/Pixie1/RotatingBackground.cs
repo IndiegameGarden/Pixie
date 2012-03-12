@@ -36,8 +36,8 @@ namespace Pixie1
 
             //
             //float f = (SimTime % 4.0f) / 4.0f ;
-            //if (bg.MotionP.Target.X < bg.MotionP.Position.X)
-            //    bg.MotionP.Position.X = bg.MotionP.Target.X;
+            //if (bg.Target.X < bg.Position.X)
+            //    bg.Position.X = bg.Target.X;
             //float g = (SimTime % 20.0f)/20.0f;
             //Vector2 v = new Vector2(bg.Texture.Width * (0.2f + 0.7f * f), bg.Texture.Height * (0.1f + 0.8f * g));
             float freq = 0.0523f;
@@ -52,7 +52,7 @@ namespace Pixie1
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null,null);
 
             spriteBatch.Draw(Texture, DrawInfo.DrawPosition, null, DrawInfo.DrawColor,
-                   Motion.RotateAbs, /*MotionP.Position*/ Vector2.Zero, DrawInfo.DrawScale, SpriteEffects.None, 0.9f);
+                   Motion.RotateAbs, /*Position*/ Vector2.Zero, DrawInfo.DrawScale, SpriteEffects.None, 0.9f);
             spriteBatch.End();
             
         }

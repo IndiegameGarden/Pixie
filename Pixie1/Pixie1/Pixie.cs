@@ -15,12 +15,7 @@ namespace Pixie1
         public Pixie()
             : base("pixie")
         {
-            DrawInfo.DrawColor = Level.PIXIE_COLOR; // 
-        }
-
-        protected override void OnUpdate(ref UpdateParams p)
-        {
-            base.OnUpdate(ref p);
+            DrawInfo.DrawColor = Level.PIXIE_COLOR;
         }
 
     }

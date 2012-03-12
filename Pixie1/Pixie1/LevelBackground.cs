@@ -12,20 +12,14 @@ namespace Pixie1
 {
     public class LevelBackground: PixieSpritelet
     {
-        Vector2 HALF_PIXEL_OFFSET = new Vector2(0.5f, 0.0f);
+        Vector2 HALF_PIXEL_OFFSET = new Vector2(0.5f, 0.5f);
         SpriteBatch spriteBatch;
-        //PixieMotionBehavior MotionB;
 
         public LevelBackground(string bitmapFileName, float motionSpeed)
             : base("bg2045.png")
         {
-            //MotionB = new PixieMotionBehavior();
-            //Add(MotionB);
-
             spriteBatch = new SpriteBatch(Screen.graphicsDevice);
-            //MotionB.TargetSpeed = motionSpeed;
-            MotionP.TargetSpeed = motionSpeed;
-
+            TargetSpeed = motionSpeed;
         }
 
         public Color SamplePixel(Vector2 pos)
@@ -33,7 +27,7 @@ namespace Pixie1
             if (pos.X < 0f || pos.X > (Texture.Width - 1) ||
                 pos.Y < 0f || pos.Y > (Texture.Height - 1))
             {
-                return Color.Black;
+                return Color.Black; // TODO bg color configurable
             }
             Color[] data = new Color[1];
             Texture.GetData<Color>(0, new Rectangle((int)pos.X, (int)pos.Y, 1, 1), data, 0, 1);
@@ -44,7 +38,7 @@ namespace Pixie1
         {
             Color c = SamplePixel(pos);
             float intensity = ((float)(c.R + c.G + c.B)) / (3.0f * 255.0f);
-            if (intensity > 0.39f)
+            if (intensity > 0.39f) // TODO make configurable of course (+ inheritance possible)
                 return true;
             else
                 return false;
@@ -53,11 +47,10 @@ namespace Pixie1
         // 2 juni ; augustus laatste week;
         protected override void OnUpdate(ref UpdateParams p)
         {
-            // move towards target
-            //MotionB.Target = Screen.Center - Motion.ScaleAbs * FromPixels(MotionP.Target + HALF_PIXEL_OFFSET);
-            Motion.Position = Screen.Center - Motion.ScaleAbs * FromPixels(MotionP.Position + HALF_PIXEL_OFFSET);
-            //MotionB.Target = Screen.Center / 2.0f;
-            
+            base.OnUpdate(ref p);
+
+            // update my on-screen position (shifting the big bitmap around to match middle point set)
+            Motion.Position = Screen.Center - Motion.ScaleAbs * FromPixels(Position + HALF_PIXEL_OFFSET);            
         }
 
         protected override void OnDraw(ref DrawParams p)
@@ -67,7 +60,7 @@ namespace Pixie1
                 spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
 
                 spriteBatch.Draw(Texture, DrawInfo.DrawPosition, null, DrawInfo.DrawColor,
-                       Motion.RotateAbs, /*MotionP.Position*/ Vector2.Zero, DrawInfo.DrawScale, SpriteEffects.None, DrawInfo.LayerDepth);
+                       Motion.RotateAbs, Vector2.Zero, DrawInfo.DrawScale, SpriteEffects.None, DrawInfo.LayerDepth);
 
                 spriteBatch.End();
             }

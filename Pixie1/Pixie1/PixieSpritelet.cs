@@ -12,58 +12,60 @@ namespace Pixie1
 {
     public class PixieSpritelet: Spritelet
     {
-        public PixieMotionBehavior MotionP;
+        /// <summary>
+        /// centre of screen viewing pos in pixels
+        /// </summary>
+        public static Vector2 ViewPos = Vector2.Zero;
+
+        /// <summary>
+        /// position in the level, in pixels
+        /// </summary>
+        public Vector2 Position = Vector2.Zero;
+
+        public Vector2 Target = Vector2.Zero;
+
+        /// <summary>
+        /// relative speed for moving towards Target. Is calculated linearly based on distance to target.
+        /// </summary>
+        public float TargetSpeed = 0f;
+        /// <summary>
+        /// minimum ABSOLUTE speed to move towards target in pixels/sec
+        /// </summary>
+        public float TargetSpeedMin = 5f;
 
         public PixieSpritelet(string bitmapFile)
-            : base()
+            : base(bitmapFile)
         {
-            if (bitmapFile.Contains("."))
-                LoadBitmap(bitmapFile);
-            this.fileName = bitmapFile;
-            InitTextures();
-
-            MotionP = new PixieMotionBehavior();
-            MotionP.TargetSpeed = 1f;
-            Add(MotionP);
-
-        }
-
-        protected void LoadBitmap(string fn)
-        {
-            // load texture
-            FileStream fs = null;
-            try
-            {
-                fs = new FileStream(TTengineMaster.ActiveGame.Content.RootDirectory + "\\" + fn, FileMode.Open);
-                Texture2D t = Texture2D.FromStream(Screen.graphicsDevice, fs);
-                Texture = t;
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-            finally
-            {
-                if (fs != null)
-                    fs.Close();
-            }            
         }
 
         protected override void OnUpdate(ref UpdateParams p)
         {
-            base.OnUpdate(ref p);
+            Motion.Position = Screen.Center + Motion.ScaleAbs * (  FromPixels( Position - ViewPos)); // TODO ViewPos smoothing using Draw cache
 
-            //PixieGame.ViewPos in pixels
-            Motion.Position = Screen.Center + Motion.ScaleAbs * (  FromPixels( MotionP.Position - Level.ViewPos)); // TODO ViewPos smoothing using Draw cache
-
-            /* JUST DOC
-                            // calculate Position from Motion
-            Vector2 mp = ToPixels((-Motion.PositionAbs + Screen.Center) / Motion.ScaleAbs) - HALF_PIXEL_OFFSET;
-            MotionP.Position = mp;
-            
-            // move towards target
-            MotionB.Target = Screen.Center - Motion.ScaleAbs * FromPixels(MotionP.Target + HALF_PIXEL_OFFSET);
-            */
+            Vector2 vdif = Target - Position;
+            if (vdif.LengthSquared() > 0f) // if target not reached yet
+            {
+                Vector2 vmove = vdif;
+                vmove *= TargetSpeed ;
+                // check minimum speed of moving
+                if (vmove.Length() < TargetSpeedMin)
+                {
+                    vmove.Normalize();
+                    vmove *= TargetSpeedMin;
+                }
+                // convert speed vector to move vector (x = v * t)
+                vmove *= p.Dt;
+                // check if target reached already (i.e. move would overshoot target)
+                if (vmove.LengthSquared() >= vdif.LengthSquared())
+                {
+                    Position = Target;
+                }
+                else
+                {
+                    // apply move towards target
+                    Position += vmove;
+                }
+            }
         }
 
     }
