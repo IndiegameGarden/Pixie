@@ -24,6 +24,9 @@ namespace Pixie1
         public Vector2 PIXIE_STARTING_POS ; // in pixels        
         public Vector2 BG_STARTING_POS ; // in pixels; bg=background
 
+        public float BOUND_X = 0.3f;
+        public float BOUND_Y = 0.3f;
+
         /// <summary>
         /// draw color of the background
         /// </summary>
@@ -61,6 +64,7 @@ namespace Pixie1
         {
             pixie = new Pixie();      
             pixie.Target = PIXIE_STARTING_POS;
+            pixie.Position = PIXIE_STARTING_POS;
             pixie.TargetSpeed = 18.0f; // TODO 
             Add(pixie);
 
@@ -109,6 +113,7 @@ namespace Pixie1
                 MotionB.ScaleTarget = 1.5f*DEFAULT_SCALE;
                 MotionB.ScaleSpeed = 0.0004f;
                 //Motion.RotateModifier = timeEscDown * 0.05f;
+                PixieGame.Instance.Exit();
             }
             else
             {
@@ -127,14 +132,21 @@ namespace Pixie1
         {
             // scrolling background at borders
             Vector2 pixiePos = pixie.Motion.PositionAbs;
-            const float BOUND_X = 0.3f;
-            const float BOUND_Y = 0.3f;
 
             if (pixiePos.X < BOUND_X || pixiePos.X > (Screen.Width - BOUND_X) ||
                 pixiePos.Y < BOUND_Y || pixiePos.Y > (Screen.Height - BOUND_Y))
             {
-                bg.Target = pixie.Position;
+                if (ScreenBorderHit())
+                    bg.Target = pixie.Position;
             }
+        }
+
+        /// <summary>
+        /// can be overridden with custom functions if screen border is hit by pixie
+        /// </summary>
+        protected virtual bool ScreenBorderHit()
+        {
+            return true;
         }
 
         protected override void OnUpdate(ref UpdateParams p)

@@ -39,7 +39,8 @@ namespace Pixie1
 
         // vars
         protected string[] text;
-        protected float[] timings;        
+        protected float[] timings;
+        Vector2 totalTextSize;
         bool doReplace;
         float nextTextStartTime = 0f;
 
@@ -93,9 +94,17 @@ namespace Pixie1
         protected void AutoPosition()
         {
             if (Parent != null && Parent is SubtitleText)
+            {
                 Motion.Position = Vector2.Zero;
+                // Use entire text size for calculating middle offsets 
+                totalTextSize = SubtitleFont.MeasureString(text[0]); 
+            }
             else
-                Motion.Position = new Vector2(0.05f, 0.8f);
+            {
+                Motion.Position = new Vector2(Screen.Center.X, 0.8f); // TODO mvoe up for long texts
+                // Use entire text size for calculating middle offsets 
+                totalTextSize = SubtitleFont.MeasureString(text[0]);
+            }
         }
 
         protected override void OnNewParent()
@@ -108,7 +117,7 @@ namespace Pixie1
         {
             Vector2 pos = DrawInfo.DrawPosition;
             String curText = "";
-            if (text.Length > 0)
+            if (text.Length > 0 && text[0].Length > 0)
             {
                 float t = 0f;
                 for (int i = 0; i < text.Length; i++ )
@@ -127,14 +136,18 @@ namespace Pixie1
                     t += timings[i];
                 }
             }
-            float sc = Motion.ScaleAbs;
-            Vector2 origin = Vector2.Zero; // new Vector2(((float)curText.Length) / 40f, 0f);
-            if (Shadow)
+
+            if (curText.Length > 0)
             {
-                MySpriteBatch.DrawString(SubtitleFont, curText, pos + ShadowVector, Color.Black, 0f, origin, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth + 0.0001f);
-                MySpriteBatch.DrawString(SubtitleFont, curText, pos - ShadowVector, Color.DarkGray, 0f, origin, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth + 0.0002f);
+                float sc = Motion.ScaleAbs;
+                Vector2 origin = totalTextSize / 2f; // Vector2.Zero; // new Vector2(((float)curText.Length) / 40f, 0f);
+                if (Shadow)
+                {
+                    MySpriteBatch.DrawString(SubtitleFont, curText, pos + ShadowVector, Color.Black, 0f, origin, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth + 0.0001f);
+                    MySpriteBatch.DrawString(SubtitleFont, curText, pos - ShadowVector, Color.DarkGray, 0f, origin, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth + 0.0002f);
+                }
+                MySpriteBatch.DrawString(SubtitleFont, curText, pos, DrawInfo.DrawColor, 0f, origin, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth);
             }
-            MySpriteBatch.DrawString(SubtitleFont, curText, pos, DrawInfo.DrawColor, 0f, origin, ScaleVector * sc, SpriteEffects.None, DrawInfo.LayerDepth);
         }
     }
 }

@@ -11,13 +11,15 @@ namespace Pixie1
 {
     public class TrainwrecksLevel: Level
     {
+        int numberOfZoomOuts = 0;
 
         public TrainwrecksLevel(): base()
         {
             SCREEN_MOTION_SPEED = 1.0f;
-            DEFAULT_SCALE = 200f;
+            DEFAULT_SCALE = 100f;
             PIXIE_STARTING_POS = new Vector2(192f, 146f); // in pixels        
-            BG_STARTING_POS = new Vector2(172f, 1300f); // in pixels; bg=background            
+            //BG_STARTING_POS = new Vector2(172f, 1300f); // in pixels; bg=background            
+            BG_STARTING_POS = new Vector2(192f, 146f); // in pixels; bg=background            
         }
 
         protected override void InitLevel()
@@ -27,7 +29,8 @@ namespace Pixie1
             // select bitmap bg
             bg = new LevelBackground("bg2045", SCREEN_MOTION_SPEED);
             Add(bg);
-            bg.Target = BG_STARTING_POS;
+            bg.Target = PIXIE_STARTING_POS;
+            bg.Position = BG_STARTING_POS;
 
         }
 
@@ -55,11 +58,24 @@ namespace Pixie1
         {
             SubtitleText t = new SubtitleText();
             t.StartTime = 2f;
-            t.Motion.Scale = 1 / DEFAULT_SCALE;
-            t.AddText("Hi! I'm Pixie.", 3f);
-            t.AddText("I seem to be, ehm, lost.", 3f);
-            t.AddText("Can you help me find that\ngreat game I was in?", 3f);
-            Add(t);
+            //t.Motion.Scale = 1 / DEFAULT_SCALE;
+            t.AddText("Oh no.", 3f);
+            t.AddText("", 3f);
+            t.AddText("Where am I?", 3f);
+            t.AddText("I'm lost.", 3f);
+            t.AddText("Can you help me\nget back home?", 3f);
+            Parent.Add(t);
+        }
+
+        protected override bool ScreenBorderHit()
+        {
+            if (numberOfZoomOuts < 0)
+            {
+                numberOfZoomOuts++;
+                Motion.Scale /= 2.0f;
+                return false;
+            }
+            return true;
         }
 
         protected override void OnUpdate(ref UpdateParams p)
