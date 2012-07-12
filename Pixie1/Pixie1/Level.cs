@@ -55,6 +55,7 @@ namespace Pixie1
         protected virtual void InitLevel()
         {
             Motion.Scale = DEFAULT_SCALE;
+            Motion.ScaleTarget = DEFAULT_SCALE;
         }
 
         /// <summary>
