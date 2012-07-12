@@ -22,25 +22,32 @@ namespace Pixie1
     /// </summary>
     public class PixieGame : Game
     {
-        public static Gamelet TreeRoot;
-
-        static GraphicsDeviceManager graphics;
-        static int myWindowWidth = 1024;
-        static int myWindowHeight = 768; 
-        static PixieScreenlet mainScreenlet;
-        static MusicEngine musicEngine;
-        static Level level;
-        static TitleScreen titleScreen;
-        static FinalScreen finalScreen;
+        public Gamelet TreeRoot;
+        private static PixieGame instance = null;
+        GraphicsDeviceManager graphics;
+        int myWindowWidth = 1024;
+        int myWindowHeight = 768; 
+        PixieScreenlet mainScreenlet;
+        MusicEngine musicEngine;
+        Level level;
 
         public PixieGame()
         {
+            instance = this;
             graphics = new GraphicsDeviceManager(this);
             graphics.IsFullScreen = false;
             graphics.PreferredBackBufferHeight = myWindowHeight;
             graphics.PreferredBackBufferWidth = myWindowWidth;
             Content.RootDirectory = "Content";
             IsFixedTimeStep = false;
+        }
+
+        public static PixieGame Instance
+        {
+            get
+            {
+                return instance;
+            }
         }
 
         protected override void Initialize()
@@ -66,47 +73,27 @@ namespace Pixie1
         protected override void LoadContent()
         {
             //mainScreenlet.Add(new FrameRateCounter(1.0f, 0f)); // TODO
-            //mainScreenlet.Add(new ScreenZoomer()); // TODO remove
 
             level = new TrainwrecksLevel();
             mainScreenlet.Add(level);
-            level.Active = false;
-
-            // title screen
-            titleScreen = new TitleScreen();
-            mainScreenlet.Add(titleScreen);
-            titleScreen.Active = true;
-
-            // test final screen
-            finalScreen = new FinalScreen();
-            mainScreenlet.Add(finalScreen);
-            finalScreen.Active = false;
 
             base.LoadContent();
         }
 
-        public static void StartPlay()
+        public void StartPlay()
         {
-            titleScreen.Active = false;
-            level.Active = true;            
-            PixieGame.mainScreenlet.Add(level);
         }
 
-        public static void StopPlay()
+        public void StopPlay()
         {
-            titleScreen.Active = true;
-            level.Active = false;
         }
 
-        public static void WinGame()
+        public void WinGame()
         {
-            level.Active = false;
-            finalScreen.Active = true;
         }
 
         protected override void Update(GameTime gameTime)
         {
-            // update params, and call the root gamelet to do all.
             TTengineMaster.Update(gameTime, TreeRoot);
 
             // update any other XNA components
@@ -115,7 +102,6 @@ namespace Pixie1
 
         protected override void Draw(GameTime gameTime)
         {
-            // draw all my gamelet items
             TTengineMaster.Draw(gameTime, TreeRoot);
 
             // then draw other (if any) XNA game components on the screen

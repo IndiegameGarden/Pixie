@@ -12,7 +12,7 @@ namespace Pixie1
     /// <summary>
     /// base class for all levels (common functions)
     /// </summary>
-    public class Level: Drawlet
+    public abstract class Level: Drawlet
     {
         // some default colors, not to be changed
         public static Color PIXIE_COLOR = new Color(251, 101, 159); // pink
@@ -51,6 +51,7 @@ namespace Pixie1
         /// </summary>
         protected virtual void InitLevel()
         {
+            Motion.Scale = DEFAULT_SCALE;
         }
 
         /// <summary>
@@ -84,20 +85,14 @@ namespace Pixie1
         /// <summary>
         /// Init: level-specific items (not fitting in the existing init categories) to be initialized by subclasses
         /// </summary>
-        protected virtual void InitLevelSpecific()
-        {
-        }
+        protected abstract void InitLevelSpecific();
 
         protected override void OnNewParent()
         {
             base.OnNewParent();
             debugMsg = new DebugMessage();
             Parent.Add(debugMsg);
-
-            //subTitles = new SubtitleText();
-            //Parent.Add(subTitles);
-
-            Motion.Scale = DEFAULT_SCALE;
+            
             InitLevel();
             InitPixie();
             InitBadPixels();
@@ -122,7 +117,7 @@ namespace Pixie1
             }
             if (timeEscDown > 1.0f)
             {
-                PixieGame.StopPlay();
+                PixieGame.Instance.StopPlay();
             }
 
         }
@@ -160,9 +155,10 @@ namespace Pixie1
                 pixie.Target += keyControl.TargetMove;
             TTutil.Round(pixie.Target);
 
+            debugMsg.Text = "Pixie: trg=" + pixie.Target +", pos=" + pixie.Position+", m.pos="+pixie.Motion.Position;
             // DEBUG sample pixel
             Color c= bg.SamplePixel(pixie.Target);
-            debugMsg.Text = "Color: " + c.R + "," + c.G + "," + c.B + "," + c.A;
+            debugMsg.Text += "Color: " + c.R + "," + c.G + "," + c.B + "," + c.A;
 
         }
     }

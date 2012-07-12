@@ -27,22 +27,34 @@ namespace Pixie1
         /// </summary>
         public Vector2 ShadowVector = new Vector2(2f, 2f);
 
+        /// <summary>
+        /// if true uses shadow effect for better visibility of subtitles
+        /// </summary>
         public bool Shadow = true;
 
-        protected string[] text;
-        protected float[] timings;
+        /// <summary>
+        /// which font to use for drawing text (can be changed)
+        /// </summary>
         public SpriteFont SubtitleFont;
-        bool doReplace;
 
+        // vars
+        protected string[] text;
+        protected float[] timings;        
+        bool doReplace;
+        float nextTextStartTime = 0f;
+
+        public SubtitleText()
+            : this("")
+        {
+        }
         public SubtitleText( string initialText)
             : base()
         {
             text = new string[] { initialText };
             timings = new float[] { 0f };
-            doReplace = false;
+            doReplace = true;
             DrawInfo.DrawColor = Color.White;
             SubtitleFont = TTengineMaster.ActiveGame.Content.Load<SpriteFont>("Subtitles1");
-            AutoPosition();
         }
 
         public SubtitleText(string[] multiText, float[] timings, bool doReplace)
@@ -52,7 +64,6 @@ namespace Pixie1
             this.doReplace = doReplace;
             DrawInfo.DrawColor = Color.White;
             SubtitleFont = TTengineMaster.ActiveGame.Content.Load<SpriteFont>("Subtitles1");
-            AutoPosition();
         }
 
         public string Text        
@@ -69,9 +80,28 @@ namespace Pixie1
             }
         }
 
+        public void AddText(string txt, float duration)
+        {
+            SubtitleText st = new SubtitleText(txt);
+            st.Duration = duration - 0.1f;
+            st.StartTime = nextTextStartTime;
+            Add(st);
+            nextTextStartTime += duration;
+            Duration = nextTextStartTime;
+        }
+
         protected void AutoPosition()
         {
-            Motion.Position = new Vector2(0.05f, 0.8f);
+            if (Parent != null && Parent is SubtitleText)
+                Motion.Position = Vector2.Zero;
+            else
+                Motion.Position = new Vector2(0.05f, 0.8f);
+        }
+
+        protected override void OnNewParent()
+        {
+            base.OnNewParent();
+            AutoPosition();
         }
 
         protected override void OnDraw(ref DrawParams p)
@@ -80,15 +110,21 @@ namespace Pixie1
             String curText = "";
             if (text.Length > 0)
             {
+                float t = 0f;
                 for (int i = 0; i < text.Length; i++ )
                 {
-                    if (timings[i] <= SimTime)
+                    if (t <= SimTime)
                     {
                         if (doReplace)
                             curText = text[i];
                         else
-                            curText += "\n" + text[i];
+                        {
+                            if (curText.Length > 0)
+                                curText += "\n";
+                            curText += text[i];
+                        }
                     }
+                    t += timings[i];
                 }
             }
             float sc = Motion.ScaleAbs;

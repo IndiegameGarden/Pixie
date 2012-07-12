@@ -153,7 +153,7 @@ namespace Pixie1
             {
                 if (timeSpaceDown > 0.0f)
                 {
-                    PixieGame.StartPlay();
+                    PixieGame.Instance.StartPlay();
                 }
                 timeSpaceDown = 0f;
             }

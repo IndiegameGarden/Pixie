@@ -25,9 +25,14 @@ namespace Pixie1
         public Vector2 Target = Vector2.Zero;
 
         /// <summary>
+        /// a relative to normal velocity of moving scale factor
+        /// </summary>
+        public float Velocity = 1f;
+
+        /// <summary>
         /// relative speed for moving towards Target. Is calculated linearly based on distance to target.
         /// </summary>
-        public float TargetSpeed = 0f;
+        public float TargetSpeed = 1f;
         /// <summary>
         /// minimum ABSOLUTE speed to move towards target in pixels/sec
         /// </summary>
@@ -41,6 +46,7 @@ namespace Pixie1
         protected override void OnUpdate(ref UpdateParams p)
         {
             Motion.Position = Screen.Center + Motion.ScaleAbs * (  FromPixels( Position - ViewPos)); // TODO ViewPos smoothing using Draw cache
+            //Motion.Position = Position - ViewPos;
 
             Vector2 vdif = Target - Position;
             if (vdif.LengthSquared() > 0f) // if target not reached yet

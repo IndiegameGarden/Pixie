@@ -14,14 +14,15 @@ namespace Pixie1
 
         public TrainwrecksLevel(): base()
         {
-            DEFAULT_SCALE = 20.0f;
             SCREEN_MOTION_SPEED = 1.0f;
+            DEFAULT_SCALE = 200f;
+            PIXIE_STARTING_POS = new Vector2(192f, 146f); // in pixels        
+            BG_STARTING_POS = new Vector2(172f, 1300f); // in pixels; bg=background            
         }
 
         protected override void InitLevel()
         {
-            PIXIE_STARTING_POS = new Vector2(192f, 146f); // in pixels        
-            BG_STARTING_POS = new Vector2(172f, 1300f); // in pixels; bg=background
+            base.InitLevel();
 
             // select bitmap bg
             bg = new LevelBackground("bg2045", SCREEN_MOTION_SPEED);
@@ -32,6 +33,8 @@ namespace Pixie1
 
         protected override void InitBadPixels()
         {
+            base.InitBadPixels();
+
             BadPixel bp = new BadPixel();
             bp.Target = PIXIE_STARTING_POS + new Vector2(5f, 0f);
             bp.TargetSpeed = 18.0f; // TODO
@@ -40,6 +43,8 @@ namespace Pixie1
 
         protected override void InitToys()
         {
+            base.InitToys();
+
             Toy test = new Toy();
             test.Target = PIXIE_STARTING_POS + new Vector2(10f, 0f);
             test.TargetSpeed = 18.0f; // TODO
@@ -48,14 +53,13 @@ namespace Pixie1
 
         protected override void InitLevelSpecific()
         {
-            // just testing
-            SubtitleText t = new SubtitleText(new string[]{"Hi! I'm Pixie.", "ARROWS to move me.","SPACE to use my special gear."},new float[]{0f,3f,6f},true);
-            t.StartTime = 3.0f;
-            t.Duration = 9.5f;
-            t.ScaleVector = new Vector2(1.7f, 1f);
-            //t.Motion.Position = new Vector2(
+            SubtitleText t = new SubtitleText();
+            t.StartTime = 2f;
+            t.Motion.Scale = 1 / DEFAULT_SCALE;
+            t.AddText("Hi! I'm Pixie.", 3f);
+            t.AddText("I seem to be, ehm, lost.", 3f);
+            t.AddText("Can you help me find that\ngreat game I was in?", 3f);
             Add(t);
-
         }
 
         protected override void OnUpdate(ref UpdateParams p)
