@@ -69,8 +69,6 @@ namespace Pixie1
             MotionB = new MotionBehavior();
             Add(MotionB);
 
-            gameMusic = new GameMusic();
-
             creditsScreen = new PixieSpritelet("credits.png");
             Add(creditsScreen);
             creditsScreen.Visible = false;

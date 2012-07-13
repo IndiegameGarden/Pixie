@@ -14,5 +14,9 @@ namespace Pixie1
         /// </summary>
         public Vector2 TargetMove;
 
+        /// <summary>
+        /// if true can pass anything
+        /// </summary>
+        public bool IsGodMode = false;
     }
 }

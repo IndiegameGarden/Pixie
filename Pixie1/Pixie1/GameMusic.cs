@@ -19,9 +19,11 @@ namespace Pixie1
         {
             //track = TTengineMaster.ActiveGame.Content.Load<Song>("A01");
             soundScript = new SoundEvent("GameMusic");
-            SampleSoundEvent evSong = new SampleSoundEvent("A01.ogg");
-            soundScript.AddEvent(0, evSong);
+            SampleSoundEvent ev1 = new SampleSoundEvent("Nostalgika.ogg"); // dur 160.0
+            soundScript.AddEvent(0, ev1);
 
+            SampleSoundEvent ev2 = new SampleSoundEvent("B01.ogg");
+            soundScript.AddEvent(162, ev2); //162
         }
 
         public float Volume

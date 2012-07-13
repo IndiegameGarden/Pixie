@@ -33,6 +33,8 @@ namespace Pixie1
         public Color BackgroundColor = DEFAULT_BG_COLOR;
         public MotionBehavior MotionB;
 
+        public GameMusic gameMusic;
+
         protected LevelBackground bg;
         protected Pixie pixie;
         protected PixieControl keyControl; // for pixie
@@ -108,7 +110,8 @@ namespace Pixie1
         /// check keys specific for level
         protected virtual void LevelKeyControl(ref UpdateParams p)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            KeyboardState st = Keyboard.GetState();
+            if (st.IsKeyDown(Keys.Escape))
             {
                 timeEscDown += p.Dt;
                 MotionB.ScaleTarget = 1.5f*DEFAULT_SCALE;
@@ -125,6 +128,23 @@ namespace Pixie1
             {
                 PixieGame.Instance.StopPlay();
             }
+
+            if (st.IsKeyDown(Keys.PageUp) && Motion.Zoom == Motion.ZoomTarget)
+            {
+                Motion.ZoomTarget *= 2.0f;
+                Motion.ZoomSpeed = 0.1f;
+            }
+
+            if (st.IsKeyDown(Keys.PageDown) && Motion.Zoom == Motion.ZoomTarget)
+            {
+                Motion.ZoomTarget *= 0.5f;
+                Motion.ZoomSpeed = 0.1f;
+            }
+
+            if (st.IsKeyDown(Keys.LeftControl))
+                keyControl.IsGodMode = true;
+            else
+                keyControl.IsGodMode = false;
 
         }
 
@@ -163,7 +183,7 @@ namespace Pixie1
 
             // take steering input and move pixie
             Vector2 newPos = pixie.Target + keyControl.TargetMove;
-            bool isWalkable = bg.IsWalkable(newPos);
+            bool isWalkable = bg.IsWalkable(newPos) || keyControl.IsGodMode ;
             if (isWalkable)
                 pixie.Target += keyControl.TargetMove;
             TTutil.Round(pixie.Target);

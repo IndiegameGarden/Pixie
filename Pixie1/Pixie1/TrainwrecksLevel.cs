@@ -56,6 +56,9 @@ namespace Pixie1
 
         protected override void InitLevelSpecific()
         {
+            gameMusic = new GameMusic();
+            Add(gameMusic);
+
             SubtitleText t = new SubtitleText();
             t.StartTime = 2f;
             t.AddText("Oh no.", 3f);

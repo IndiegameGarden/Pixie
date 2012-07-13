@@ -1,4 +1,4 @@
-All software code and graphics
+All software code and graphics, including pixels, 
 Copyright (c) 2012, TranceTrance.com and its domain owner
 All rights reserved.
 
@@ -24,8 +24,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -----------------------------------------------------------------------------
 
-Music tracks A01.mp3 and B01.mp3 from album "mini" by BERTIN,
+Music tracks A01.ogg and B01.ogg from album "mini" by BERTIN,
 Creative Commons license BY-NC-SA applies to these files.
 See http://bertin.bandcamp.com/
 See http://creativecommons.org/licenses/by-nc-sa/3.0/
 
+-----------------------------------------------------------------------------
+
+Music track Nostalgika.ogg from album "Dream Journal 2" by Torley,
+Creative Commons license BY-NC-SA applies to this file.
+See http://music.torley.com/
+See http://creativecommons.org/licenses/by-nc-sa/3.0/
