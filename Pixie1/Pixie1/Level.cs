@@ -14,12 +14,15 @@ namespace Pixie1
     /// </summary>
     public abstract class Level: Drawlet
     {
+        public static Level Current = null;
+
         // some default colors, not to be changed
         public static Color PIXIE_COLOR = new Color(251, 101, 159); // pink
         public static Color DEFAULT_BG_COLOR = Color.Black;
 
         public float DEFAULT_SCALE = 20.0f;
-        public float SCREEN_MOTION_SPEED = 10.0f;
+        public float SCREEN_MOTION_SPEED = 15.0f;
+        public float PIXIE_TARGETSPEED = 18.0f;
 
         public Vector2 PIXIE_STARTING_POS ; // in pixels        
         public Vector2 BG_STARTING_POS ; // in pixels; bg=background
@@ -35,7 +38,7 @@ namespace Pixie1
 
         public GameMusic gameMusic;
 
-        protected LevelBackground bg;
+        public LevelBackground bg;
         protected Pixie pixie;
         protected PixieControl keyControl; // for pixie
         protected DebugMessage debugMsg;
@@ -66,9 +69,8 @@ namespace Pixie1
         protected virtual void InitPixie()
         {
             pixie = new Pixie();      
-            pixie.Target = PIXIE_STARTING_POS;
-            pixie.Position = PIXIE_STARTING_POS;
-            pixie.TargetSpeed = 18.0f; // TODO 
+            pixie.PositionAndTarget = PIXIE_STARTING_POS;
+            pixie.TargetSpeed = PIXIE_TARGETSPEED;
             Add(pixie);
 
             keyControl = new PixieKeyControl();

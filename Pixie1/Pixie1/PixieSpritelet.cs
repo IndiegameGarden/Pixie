@@ -13,7 +13,7 @@ namespace Pixie1
     public class PixieSpritelet: Spritelet
     {
         /// <summary>
-        /// centre of screen viewing pos in pixels
+        /// centre of screen viewing pos in pixels for all PixieSpritelets
         /// </summary>
         public static Vector2 ViewPos = Vector2.Zero;
 
@@ -23,6 +23,15 @@ namespace Pixie1
         public Vector2 Position = Vector2.Zero;
 
         public Vector2 Target = Vector2.Zero;
+
+        public Vector2 PositionAndTarget
+        {
+            set
+            {
+                Position = value;
+                Target = value;
+            }
+        }
 
         /// <summary>
         /// a relative to normal velocity of moving scale factor

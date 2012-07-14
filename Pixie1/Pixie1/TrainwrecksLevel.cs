@@ -15,11 +15,11 @@ namespace Pixie1
 
         public TrainwrecksLevel(): base()
         {
+            Current = this;
             SCREEN_MOTION_SPEED = 1.0f;
             DEFAULT_SCALE = 200f;
-            PIXIE_STARTING_POS = new Vector2(192f, 146f); // in pixels        
-            //BG_STARTING_POS = new Vector2(172f, 1300f); // in pixels; bg=background            
-            BG_STARTING_POS = new Vector2(192f, 146f); // in pixels; bg=background            
+            PIXIE_STARTING_POS = new Vector2(7f, 197f); // in pixels        
+            BG_STARTING_POS = new Vector2(7f, 197f); // in pixels; bg=background            
         }
 
         protected override void InitLevel()
@@ -38,9 +38,13 @@ namespace Pixie1
         {
             base.InitBadPixels();
 
-            BadPixel bp = new BadPixel();
-            bp.Target = PIXIE_STARTING_POS + new Vector2(5f, 0f);
-            bp.TargetSpeed = 18.0f; // TODO
+            BadPixel bp = new BadPixel(true,pixie);
+            bp.PositionAndTarget = PIXIE_STARTING_POS + new Vector2(7f, 0f);
+            //bp.TargetSpeed = 18.0f; // TODO
+            Add(bp);
+
+            bp = new BadPixel(false,pixie);
+            bp.PositionAndTarget = PIXIE_STARTING_POS + new Vector2(0f, -5f);
             Add(bp);
         }
 

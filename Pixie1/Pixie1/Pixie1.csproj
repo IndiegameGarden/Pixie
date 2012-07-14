@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="BadPixel.cs" />
     <Compile Include="BlinkBehaviour.cs" />
+    <Compile Include="ChaseBehavior.cs" />
     <Compile Include="ColorCycleBehavior.cs" />
     <Compile Include="RotatingBackground.cs" />
     <Compile Include="FinalScreen.cs" />

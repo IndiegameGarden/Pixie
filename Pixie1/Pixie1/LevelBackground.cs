@@ -12,7 +12,7 @@ namespace Pixie1
 {
     public class LevelBackground: PixieSpritelet
     {
-        Vector2 HALF_PIXEL_OFFSET = new Vector2(0.5f, 0.5f);
+        Vector2 HALF_PIXEL_OFFSET = new Vector2(0.5f, 0.45f);
         SpriteBatch spriteBatch;
 
         public LevelBackground(string bitmapFileName, float motionSpeed)
