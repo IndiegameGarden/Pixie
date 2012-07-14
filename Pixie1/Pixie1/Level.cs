@@ -74,7 +74,7 @@ namespace Pixie1
             Add(pixie);
 
             keyControl = new PixieKeyControl();
-            Add(keyControl);
+            pixie.Add(keyControl);
         }
 
         /// <summary>
@@ -144,9 +144,9 @@ namespace Pixie1
             }
 
             if (st.IsKeyDown(Keys.LeftControl))
-                keyControl.IsGodMode = true;
+                pixie.IsGodMode = true;
             else
-                keyControl.IsGodMode = false;
+                pixie.IsGodMode = false;
 
         }
 
@@ -172,6 +172,16 @@ namespace Pixie1
             return true;
         }
 
+        /// <summary>
+        /// check whether the given pixel position in this level is currently passable
+        /// </summary>
+        /// <param name="pos">pixel position to check</param>
+        /// <returns>true if passable for any PixieSpritelet entity</returns>
+        public bool CanPass(Vector2 pos)
+        {
+            return bg.IsWalkable(pos);
+        }
+
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
@@ -182,13 +192,6 @@ namespace Pixie1
             // do some level tasks
             LevelKeyControl(ref p);
             ScrollBackground(ref p);
-
-            // take steering input and move pixie
-            Vector2 newPos = pixie.Target + keyControl.TargetMove;
-            bool isWalkable = bg.IsWalkable(newPos) || keyControl.IsGodMode ;
-            if (isWalkable)
-                pixie.Target += keyControl.TargetMove;
-            TTutil.Round(pixie.Target);
 
             debugMsg.Text = "Pixie: trg=" + pixie.Target +", pos=" + pixie.Position+", m.pos="+pixie.Motion.Position;
             // DEBUG sample pixel

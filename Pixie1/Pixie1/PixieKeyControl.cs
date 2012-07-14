@@ -21,6 +21,8 @@ namespace Pixie1
 
         protected override void OnUpdate(ref UpdateParams p)
         {
+            base.OnUpdate(ref p);
+
             float dx = 0f, dy = 0f;
 
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
@@ -53,7 +55,7 @@ namespace Pixie1
             }
 
             // key rep
-            if (pressTime > 0.1f)
+            if (pressTime > 0.1f) // TODO 0.1 const
                 pressTime = 0f;
 
             // make user's requested motion vector
