@@ -54,6 +54,14 @@ namespace Pixie1
             return minimum + (float)random.NextDouble() * (maximum - minimum);
         }
 
+        /// <summary>
+        /// generate a random floating-point value between 0 and 1
+        /// </summary>
+        /// <returns>a random floating-point value between 0 and 1</returns>
+        public static float RandomUnit()
+        {
+            return (float)random.NextDouble();
+        }
 
         #endregion
 

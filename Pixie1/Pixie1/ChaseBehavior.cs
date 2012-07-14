@@ -21,12 +21,22 @@ namespace Pixie1
         {
             base.OnUpdate(ref p);
             wTime += p.Dt;
-            if (wTime >= 0.1f)
+            if (wTime >= 0.2f) // TODO speed varies
                 wTime = 0f;
             if (wTime == 0f)
             {
-                Vector2 dif = chaseTarget.Position - (Parent as PixieSpritelet).Position;
-                dif /= dif.Length();
+                Vector2 dif = chaseTarget.Position - ParentPixie.Position;
+                if (dif.Length() > 0f)
+                    dif /= dif.Length();
+                if (dif.X != 0f && dif.Y != 0f)
+                {
+                    // choose one direction randomly, if diagonals are requested
+                    float r = RandomMath.RandomUnit();
+                    if (r > 0.5f)
+                        dif.X = 0f;
+                    else
+                        dif.Y = 0f;
+                }
                 TargetMove = dif;
             }
             else
