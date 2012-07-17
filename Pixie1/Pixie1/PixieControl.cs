@@ -12,17 +12,6 @@ namespace Pixie1
     {
         public PixieSpritelet ParentPixie;
 
-        /// <summary>
-        /// target move delta for pixie or another controlled character
-        /// </summary>
-        public Vector2 TargetMove;
-
-        protected override void OnUpdate(ref UpdateParams p)
-        {
-            base.OnUpdate(ref p);
-
-        }
-
         protected override void OnNewParent()
         {
             base.OnNewParent();

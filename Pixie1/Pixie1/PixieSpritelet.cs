@@ -31,9 +31,14 @@ namespace Pixie1
         public Vector2 Position = Vector2.Zero;
 
         /// <summary>
-        /// position in the level, in pixels, where the entity's Position should move towards
+        /// position in the level, in pixels, where the entity's Position should move towards in a smooth fashion
         /// </summary>
         public Vector2 Target = Vector2.Zero;
+
+        /// <summary>
+        /// a direction (if any) the entity is facing towards e.g. up (0,-1), down (0,1) or right (1,0).
+        /// </summary>
+        public Vector2 FacingDirection = Vector2.Zero;
 
         /// <summary>
         /// to set both Position and Target in one go
@@ -53,14 +58,14 @@ namespace Pixie1
         public float Velocity = 1f;
 
         /// <summary>
-        /// relative speed for moving towards Target. Is calculated linearly based on distance to target.
+        /// relative speed of the smooth motion for moving towards Target. Linear speed.
         /// </summary>
-        public float TargetSpeed = 1f;
+        public float TargetSpeed = 10f;
 
         /// <summary>
-        /// minimum ABSOLUTE speed to move towards target in pixels/sec
+        /// the target move delta for current Update() round
         /// </summary>
-        public float TargetSpeedMin = 5f;
+        public Vector2 TargetMove = Vector2.Zero;
 
         /// <summary>
         /// create a single-pixel PixieSpritelet
@@ -86,36 +91,25 @@ namespace Pixie1
             Motion.Position = Screen.Center + Motion.ScaleAbs * (  FromPixels( Position - ViewPos)); // TODO ViewPos smoothing using Draw cache
             //Motion.Position = Position - ViewPos;
 
-            // sum all intended moves from PixieControls attached
-            Vector2 TargetMove = Vector2.Zero;
-            foreach (Gamelet g in Children)
-            {
-                if (g is PixieControl) {
-                    PixieControl c = g as PixieControl;
-                    TargetMove += c.TargetMove;
-                }
-            }
             // take steering inputs if any, and move pixie
-            if (TargetMove.Length() > 0f)
+            if (TargetMove.LengthSquared() > 0f)
             {
-                Vector2 newPos = Target + TargetMove;
+                Vector2 newPos = Position + TargetMove;
+                TTutil.Round(newPos);
                 bool isWalkable = Level.Current.CanPass(newPos) || IsGodMode;
                 if (isWalkable)
+                {
                     Target += TargetMove;
-            }
-            TTutil.Round(Target);
+                    TTutil.Round(Target);
+                }
+            }            
 
             Vector2 vdif = Target - Position;
             if (vdif.LengthSquared() > 0f) // if target not reached yet
             {
                 Vector2 vmove = vdif;
+                vmove.Normalize();
                 vmove *= TargetSpeed ;
-                // check minimum speed of moving
-                if (vmove.Length() < TargetSpeedMin)
-                {
-                    vmove.Normalize();
-                    vmove *= TargetSpeedMin;
-                }
                 // convert speed vector to move vector (x = v * t)
                 vmove *= p.Dt;
                 // check if target reached already (i.e. move would overshoot target)
@@ -129,6 +123,10 @@ namespace Pixie1
                     Position += vmove;
                 }
             }
+
+            // reset TargetMove for next round
+            TargetMove = Vector2.Zero;
+
         }
 
     }

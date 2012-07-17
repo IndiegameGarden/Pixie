@@ -8,17 +8,38 @@ namespace Pixie1
 {
     public class BlinkBehaviour: Gamelet
     {
-        float timePeriod, timeOn;
+        /// <summary>
+        /// the length of a single blink period
+        /// </summary>
+        public float TimePeriod;
+
+        /// <summary>
+        /// the fraction 0...1 of time that the blinking thing is visible
+        /// </summary>
+        public float DutyCycle
+        {
+            get
+            {
+                return dutyCycle;
+            }
+            set
+            {
+                dutyCycle = value;
+                timeOn = value * TimePeriod;
+            }
+        }
+
+        protected float timeOn, dutyCycle;
 
         public BlinkBehaviour(float timePeriod, float dutyCycle)
         {
-            this.timePeriod = timePeriod;
-            timeOn = dutyCycle * timePeriod;
+            this.TimePeriod = timePeriod;
+            DutyCycle = dutyCycle;
         }
 
         protected override void OnUpdate(ref UpdateParams p)
         {
-            float t = SimTime % timePeriod;
+            float t = SimTime % TimePeriod;
             if (t <= timeOn)
                 Parent.Visible = true;
             else

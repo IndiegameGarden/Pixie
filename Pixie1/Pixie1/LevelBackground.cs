@@ -16,7 +16,7 @@ namespace Pixie1
         SpriteBatch spriteBatch;
 
         public LevelBackground(string bitmapFileName, float motionSpeed)
-            : base("bg2045.png")
+            : base(bitmapFileName)
         {
             spriteBatch = new SpriteBatch(Screen.graphicsDevice);
             TargetSpeed = motionSpeed;

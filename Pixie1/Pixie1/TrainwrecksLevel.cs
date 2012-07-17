@@ -16,7 +16,7 @@ namespace Pixie1
         public TrainwrecksLevel(): base()
         {
             Current = this;
-            SCREEN_MOTION_SPEED = 1.0f;
+            SCREEN_MOTION_SPEED = 8.0f;
             DEFAULT_SCALE = 200f;
             PIXIE_STARTING_POS = new Vector2(7f, 197f); // in pixels        
             BG_STARTING_POS = new Vector2(7f, 197f); // in pixels; bg=background            
@@ -27,7 +27,7 @@ namespace Pixie1
             base.InitLevel();
 
             // select bitmap bg
-            bg = new LevelBackground("bg2045", SCREEN_MOTION_SPEED);
+            bg = new LevelBackground("bg2045.png", SCREEN_MOTION_SPEED);
             Add(bg);
             bg.Target = PIXIE_STARTING_POS;
             bg.Position = BG_STARTING_POS;
@@ -38,13 +38,13 @@ namespace Pixie1
         {
             base.InitBadPixels();
 
-            BadPixel bp = new BadPixel(true,pixie);
-            bp.PositionAndTarget = PIXIE_STARTING_POS + new Vector2(7f, 0f);
+            BadPixel bp = BadPixel.CreateCloaky();
+            bp.PositionAndTarget = PIXIE_STARTING_POS + new Vector2(95f, 0f);            
             //bp.TargetSpeed = 18.0f; // TODO
             Add(bp);
 
-            bp = new BadPixel(false,pixie);
-            bp.PositionAndTarget = PIXIE_STARTING_POS + new Vector2(0f, -5f);
+            bp = BadPixel.Create();
+            bp.PositionAndTarget = PIXIE_STARTING_POS + new Vector2(0f, -12f);
             Add(bp);
         }
 
@@ -53,7 +53,7 @@ namespace Pixie1
             base.InitToys();
 
             Toy test = new Toy();
-            test.Target = PIXIE_STARTING_POS + new Vector2(10f, 0f);
+            test.PositionAndTarget = PIXIE_STARTING_POS + new Vector2(10f, 0f);
             test.TargetSpeed = 18.0f; // TODO
             Add(test);
         }

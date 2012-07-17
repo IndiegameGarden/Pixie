@@ -14,32 +14,42 @@ namespace Pixie1
     /// </summary>
     public abstract class Level: Drawlet
     {
+        /// <summary>
+        /// the current Level singleton
+        /// </summary>
         public static Level Current = null;
 
-        // some default colors, not to be changed
+        // some default colors and settings
         public static Color PIXIE_COLOR = new Color(251, 101, 159); // pink
-        public static Color DEFAULT_BG_COLOR = Color.Black;
 
         public float DEFAULT_SCALE = 20.0f;
         public float SCREEN_MOTION_SPEED = 15.0f;
         public float PIXIE_TARGETSPEED = 18.0f;
 
-        public Vector2 PIXIE_STARTING_POS ; // in pixels        
-        public Vector2 BG_STARTING_POS ; // in pixels; bg=background
+        public Vector2 PIXIE_STARTING_POS = Vector2.Zero; // in pixels        
+        public Vector2 BG_STARTING_POS = Vector2.Zero;    // in pixels; bg=background
 
+        // scrolling screen trigger boundaries (in TTengine coordinates)
         public float BOUND_X = 0.3f;
         public float BOUND_Y = 0.3f;
 
         /// <summary>
         /// draw color of the background
         /// </summary>
-        public Color BackgroundColor = DEFAULT_BG_COLOR;
+        public Color BackgroundColor = Color.Black;
+
+        // level moves/scrolls
         public MotionBehavior MotionB;
 
+        // level music object
         public GameMusic gameMusic;
 
+        // background bitmap
         public LevelBackground bg;
-        protected Pixie pixie;
+
+        // our heroine Pixie
+        public Pixie pixie;
+
         protected PixieControl keyControl; // for pixie
         protected DebugMessage debugMsg;
         protected SubtitleText subTitles;
