@@ -15,7 +15,7 @@ namespace Pixie1
         SubtitleText cuteText;
         Spritelet helpText;
         Spritelet bg;
-        PixieSpritelet creditsScreen;
+        Thing creditsScreen;
         float timeEscDown = 0f;
         float timeCDown = 0f;
         float timeSpaceDown = 0f;
@@ -69,7 +69,7 @@ namespace Pixie1
             MotionB = new MotionBehavior();
             Add(MotionB);
 
-            creditsScreen = new PixieSpritelet("credits.png");
+            creditsScreen = new Thing("credits.png");
             Add(creditsScreen);
             creditsScreen.Visible = false;
 

@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 
 namespace Pixie1
 {
-    public class BadPixel: PixieSpritelet
+    public class BadPixel: Thing
     {
         // behaviors - the things that bad pixels do 
         public BlinkBehaviour Blinking;
@@ -29,7 +29,7 @@ namespace Pixie1
 
         bool isCloaky = false;
 
-        public BadPixel(PixieSpritelet chaseTarget)
+        public BadPixel(Thing chaseTarget)
             : base("pixie")
         {
             DrawInfo.DrawColor = new Color(255, 10, 4);

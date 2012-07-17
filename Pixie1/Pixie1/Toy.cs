@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 
 namespace Pixie1
 {
-    public class Toy: PixieSpritelet
+    public class Toy: Thing
     {
         float cyclePeriod;
 

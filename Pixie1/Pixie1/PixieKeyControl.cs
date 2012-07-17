@@ -10,7 +10,7 @@ using TTengine.Core;
 
 namespace Pixie1
 {
-    public class PixieKeyControl: PixieControl
+    public class PixieKeyControl: ThingControl
     {
         float pressTime = 0f;
 

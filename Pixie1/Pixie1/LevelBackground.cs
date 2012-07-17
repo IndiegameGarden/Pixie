@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Pixie1
 {
-    public class LevelBackground: PixieSpritelet
+    public class LevelBackground: Thing
     {
         Vector2 HALF_PIXEL_OFFSET = new Vector2(0.5f, 0.45f);
         SpriteBatch spriteBatch;

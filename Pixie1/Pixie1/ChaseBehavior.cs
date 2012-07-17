@@ -7,12 +7,12 @@ using Microsoft.Xna.Framework;
 
 namespace Pixie1
 {
-    public class ChaseBehavior: PixieControl
+    public class ChaseBehavior: ThingControl
     {
         /// <summary>
         /// followed target of this chase behavior
         /// </summary>
-        public PixieSpritelet ChaseTarget;
+        public Thing ChaseTarget;
 
         /// <summary>
         /// relative speed of chasing target
@@ -26,7 +26,7 @@ namespace Pixie1
 
         float wTime = 0f;
 
-        public ChaseBehavior(PixieSpritelet chaseTarget)
+        public ChaseBehavior(Thing chaseTarget)
         {
             this.ChaseTarget = chaseTarget;
         }

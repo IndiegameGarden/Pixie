@@ -50,7 +50,7 @@ namespace Pixie1
         // our heroine Pixie
         public Pixie pixie;
 
-        protected PixieControl keyControl; // for pixie
+        protected ThingControl keyControl; // for pixie
         protected DebugMessage debugMsg;
         protected SubtitleText subTitles;
 
@@ -186,7 +186,7 @@ namespace Pixie1
         /// check whether the given pixel position in this level is currently passable
         /// </summary>
         /// <param name="pos">pixel position to check</param>
-        /// <returns>true if passable for any PixieSpritelet entity</returns>
+        /// <returns>true if passable for any Thing entity</returns>
         public bool CanPass(Vector2 pos)
         {
             return bg.IsWalkable(pos);
@@ -197,7 +197,7 @@ namespace Pixie1
             base.OnUpdate(ref p);
 
             // important: reflect the global viewpos (for sprites to use)
-            PixieSpritelet.ViewPos = bg.Position;
+            Thing.ViewPos = bg.Position;
 
             // do some level tasks
             LevelKeyControl(ref p);

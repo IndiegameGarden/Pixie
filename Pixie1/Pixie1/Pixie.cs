@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 
 namespace Pixie1
 {
-    public class Pixie: PixieSpritelet
+    public class Pixie: Thing
     {
         
         public Pixie()
