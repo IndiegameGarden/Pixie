@@ -10,12 +10,12 @@ namespace Pixie1
 {
     public class ThingControl: Gamelet
     {
-        public Thing ParentPixie;
+        public Thing ParentThing;
 
         protected override void OnNewParent()
         {
             base.OnNewParent();
-            ParentPixie = Parent as Thing;
+            ParentThing = Parent as Thing;
         }
     }
 }

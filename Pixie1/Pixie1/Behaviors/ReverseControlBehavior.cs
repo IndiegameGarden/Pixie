@@ -13,7 +13,7 @@ namespace Pixie1.Behaviors
         protected override void OnUpdate(UpdateParams p)
         {
             base.OnUpdate(ref p);
-            ParentPixie.TargetMove = -ParentPixie.TargetMove;
+            ParentThing.TargetMove = -ParentThing.TargetMove;
         }
     }
 }

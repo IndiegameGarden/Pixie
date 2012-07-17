@@ -55,11 +55,11 @@ namespace Pixie1
             }
 
             // key rep
-            if (pressTime > 0.2f / ParentPixie.Velocity ) // TODO 0.1 const
+            if (pressTime > 0.2f / ParentThing.Velocity ) // TODO 0.1 const
                 pressTime = 0f;
 
             // make user's requested motion vector
-            ParentPixie.TargetMove += new Vector2(dx, dy);
+            ParentThing.TargetMove += new Vector2(dx, dy);
 
         }
 
