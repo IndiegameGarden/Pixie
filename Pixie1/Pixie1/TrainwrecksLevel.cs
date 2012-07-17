@@ -39,7 +39,7 @@ namespace Pixie1
             base.InitBadPixels();
 
             BadPixel bp = BadPixel.CreateCloaky();
-            bp.PositionAndTarget = PIXIE_STARTING_POS + new Vector2(95f, 0f);            
+            bp.PositionAndTarget = PIXIE_STARTING_POS + new Vector2(5f, -12f);            
             //bp.TargetSpeed = 18.0f; // TODO
             Add(bp);
 

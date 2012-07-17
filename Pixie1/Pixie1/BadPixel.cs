@@ -40,9 +40,13 @@ namespace Pixie1
 
             Chasing = new ChaseBehavior(chaseTarget);
             Chasing.ChaseSpeed = RandomMath.RandomBetween(0.57f, 1.05f);
+            Chasing.ChaseRange = RandomMath.RandomBetween(12f, 40f);
             Add(Chasing);
         }
 
+        /// <summary>
+        /// set 'cloaky' status, a cloaky is a hardly visible bad pixel
+        /// </summary>
         public bool IsCloaky
         {
             get
