@@ -13,10 +13,15 @@ namespace Pixie1
     {
         
         public Pixie()
-            : base("pixie")
+            : base("shape2x2")
         {
             DrawInfo.DrawColor = Level.PIXIE_COLOR;
+            //DrawInfo.DrawColor = Color.White;
         }
 
+        protected override void OnDraw(ref DrawParams p)
+        {
+            base.OnDraw(ref p);
+        }
     }
 }

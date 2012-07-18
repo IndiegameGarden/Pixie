@@ -15,11 +15,13 @@ namespace Pixie1
 
         public TrainwrecksLevel(): base()
         {
-            Current = this;
+            Current = this; // pointer to level instance singleton
+
+            // Level settings
             SCREEN_MOTION_SPEED = 8.0f;
             DEFAULT_SCALE = 200f;
-            PIXIE_STARTING_POS = new Vector2(7f, 197f); // in pixels        
-            BG_STARTING_POS = new Vector2(7f, 197f); // in pixels; bg=background            
+            PIXIE_STARTING_POS = new Vector2(27f, 197f); // in pixels        
+            BG_STARTING_POS = new Vector2(27f, 197f); // in pixels; bg=background            
         }
 
         protected override void InitLevel()
@@ -27,7 +29,8 @@ namespace Pixie1
             base.InitLevel();
 
             // select bitmap bg
-            bg = new LevelBackground("bg2045.png", SCREEN_MOTION_SPEED);
+            bg = new LevelBackground("bg2045.png");
+            bg.TargetSpeed = SCREEN_MOTION_SPEED;
             Add(bg);
             bg.Target = PIXIE_STARTING_POS;
             bg.Position = BG_STARTING_POS;

@@ -6,6 +6,7 @@ using TTengine.Core;
 using TTengine.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Pixie1
 {
@@ -24,7 +25,7 @@ namespace Pixie1
 
         public float DEFAULT_SCALE = 20.0f;
         public float SCREEN_MOTION_SPEED = 15.0f;
-        public float PIXIE_TARGETSPEED = 18.0f;
+        public float PIXIE_TARGETSPEED = 5.0f;
 
         public Vector2 PIXIE_STARTING_POS = Vector2.Zero; // in pixels        
         public Vector2 BG_STARTING_POS = Vector2.Zero;    // in pixels; bg=background
@@ -65,12 +66,14 @@ namespace Pixie1
         }
 
         /// <summary>
-        /// Init: the scrolling level itself
+        /// Init: the scrolling level itself. First Init method that is called
         /// </summary>
         protected virtual void InitLevel()
         {
             Motion.Scale = DEFAULT_SCALE;
             Motion.ScaleTarget = DEFAULT_SCALE;
+
+            MySpriteBatch = new TTSpriteBatch(Screen.graphicsDevice,SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
         }
 
         /// <summary>
@@ -187,10 +190,12 @@ namespace Pixie1
         /// </summary>
         /// <param name="pos">pixel position to check</param>
         /// <returns>true if passable for any Thing entity</returns>
+        /*
         public bool CanPass(Vector2 pos)
         {
             return bg.IsWalkable(pos);
         }
+        */
 
         protected override void OnUpdate(ref UpdateParams p)
         {
@@ -203,7 +208,7 @@ namespace Pixie1
             LevelKeyControl(ref p);
             ScrollBackground(ref p);
 
-            debugMsg.Text = "Pixie: trg=" + pixie.Target +", pos=" + pixie.Position+", m.pos="+pixie.Motion.Position;
+            debugMsg.Text = "Pixie: trg=" + pixie.Target +", pos=" + pixie.Position;
             // DEBUG sample pixel
             Color c= bg.SamplePixel(pixie.Target);
             debugMsg.Text += "Color: " + c.R + "," + c.G + "," + c.B + "," + c.A;
