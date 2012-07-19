@@ -22,41 +22,48 @@ namespace Pixie1
 
         // some default colors and settings
         public static Color PIXIE_COLOR = new Color(251, 101, 159); // pink
-
         public float DEFAULT_SCALE = 20.0f;
         public float SCREEN_MOTION_SPEED = 15.0f;
         public float PIXIE_TARGETSPEED = 5.0f;
-
         public Vector2 PIXIE_STARTING_POS = Vector2.Zero; // in pixels        
         public Vector2 BG_STARTING_POS = Vector2.Zero;    // in pixels; bg=background
 
-        // scrolling screen trigger boundaries (in TTengine coordinates)
+        /// <summary>
+        /// scrolling screen trigger boundaries (in TTengine coordinates)
+        /// </summary>
         public float BOUND_X = 0.3f;
         public float BOUND_Y = 0.3f;
 
         /// <summary>
-        /// draw color of the background
+        /// default color of the background (e.g. for areas not covered by the bg bitmap)
         /// </summary>
         public Color BackgroundColor = Color.Black;
 
-        // level moves/scrolls
+        /// <summary>
+        /// level moves/scrolls behavior for TTengine
+        /// </summary>
         public MotionBehavior MotionB;
 
-        // level music object
-        public GameMusic gameMusic;
+        /// <summary>
+        /// level music object
+        /// </summary> 
+        public GameMusic Music;
 
-        // background bitmap
-        public LevelBackground bg;
+        /// <summary>
+        /// background bitmap
+        /// </summary>
+        public LevelBackground Background;
 
-        // our heroine Pixie
+        /// <summary>
+        /// our heroine Pixie
+        /// </summary>
         public Pixie pixie;
 
+        // class internal
         protected ThingControl keyControl; // for pixie
         protected DebugMessage debugMsg;
         protected SubtitleText subTitles;
-
-        float timeEscDown = 0f;
-        
+        float timeEscDown = 0f;        
 
         public Level(): base()
         {
@@ -173,7 +180,7 @@ namespace Pixie1
                 pixiePos.Y < BOUND_Y || pixiePos.Y > (Screen.Height - BOUND_Y))
             {
                 if (ScreenBorderHit())
-                    bg.Target = pixie.Position;
+                    Background.Target = pixie.Position;
             }
         }
 
@@ -193,7 +200,7 @@ namespace Pixie1
         /*
         public bool CanPass(Vector2 pos)
         {
-            return bg.IsWalkable(pos);
+            return Background.IsWalkable(pos);
         }
         */
 
@@ -202,7 +209,7 @@ namespace Pixie1
             base.OnUpdate(ref p);
 
             // important: reflect the global viewpos (for sprites to use)
-            Thing.ViewPos = bg.Position;
+            Thing.ViewPos = Background.Position;
 
             // do some level tasks
             LevelKeyControl(ref p);
@@ -210,7 +217,7 @@ namespace Pixie1
 
             debugMsg.Text = "Pixie: trg=" + pixie.Target +", pos=" + pixie.Position;
             // DEBUG sample pixel
-            Color c= bg.SamplePixel(pixie.Target);
+            Color c= Background.SamplePixel(pixie.Target);
             debugMsg.Text += "Color: " + c.R + "," + c.G + "," + c.B + "," + c.A;
 
         }

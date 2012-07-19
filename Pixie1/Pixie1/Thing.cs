@@ -149,7 +149,7 @@ namespace Pixie1
         protected override void OnNewParent()
         {
             base.OnNewParent();
-            bg = Level.Current.bg;
+            bg = Level.Current.Background;
         }
 
         protected override void OnUpdate(ref UpdateParams p)

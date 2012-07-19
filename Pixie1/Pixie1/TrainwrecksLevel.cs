@@ -29,11 +29,11 @@ namespace Pixie1
             base.InitLevel();
 
             // select bitmap bg
-            bg = new LevelBackground("bg2045.png");
-            bg.TargetSpeed = SCREEN_MOTION_SPEED;
-            Add(bg);
-            bg.Target = PIXIE_STARTING_POS;
-            bg.Position = BG_STARTING_POS;
+            Background = new LevelBackground("bg2045.png");
+            Background.TargetSpeed = SCREEN_MOTION_SPEED;
+            Add(Background);
+            Background.Target = PIXIE_STARTING_POS;
+            Background.Position = BG_STARTING_POS;
 
         }
 
@@ -63,8 +63,8 @@ namespace Pixie1
 
         protected override void InitLevelSpecific()
         {
-            gameMusic = new GameMusic();
-            Add(gameMusic);
+            Music = new GameMusic();
+            Add(Music);
 
             SubtitleText t = new SubtitleText();
             t.StartTime = 2f;
