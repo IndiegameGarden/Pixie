@@ -13,7 +13,8 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Pixie1
 {
     /**
-     * base class for any visible thing in the Pixie universe
+     * base class for any visible thing in the Pixie universe. Has multi-pixel
+     * collission detection including background collissions.
      */
     public class Thing: Spritelet
     {
@@ -120,6 +121,7 @@ namespace Pixie1
 
         // used for the collision detection per-pixel
         protected Color[] textureData;
+        protected LevelBackground bg;
 
         /// <summary>
         /// create a single-pixel Thing
@@ -144,6 +146,12 @@ namespace Pixie1
             DrawInfo.Center = Vector2.Zero;
         }
 
+        protected override void OnNewParent()
+        {
+            base.OnNewParent();
+            bg = Level.Current.bg;
+        }
+
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
@@ -156,7 +164,7 @@ namespace Pixie1
             Motion.Position = Screen.Center + Motion.ScaleAbs * (  FromPixels( Position - ViewPos)); // TODO ViewPos smoothing using Draw cache?
             //Motion.Position = Position - ViewPos; // alternative to above
 
-            // take steering inputs if any, and move pixie
+            // take steering inputs if any, and move pixie, applying collision detection
             if (TargetMove.LengthSquared() > 0f)
             {
                 Target += TargetMove;
@@ -208,9 +216,13 @@ namespace Pixie1
                 return true;
             Rectangle bgSampleRect = new Rectangle(posX, posY, BoundingRectangle.Width, BoundingRectangle.Height);
             Rectangle thingRect = new Rectangle(posX, posY, BoundingRectangle.Width, BoundingRectangle.Height);
+            if (bgSampleRect.Right >= bg.Texture.Width)
+                return true;
+            if (bgSampleRect.Bottom >= bg.Texture.Height)
+                return true;
             int N = bgSampleRect.Width * bgSampleRect.Height;
             Color[] bgTextureData = new Color[N];
-            Level.Current.bg.Texture.GetData<Color>(0, bgSampleRect, bgTextureData, 0, N);
+            bg.Texture.GetData<Color>(0, bgSampleRect, bgTextureData, 0, N);
             return IntersectPixelsBg(thingRect, textureData, bgSampleRect, bgTextureData);
         }
 

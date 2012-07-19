@@ -40,7 +40,7 @@ namespace Pixie1
                 wTime = 0f;
             if (wTime == 0f)
             {
-                Vector2 dif = ChaseTarget.Position - ParentThing.Position;
+                Vector2 dif = ChaseTarget.Position - ParentThing.Target;
                 float dist = dif.Length();
                 if (dist > 0f && dist <= ChaseRange )
                 {
