@@ -59,6 +59,10 @@ namespace Pixie1
             test.PositionAndTarget = PIXIE_STARTING_POS + new Vector2(10f, 0f);
             test.TargetSpeed = 18.0f; // TODO
             Add(test);
+
+            // attach test
+            test.AttachmentPosition = new Vector2(3f, 0f);
+            pixie.Add(test);
         }
 
         protected override void InitLevelSpecific()
@@ -74,6 +78,7 @@ namespace Pixie1
             t.AddText("I'm lost.", 3f);
             t.AddText("Can you help me\nget back home?", 3f);
             Parent.Add(t);
+
         }
 
         protected override bool ScreenBorderHit()

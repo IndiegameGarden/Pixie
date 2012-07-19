@@ -30,7 +30,7 @@ namespace Pixie1
             base.OnUpdate(ref p);
             //MotionB.Target = TargetPos; // FIXME mappin to screen
             //MotionB.TargetSpeed = 1f;
-            Motion.RotateModifier += SimTime;
+            //Motion.RotateModifier += SimTime;
         }
     }
 }

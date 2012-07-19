@@ -41,6 +41,12 @@ namespace Pixie1
         public Vector2 Position = Vector2.Zero;
 
         /// <summary>
+        /// if attached to a parent, the position relative to parent where it is
+        /// attached
+        /// </summary>
+        public Vector2 AttachmentPosition = Vector2.Zero;
+
+        /// <summary>
         /// Position.X as a rounded integer
         /// </summary>
         public int PositionX
@@ -161,19 +167,47 @@ namespace Pixie1
             BoundingRectangle.Y = PositionY;
 
             // update position of the smooth motion of this Thing in the TTengine
-            Motion.Position = Screen.Center + Motion.ScaleAbs * (  FromPixels( Position - ViewPos)); // TODO ViewPos smoothing using Draw cache?
-            //Motion.Position = Position - ViewPos; // alternative to above
+            // update position when attached to a parent Thing
+            if (Parent is Thing)
+            {
+                Thing t = Parent as Thing;
+                Target = t.Target + AttachmentPosition;
+                Motion.Position = Motion.ScaleAbs * FromPixels(AttachmentPosition);
+            }
+            else
+            {
+                Motion.Position = Screen.Center + Motion.ScaleAbs * (FromPixels(Position - ViewPos)); // TODO ViewPos smoothing using Draw cache?
+                //Motion.Position = Position - ViewPos; // alternative to above
+            }
 
             // take steering inputs if any, and move pixie, applying collision detection
             if (TargetMove.LengthSquared() > 0f)
             {
-                Target += TargetMove;
                 // if passable...
-                if (IsGodMode || !CollidesWithBackground(TargetX,TargetY))
+                if (IsGodMode || !CollidesWithBackground(TargetMove))
                 {
-                    // walk is ok
-                }else{
-                    Target -= TargetMove; // cancel the move
+                    bool ok = true;
+                    if (!IsGodMode)
+                    {
+                        // check all attached Things too                        
+                        foreach (Gamelet g in Children)
+                        {
+                            if (g is Thing)
+                            {
+                                Thing t = g as Thing;
+                                if (t.IsGodMode) continue;
+                                if (t.CollidesWithBackground(TargetMove))
+                                {
+                                    ok = false;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (ok)
+                    {
+                        Target += TargetMove;
+                    }
                 }
                 
             }            
@@ -208,8 +242,16 @@ namespace Pixie1
             return IntersectPixels(BoundingRectangle, textureData, other.BoundingRectangle, other.textureData );
         }
 
-        public bool CollidesWithBackground(int posX, int posY)
+        /// <summary>
+        /// check whether this Thing would collide with background, when attempting to do a given potential move
+        /// </summary>
+        /// <param name="potentialMove">the move vector, delta from current Target, that we would like to apply</param>
+        /// <returns>true if Thing would collide with background after a potentialMove has been made, false otherwise</returns>
+        public bool CollidesWithBackground(Vector2 potentialMove)
         {
+            TTutil.Round(potentialMove);
+            int posX = TargetX + (int)potentialMove.X;
+            int posY = TargetY + (int)potentialMove.Y;
             if (posX < 0) 
                 return true;
             if (posY < 0) 
