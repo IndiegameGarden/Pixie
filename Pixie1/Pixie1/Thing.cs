@@ -116,7 +116,7 @@ namespace Pixie1
         public float Velocity = 1f;
 
         /// <summary>
-        /// relative speed of the smooth motion for moving towards Target. Linear speed.
+        /// relative speed of the smooth motion for moving towards Target. Linear speed defined for Velocity==1.
         /// </summary>
         public float TargetSpeed = 10f;
 
@@ -217,7 +217,7 @@ namespace Pixie1
             {
                 Vector2 vmove = vdif;
                 vmove.Normalize();
-                vmove *= TargetSpeed ;
+                vmove *= TargetSpeed * Velocity ;
                 // convert speed vector to move vector (x = v * t)
                 vmove *= p.Dt;
                 // check if target reached already (i.e. move would overshoot target)

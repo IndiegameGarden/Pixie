@@ -14,7 +14,6 @@ namespace Pixie1
     {
         public Color BackgroundColor = Color.Black;
 
-        Vector2 HALF_PIXEL_OFFSET = Vector2.Zero; //new Vector2(0.5f, 0.5f); // FIXME
         SpriteBatch spriteBatch;
 
         public LevelBackground(string bitmapFileName)
@@ -35,30 +34,12 @@ namespace Pixie1
             return data[0];
         }
 
-        /*
-        public bool IsWalkablex(Color c)
-        {
-            float intensity = ((float)(c.R + c.G + c.B)) / (3.0f * 255.0f);
-            if (intensity > 0.39f) // FIXME make configurable of course (+ inheritance possible), use int only
-                return true;
-            else
-                return false;
-        }
-
-        public bool IsWalkablex(Vector2 pos)
-        {
-            Color c = SamplePixel(pos);
-            return IsWalkable(c);
-        }
-        */
-
-        // 2 juni ; augustus laatste week;
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
 
             // update my on-screen position (shifting the big bitmap around to match middle point set)
-            Motion.Position = Screen.Center - Motion.ScaleAbs * FromPixels(Position + HALF_PIXEL_OFFSET);            
+            Motion.Position = Screen.Center - Motion.ScaleAbs * FromPixels(Position);            
         }
 
         protected override void OnDraw(ref DrawParams p)

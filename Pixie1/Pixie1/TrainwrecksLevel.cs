@@ -6,6 +6,7 @@ using TTengine.Core;
 using TTengine.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Pixie1.Toys;
 
 namespace Pixie1
 {
@@ -55,14 +56,16 @@ namespace Pixie1
         {
             base.InitToys();
 
-            Toy test = new Toy();
-            test.PositionAndTarget = PIXIE_STARTING_POS + new Vector2(10f, 0f);
-            test.TargetSpeed = 18.0f; // TODO
-            Add(test);
+            for (int i = 0; i < 20; i++)
+            {
+                Toy test = new SpeedModifyToy(2f);
+                test.PositionAndTarget = PIXIE_STARTING_POS + new Vector2(RandomMath.RandomBetween(10f,50f), RandomMath.RandomBetween(-40f,40f));
+                Add(test);
+            }
 
             // attach test
-            test.AttachmentPosition = new Vector2(3f, 0f);
-            pixie.Add(test);
+            //test.AttachmentPosition = new Vector2(3f, 0f);
+            //pixie.Add(test);
         }
 
         protected override void InitLevelSpecific()
@@ -97,7 +100,8 @@ namespace Pixie1
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
-
+            // adapt scroll speed to how fast pixie goes
+            Background.TargetSpeed = SCREEN_MOTION_SPEED * pixie.Velocity;
         }
     }
 }
