@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework;
 
 namespace Pixie1
 {
+    /// <summary>
+    /// lets a Thing chase another Thing when it's visible.
+    /// </summary>
     public class ChaseBehavior: ThingControl
     {
         /// <summary>
@@ -24,6 +27,7 @@ namespace Pixie1
         /// </summary>
         public float ChaseRange = 10.0f;
 
+        // waiting time before a next move is taken
         float wTime = 0f;
 
         public ChaseBehavior(Thing chaseTarget)
@@ -38,7 +42,7 @@ namespace Pixie1
             wTime += p.Dt;
             if (wTime >= 0.2f / ChaseSpeed ) 
                 wTime = 0f;
-            if (wTime == 0f)
+            if (wTime == 0f && ChaseTarget.Visible)
             {
                 Vector2 dif = ChaseTarget.Position - ParentThing.Target;
                 float dist = dif.Length();

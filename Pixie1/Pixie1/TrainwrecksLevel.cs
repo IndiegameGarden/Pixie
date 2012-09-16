@@ -63,6 +63,10 @@ namespace Pixie1
                 Add(test);
             }
 
+            Toy invisToy = new InvisibilityToy();
+            invisToy.PositionAndTarget = PIXIE_STARTING_POS + new Vector2(20f, 0f);
+            Add(invisToy);
+
             // attach test
             //test.AttachmentPosition = new Vector2(3f, 0f);
             //pixie.Add(test);

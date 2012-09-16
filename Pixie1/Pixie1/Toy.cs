@@ -9,6 +9,10 @@ using Microsoft.Xna.Framework;
 
 namespace Pixie1
 {
+    /// <summary>
+    /// base class for a Toy that can be picked up, left behind, used (and then it is active for a while), sometimes with 
+    /// multiple shots before it is expended. Typically some special power, effect or weapon.
+    /// </summary>
     public class Toy: Thing
     {
         /// <summary>
