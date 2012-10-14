@@ -40,19 +40,11 @@ namespace Pixie1
         /// </summary>
         public int UsesLeft = 1;
 
-        float cyclePeriod;
         float useTime;
 
         public Toy()
             : base("pixie")
         {            
-            cyclePeriod = RandomMath.RandomBetween(0.2f, 1.82f);
-            ColorCycleBehavior cycl = new ColorCycleBehavior(cyclePeriod);
-            cycl.minColor = new Color(RandomMath.RandomBetween(0.3f, 0.5734f), RandomMath.RandomBetween(0.7f, 1f), RandomMath.RandomBetween(0.1f, 0.54f));
-            cycl.maxColor = new Color(0.9434f, 0.9f, RandomMath.RandomBetween(0.8f,1.0f) );
-            cycl.timePeriodR = cyclePeriod * RandomMath.RandomBetween(1.02f, 1.537f); ;
-            cycl.timePeriodG = cyclePeriod * RandomMath.RandomBetween(0.7f, 0.93f); ;
-            Add(cycl);        
         }
 
         /// <summary>
@@ -104,6 +96,16 @@ namespace Pixie1
                 pixie.Add(this);
                 Visible = false;
             }
+        }
+
+        protected void SetColors(float cyclePeriod, Color minColor, Color maxColor)
+        {
+            ColorCycleBehavior cycl = new ColorCycleBehavior(cyclePeriod);
+            cycl.minColor = minColor;
+            cycl.maxColor = maxColor;
+            //cycl.timePeriodR = cyclePeriod * RandomMath.RandomBetween(1.02f, 1.537f); ;
+            //cycl.timePeriodG = cyclePeriod * RandomMath.RandomBetween(0.7f, 0.93f); ;
+            Add(cycl);        
         }
     }
 }

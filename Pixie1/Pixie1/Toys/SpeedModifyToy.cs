@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Pixie1.Toys
 {
@@ -15,13 +16,10 @@ namespace Pixie1.Toys
         /// </summary>
         public float SpeedFactor = 1f;
 
-        public SpeedModifyToy()
-        {
-        }
-
         public SpeedModifyToy(float initialSpeedFactor)
         {
             this.SpeedFactor = initialSpeedFactor;
+            SetColors(0.4f, Color.LightPink, Color.LightSalmon);
         }
 
         protected override void StartUsing()

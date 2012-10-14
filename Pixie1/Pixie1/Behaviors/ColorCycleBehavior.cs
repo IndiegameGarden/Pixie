@@ -10,8 +10,7 @@ namespace Pixie1
     public class ColorCycleBehavior: Gamelet
     {
         public float timePeriod;
-        public float timePeriodR, timePeriodG, timePeriodB;
-        //public float minB, maxB, minG, maxG, minR, maxR;
+        public float timePeriodR, timePeriodG, timePeriodB, timePeriodA;
         public Color minColor;
         public Color maxColor;
 
@@ -21,6 +20,7 @@ namespace Pixie1
             timePeriodR = timePeriod;
             timePeriodG = timePeriod;
             timePeriodB = timePeriod;
+            timePeriodA = timePeriod;
         }
 
         protected override void OnUpdate(ref UpdateParams p)
@@ -30,7 +30,8 @@ namespace Pixie1
                 t = 2*timePeriod - t;
             Color col = new Color( (int)  ((t / timePeriodR) * (maxColor.R - minColor.R) + minColor.R),
                                    (int)  ((t / timePeriodG) * (maxColor.G - minColor.G) + minColor.G),
-                                   (int)  ((t / timePeriodB) * (maxColor.B - minColor.B) + minColor.B)
+                                   (int)  ((t / timePeriodB) * (maxColor.B - minColor.B) + minColor.B),
+                                   (int)  ((t / timePeriodA) * (maxColor.A - minColor.A) + minColor.A)
                                  );
             Parent.DrawInfo.DrawColor = col;
             
