@@ -107,11 +107,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BadPixel.cs" />
+    <Compile Include="Levels\AmazingLevel.cs" />
+    <Compile Include="Actors\BadPixel.cs" />
+    <Compile Include="Behaviors\AlwaysTurnRightBehavior.cs" />
+    <Compile Include="Behaviors\RandomWanderBehavior.cs" />
     <Compile Include="Behaviors\ReverseControlBehavior.cs" />
     <Compile Include="Behaviors\BlinkBehaviour.cs" />
     <Compile Include="Behaviors\ChaseBehavior.cs" />
     <Compile Include="Behaviors\ColorCycleBehavior.cs" />
+    <Compile Include="Behaviors\SubsumptionBehavior.cs" />
     <Compile Include="RotatingBackground.cs" />
     <Compile Include="FinalScreen.cs" />
     <Compile Include="GameMusic.cs" />
@@ -122,7 +126,7 @@
     <Compile Include="Toy.cs" />
     <Compile Include="ThingControl.cs" />
     <Compile Include="PixieKeyControl.cs" />
-    <Compile Include="Pixie.cs" />
+    <Compile Include="Actors\Pixie.cs" />
     <Compile Include="PixieScreenlet.cs" />
     <Compile Include="Thing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,7 +145,7 @@
     <Compile Include="Toys\ShaderToy.cs" />
     <Compile Include="Toys\SpeedModifyToy.cs" />
     <Compile Include="Toys\ZoomOutToy.cs" />
-    <Compile Include="TrainwrecksLevel.cs" />
+    <Compile Include="Levels\TrainwrecksLevel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

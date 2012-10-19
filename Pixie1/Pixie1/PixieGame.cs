@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -13,7 +12,8 @@ using TTengine.Util;
 using TTengine.Modifiers;
 using TTMusicEngine;
 using TTMusicEngine.Soundevents;
-
+using Pixie1.Levels;
+using Pixie1.Actors;
 
 namespace Pixie1
 {
@@ -74,7 +74,9 @@ namespace Pixie1
         {
             //mainScreenlet.Add(new FrameRateCounter(1.0f, 0f)); // TODO
 
-            level = new TrainwrecksLevel();
+            //level = new TrainwrecksLevel();
+            level = new AmazingLevel();
+
             mainScreenlet.Add(level);
 
             base.LoadContent();

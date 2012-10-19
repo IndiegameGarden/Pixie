@@ -175,9 +175,23 @@ namespace Pixie1
                 Motion.Position = Motion.ScaleAbs * FromPixels(AttachmentPosition);
             }
             else
-            {
+            {   // not attached to a parent Thing
                 Motion.Position = Screen.Center + Motion.ScaleAbs * (FromPixels(Position - ViewPos)); // TODO ViewPos smoothing using Draw cache?
                 //Motion.Position = Position - ViewPos; // alternative to above
+            }
+
+            // compute target move for this thing based on child controls
+            foreach (Gamelet g in Children)
+            {
+                if (g is ThingControl)
+                {
+                    ThingControl control = g as ThingControl;
+                    if (control.IsTargetMoveDefined)
+                    {
+                        TargetMove += control.TargetMove;
+                        TargetMove *= control.TargetMoveMultiplier;
+                    }
+                }
             }
 
             // take steering inputs if any, and move pixie, applying collision detection

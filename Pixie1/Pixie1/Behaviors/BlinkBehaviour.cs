@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using TTengine.Core;
 
-namespace Pixie1
+namespace Pixie1.Behaviors
 {
-    public class BlinkBehaviour: Gamelet
+    public class BlinkBehavior: Gamelet
     {
         /// <summary>
         /// the length of a single blink period
@@ -31,7 +31,7 @@ namespace Pixie1
 
         protected float timeOn, dutyCycle;
 
-        public BlinkBehaviour(float timePeriod, float dutyCycle)
+        public BlinkBehavior(float timePeriod, float dutyCycle)
         {
             this.TimePeriod = timePeriod;
             DutyCycle = dutyCycle;

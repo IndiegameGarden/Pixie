@@ -7,6 +7,7 @@ using TTengine.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using Pixie1.Actors;
 
 namespace Pixie1
 {

@@ -5,7 +5,7 @@ using System.Text;
 using TTengine.Core;
 using Microsoft.Xna.Framework;
 
-namespace Pixie1
+namespace Pixie1.Behaviors
 {
     /// <summary>
     /// lets a Thing chase another Thing when it's visible.
@@ -42,23 +42,30 @@ namespace Pixie1
             wTime += p.Dt;
             if (wTime >= 0.2f / ChaseSpeed ) 
                 wTime = 0f;
-            if (wTime == 0f && ChaseTarget.Visible)
+
+            if (ChaseTarget.Visible)
             {
                 Vector2 dif = ChaseTarget.Position - ParentThing.Target;
                 float dist = dif.Length();
                 if (dist > 0f && dist <= ChaseRange )
                 {
-                    // choose one direction randomly, if diagonals are requested
-                    if (dif.X != 0f && dif.Y != 0f)
+                    if (wTime == 0f)
                     {
-                        float r = RandomMath.RandomUnit();
-                        if (r > 0.5f)
-                            dif.X = 0f;
-                        else
-                            dif.Y = 0f;
+                        // choose one direction randomly, if diagonals would be required
+                        if (dif.X != 0f && dif.Y != 0f)
+                        {
+                            float r = RandomMath.RandomUnit();
+                            if (r > 0.5f)
+                                dif.X = 0f;
+                            else
+                                dif.Y = 0f;
+                        }
+                        dif.Normalize();
+
+                        TargetMove = dif;                        
                     }
-                    dif.Normalize();
-                    ParentThing.TargetMove += dif;
+                    // indicate we're chasing
+                    IsTargetMoveDefined = true;
                 }
             }
         }

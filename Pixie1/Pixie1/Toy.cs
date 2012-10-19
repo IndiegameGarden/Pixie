@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using TTengine.Core;
 using TTengine.Util;
 using Microsoft.Xna.Framework;
+using Pixie1.Behaviors;
 
 namespace Pixie1
 {

@@ -6,6 +6,7 @@ using TTengine.Core;
 using TTengine.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Pixie1.Actors;
 
 namespace Pixie1
 {

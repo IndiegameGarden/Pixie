@@ -59,7 +59,8 @@ namespace Pixie1
                 pressTime = 0f;
 
             // make user's requested motion vector
-            ParentThing.TargetMove += new Vector2(dx, dy);
+            TargetMove = new Vector2(dx, dy);
+            IsTargetMoveDefined = true;
 
         }
 

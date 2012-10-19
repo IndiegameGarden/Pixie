@@ -5,7 +5,7 @@ using System.Text;
 using TTengine.Core;
 using Microsoft.Xna.Framework;
 
-namespace Pixie1
+namespace Pixie1.Behaviors
 {
     public class ColorCycleBehavior: Gamelet
     {
