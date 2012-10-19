@@ -44,12 +44,12 @@ namespace Pixie1.Levels
             base.InitBadPixels();
 
             BadPixel bp = BadPixel.Create(); // Cloaky();
-            bp.PositionAndTarget = new Vector2(1f, 1f);
+            bp.PositionAndTarget = new Vector2(50f, 39f);
             //bp.TargetSpeed = 18.0f; // TODO
             Add(bp);
 
             bp = BadPixel.Create();
-            bp.PositionAndTarget = new Vector2(5f, 1f);
+            bp.PositionAndTarget = new Vector2(52f, 44f);
             Add(bp);
         }
 

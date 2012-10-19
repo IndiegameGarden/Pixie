@@ -13,6 +13,7 @@ namespace Pixie1.Actors
         public BlinkBehavior Blinking;
         public ChaseBehavior  Chasing;
         public AlwaysTurnRightBehavior Turning;
+        public RandomWanderBehavior Wandering;
 
         public static BadPixel Create()
         {
@@ -47,10 +48,12 @@ namespace Pixie1.Actors
 
             Turning = new AlwaysTurnRightBehavior();
             Turning.MoveSpeed = Chasing.ChaseSpeed; //RandomMath.RandomBetween(0.57f, 1.05f);
-            //sub.Add(Turning);
+            Turning.MoveSpeed = 0.7f;
+            sub.Add(Turning);
 
-            RandomWanderBehavior rw = new RandomWanderBehavior(2.7f, 11.3f);
-            sub.Add(rw);
+            Wandering = new RandomWanderBehavior(2.7f, 11.3f);
+            Wandering.MoveSpeed = 0.7f;
+            sub.Add(Wandering);
             
         }
 

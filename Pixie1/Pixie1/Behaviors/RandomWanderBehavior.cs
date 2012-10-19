@@ -41,7 +41,9 @@ namespace Pixie1.Behaviors
         {
             base.OnUpdate(ref p);
 
+            // time keeping
             wTime += p.Dt;
+            timeSinceLastChange += p.Dt;
             if (wTime >= 0.2f / MoveSpeed)
                 wTime = 0f;
 
@@ -67,7 +69,6 @@ namespace Pixie1.Behaviors
                 TargetMove = dir;
 
                 // direction changing
-                timeSinceLastChange += p.Dt;
                 if (timeSinceLastChange >= dirChangeTime)
                 {
                     timeSinceLastChange = 0f;
