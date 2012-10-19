@@ -61,7 +61,7 @@ namespace Pixie1.Behaviors
                     didSeeWall = true;
             }
             // in case that it's not time to make a move, keep this ThingControl active if near walls
-            else if (didSeeWall || !isRightHandFree || !isLeftHandFree || !isFrontFree )
+            if (didSeeWall || !isRightHandFree || !isLeftHandFree || !isFrontFree )
                 IsTargetMoveDefined = true; 
         }
 

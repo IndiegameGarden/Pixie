@@ -44,12 +44,12 @@ namespace Pixie1.Levels
             base.InitBadPixels();
 
             BadPixel bp = BadPixel.Create(); // Cloaky();
-            bp.PositionAndTarget = new Vector2(50f, 39f);
+            bp.PositionAndTarget = new Vector2(72f, 34f);
             //bp.TargetSpeed = 18.0f; // TODO
             Add(bp);
 
             bp = BadPixel.Create();
-            bp.PositionAndTarget = new Vector2(52f, 44f);
+            bp.PositionAndTarget = new Vector2(37f, 44f);
             Add(bp);
         }
 
@@ -76,7 +76,7 @@ namespace Pixie1.Levels
         protected override void InitLevelSpecific()
         {
             Music = new GameMusic();
-            Add(Music);
+            //Add(Music);
 
             SubtitleText t = new SubtitleText();
             t.StartTime = 2f;
