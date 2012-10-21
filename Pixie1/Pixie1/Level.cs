@@ -60,6 +60,8 @@ namespace Pixie1
         /// </summary>
         public Pixie pixie;
 
+        public SubtitleManager Subtitles;
+
         // class internal
         protected ThingControl keyControl; // for pixie
         protected DebugMessage debugMsg;
@@ -70,6 +72,9 @@ namespace Pixie1
         {
             MotionB = new MotionBehavior();
             Add(MotionB);
+
+            Subtitles = new SubtitleManager();
+            Add(Subtitles);
 
         }
 

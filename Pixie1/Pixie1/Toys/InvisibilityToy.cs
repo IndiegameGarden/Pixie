@@ -16,6 +16,11 @@ namespace Pixie1.Toys
             SetColors(1.9f, Color.LightSkyBlue, new Color(1f,1f,1f,0f));
         }
 
+        public override string ToyName()
+        {
+            return "CLOAKING DEVICE";
+        }
+
         protected override void StartUsing()
         {
             base.StartUsing();

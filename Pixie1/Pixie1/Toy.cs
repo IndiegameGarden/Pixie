@@ -11,7 +11,7 @@ namespace Pixie1
     /// base class for a Toy that can be picked up, left behind, used (and then it is active for a while), sometimes with 
     /// multiple shots before it is expended. Typically some special power, effect or weapon.
     /// </summary>
-    public class Toy: Thing
+    public abstract class Toy: Thing
     {
         /// <summary>
         /// if my Parent is a Thing, this holds it. If null, there is no Parent which is a Thing
@@ -44,6 +44,8 @@ namespace Pixie1
             : base("pixie")
         {            
         }
+
+        public abstract string ToyName();
 
         /// <summary>
         /// a ParentThing starts using the Toy
@@ -87,8 +89,14 @@ namespace Pixie1
                 useTime = 0f;                
             }
 
-            // collision = pickup
+            // pixie facing this Toy == print info message
             Thing pixie = Level.Current.pixie;
+            if (ParentThing == null && Collides(pixie, pixie.FacingDirection))
+            {
+                Level.Current.Subtitles.ShowNow(ToyName(), 4f);
+            }
+
+            // collision with pixie = pickup            
             if (ParentThing==null && Collides(pixie))
             {
                 pixie.Add(this);

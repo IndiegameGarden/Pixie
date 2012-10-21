@@ -22,6 +22,11 @@ namespace Pixie1.Toys
             SetColors(0.4f, Color.LightPink, Color.LightSalmon);
         }
 
+        public override string ToyName()
+        {
+            return "TURBO";
+        }
+
         protected override void StartUsing()
         {
             base.StartUsing();

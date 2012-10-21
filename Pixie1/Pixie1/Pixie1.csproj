@@ -121,6 +121,7 @@
     <Compile Include="GameMusic.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="PixieLogo.cs" />
+    <Compile Include="SubtitleManager.cs" />
     <Compile Include="SubtitleText.cs" />
     <Compile Include="TitleScreen.cs" />
     <Compile Include="Toy.cs" />

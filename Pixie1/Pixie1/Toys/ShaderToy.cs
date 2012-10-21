@@ -10,5 +10,11 @@ namespace Pixie1.Toys
     /// </summary>
     public class ShaderToy: Toy
     {
+        public override string ToyName()
+        {
+            return "CLOAKING DEVICE";
+        }
+
+
     }
 }

@@ -10,5 +10,11 @@ namespace Pixie1.Toys
     /// </summary>
     public class ZoomOutToy: Toy
     {
+        public override string ToyName()
+        {
+            return "SCALE";
+        }
+
+
     }
 }

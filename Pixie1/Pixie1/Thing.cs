@@ -91,7 +91,7 @@ namespace Pixie1
         /// <summary>
         /// a direction (if any) the entity is facing towards e.g. up (0,-1), down (0,1) or right (1,0).
         /// </summary>
-        public Vector2 FacingDirection = Vector2.Zero;
+        public Vector2 FacingDirection = new Vector2(1f, 0f);
 
         /// <summary>
         /// to set both Position and Target in one go
@@ -193,6 +193,12 @@ namespace Pixie1
                     }
                 }
             }
+            // compute new facingDirection from TargetMove
+            if (TargetMove.LengthSquared() > 0f)
+            {
+                FacingDirection = TargetMove;
+                FacingDirection.Normalize();
+            }
 
             // take steering inputs if any, and move pixie, applying collision detection
             if (TargetMove.LengthSquared() > 0f)
@@ -254,6 +260,14 @@ namespace Pixie1
         public bool Collides(Thing other)
         {
             return IntersectPixels(BoundingRectangle, textureData, other.BoundingRectangle, other.textureData );
+        }
+
+        public bool Collides(Thing other, Vector2 potentialThingMove)
+        {
+            Rectangle brect = other.BoundingRectangle;
+            brect.X += (int) Math.Round(potentialThingMove.X);
+            brect.Y += (int) Math.Round(potentialThingMove.Y);
+            return IntersectPixels(BoundingRectangle, textureData, brect, other.textureData);
         }
 
         /// <summary>

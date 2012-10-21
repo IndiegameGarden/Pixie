@@ -10,5 +10,10 @@ namespace Pixie1.Toys
     /// </summary>
     public class BombToy: Toy
     {
+        public override string ToyName()
+        {
+            return "CLOAKING DEVICE";
+        }
+
     }
 }

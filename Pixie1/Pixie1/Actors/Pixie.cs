@@ -20,5 +20,11 @@ namespace Pixie1.Actors
         {
             base.OnDraw(ref p);
         }
+
+        protected override void OnUpdate(ref UpdateParams p)
+        {
+            base.OnUpdate(ref p);
+
+        }
     }
 }
