@@ -18,30 +18,37 @@ namespace Pixie1.Behaviors
         public Thing ChaseTarget;
 
         /// <summary>
-        /// relative speed of chasing target
-        /// </summary>
-        public float ChaseSpeed = 1.0f;
-
-        /// <summary>
         /// chase range in pixels
         /// </summary>
         public float ChaseRange = 10.0f;
-
-        // waiting time before a next move is taken
-        float wTime = 0f;
 
         public ChaseBehavior(Thing chaseTarget)
         {
             this.ChaseTarget = chaseTarget;
         }
 
+        protected override void  OnNextMove()
+        {
+ 	        base.OnNextMove();
+
+            // compute direction towards chase-target
+            Vector2 dif = ChaseTarget.Position - ParentThing.Target;
+            // choose one direction randomly, if diagonals would be required
+            if (dif.X != 0f && dif.Y != 0f)
+            {
+                float r = RandomMath.RandomUnit();
+                if (r > 0.5f)
+                    dif.X = 0f;
+                else
+                    dif.Y = 0f;
+            }
+            dif.Normalize();
+            TargetMove = dif;
+        }
+
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
-
-            wTime += p.Dt;
-            if (wTime >= 0.2f / ChaseSpeed ) 
-                wTime = 0f;
 
             if (ChaseTarget.Visible)
             {
@@ -49,23 +56,9 @@ namespace Pixie1.Behaviors
                 float dist = dif.Length();
                 if (dist > 0f && dist <= ChaseRange )
                 {
-                    if (wTime == 0f)
-                    {
-                        // choose one direction randomly, if diagonals would be required
-                        if (dif.X != 0f && dif.Y != 0f)
-                        {
-                            float r = RandomMath.RandomUnit();
-                            if (r > 0.5f)
-                                dif.X = 0f;
-                            else
-                                dif.Y = 0f;
-                        }
-                        dif.Normalize();
-
-                        TargetMove = dif;                        
-                    }
                     // indicate we're chasing
                     IsTargetMoveDefined = true;
+                    AllowNextMove();
                 }
             }
         }

@@ -5,9 +5,7 @@ using TTengine.Core;
 namespace Pixie1.Behaviors
 {
     /**
-     * a simple ThingControl that reverses the direction computed for the Thing.
-     * Only works if called last in a sequence of ThingControls. Acts directly
-     * on ParentThing move vector.
+     * a control that reverses the direction computed (by other controls) for the Thing.
      */
     public class ReverseControlBehavior: ThingControl
     {

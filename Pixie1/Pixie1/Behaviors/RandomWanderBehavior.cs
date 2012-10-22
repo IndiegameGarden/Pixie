@@ -20,19 +20,11 @@ namespace Pixie1.Behaviors
          */
         public float MaxDirectionChangeTime, MinDirectionChangeTime;
 
-        // waiting time before a next move is taken
-        float wTime = 0f;
-
         public RandomWanderBehavior(float minDirectionChangeTime, float maxDirectionChangeTime)
         {
             this.MinDirectionChangeTime = minDirectionChangeTime;
             this.MaxDirectionChangeTime = maxDirectionChangeTime;
         }
-
-        /// <summary>
-        /// relative speed of chasing target
-        /// </summary>
-        public float MoveSpeed = 1.0f;
 
         float dirChangeTime = 0f;
         float timeSinceLastChange = 0f;
@@ -42,42 +34,43 @@ namespace Pixie1.Behaviors
             base.OnUpdate(ref p);
 
             // time keeping
-            wTime += p.Dt;
             timeSinceLastChange += p.Dt;
-            if (wTime >= 0.2f / MoveSpeed)
-                wTime = 0f;
 
-            if (wTime == 0f)
-            {
-                Vector2 dir = CurrentDirection;
-
-                if (dir.Length() < 0.1f)
-                    dir = Vector2.Zero;
-                else
-                {
-                    // choose one direction randomly, if diagonals would be required
-                    if (dir.X != 0f && dir.Y != 0f)
-                    {
-                        float r = RandomMath.RandomUnit();
-                        if (r > 0.5f)
-                            dir.X = 0f;
-                        else
-                            dir.Y = 0f;
-                    }
-                    dir.Normalize();
-                }
-                TargetMove = dir;
-
-                // direction changing
-                if (timeSinceLastChange >= dirChangeTime)
-                {
-                    timeSinceLastChange = 0f;
-                    dirChangeTime = RandomMath.RandomBetween(MinDirectionChangeTime, MaxDirectionChangeTime);
-                    CurrentDirection = RandomMath.RandomDirection();
-                }
-            }
+            // keep this control always-active
             IsTargetMoveDefined = true;
+            AllowNextMove();
         }
 
-    }
+        protected override void OnNextMove()
+        {
+            base.OnNextMove();
+
+            Vector2 dir = CurrentDirection;
+            if (dir.Length() < 0.1f)
+                dir = Vector2.Zero;
+            else
+            {
+                // choose one direction randomly, if diagonals would be required
+                if (dir.X != 0f && dir.Y != 0f)
+                {
+                    float r = RandomMath.RandomUnit();
+                    if (r > 0.5f)
+                        dir.X = 0f;
+                    else
+                        dir.Y = 0f;
+                }
+                dir.Normalize();
+            }
+            TargetMove = dir;
+
+            // direction changing
+            if (timeSinceLastChange >= dirChangeTime)
+            {
+                timeSinceLastChange = 0f;
+                dirChangeTime = RandomMath.RandomBetween(MinDirectionChangeTime, MaxDirectionChangeTime);
+                CurrentDirection = RandomMath.RandomDirection();
+            }
+
+        }
+    }    
 }

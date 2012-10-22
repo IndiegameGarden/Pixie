@@ -42,12 +42,12 @@ namespace Pixie1.Actors
             Add(sub);
 
             Chasing = new ChaseBehavior(chaseTarget);
-            Chasing.ChaseSpeed = RandomMath.RandomBetween(0.57f, 1.01f);
+            Chasing.MoveSpeed = RandomMath.RandomBetween(0.57f, 1.01f);
             Chasing.ChaseRange = 10f; // RandomMath.RandomBetween(12f, 40f);
             sub.Add(Chasing);
 
             Turning = new AlwaysTurnRightBehavior();
-            Turning.MoveSpeed = Chasing.ChaseSpeed; //RandomMath.RandomBetween(0.57f, 1.05f);
+            Turning.MoveSpeed = Chasing.MoveSpeed; //RandomMath.RandomBetween(0.57f, 1.05f);
             Turning.MoveSpeed = 0.7f;
             sub.Add(Turning);
 

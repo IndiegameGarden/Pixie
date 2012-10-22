@@ -9,60 +9,65 @@ namespace Pixie1.Behaviors
      */
     public class AlwaysTurnRightBehavior: ThingControl
     {
-        Vector2 currentDirection = new Vector2(1f, 0f);
-
-        // waiting time before a next move is taken
-        float wTime = 0f;
-        bool didSeeWall = false;
-
         /// <summary>
-        /// relative speed of chasing target
+        /// current direction of motion (e.g. along wall turning right). May be modified on the fly for sazzy effect.
         /// </summary>
-        public float MoveSpeed = 1.0f;
+        public Vector2 CurrentDirection = new Vector2(1f, 0f);
+
+        // keep track of wall last seen
+        protected bool didSeeWall = false;
 
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
 
-            wTime += p.Dt;
-            if (wTime >= 0.2f / MoveSpeed)
-                wTime = 0f;
-
-            Vector2 rightHandDirection = RotateVector2(currentDirection, MathHelper.PiOver2);
-            Vector2 leftHandDirection = RotateVector2(currentDirection, -MathHelper.PiOver2);
+            Vector2 rightHandDirection = RotateVector2(CurrentDirection, MathHelper.PiOver2);
+            Vector2 leftHandDirection = RotateVector2(CurrentDirection, -MathHelper.PiOver2);
             bool isRightHandFree = !ParentThing.CollidesWithBackground(rightHandDirection);
             bool isLeftHandFree = !ParentThing.CollidesWithBackground(leftHandDirection);
-            bool isFrontFree = !ParentThing.CollidesWithBackground(currentDirection);
+            bool isFrontFree = !ParentThing.CollidesWithBackground(CurrentDirection);
 
-            if (wTime == 0f)
+            // keep this control active if near walls
+            if (didSeeWall || !isRightHandFree || !isLeftHandFree || !isFrontFree)
             {
-                // change direction to righthand if that's free
-                if (didSeeWall && isRightHandFree)
-                {
-                    currentDirection = rightHandDirection;
-                    didSeeWall = false;
-                    TargetMove = currentDirection;
-                    IsTargetMoveDefined = true; 
-                }
-
-                else if (!isFrontFree)
-                {
-                    // turn left if the way is blocked
-                    currentDirection = leftHandDirection;
-                    didSeeWall = true;
-                }
-                else if (didSeeWall || !isRightHandFree || !isLeftHandFree || !isFrontFree)
-                {
-                    TargetMove = currentDirection;
-                    IsTargetMoveDefined = true; 
-                }
-
-                if (!isRightHandFree)
-                    didSeeWall = true;
+                IsTargetMoveDefined = true;
+                AllowNextMove();
             }
-            // in case that it's not time to make a move, keep this ThingControl active if near walls
-            if (didSeeWall || !isRightHandFree || !isLeftHandFree || !isFrontFree )
+        }
+
+        protected override void OnNextMove() 
+        {
+            base.OnNextMove();
+
+            Vector2 rightHandDirection = RotateVector2(CurrentDirection, MathHelper.PiOver2);
+            Vector2 leftHandDirection = RotateVector2(CurrentDirection, -MathHelper.PiOver2);
+            bool isRightHandFree = !ParentThing.CollidesWithBackground(rightHandDirection);
+            bool isLeftHandFree = !ParentThing.CollidesWithBackground(leftHandDirection);
+            bool isFrontFree = !ParentThing.CollidesWithBackground(CurrentDirection);
+
+            // change direction to righthand if that's free
+            if (didSeeWall && isRightHandFree)
+            {
+                CurrentDirection = rightHandDirection;
+                didSeeWall = false;
+                TargetMove = CurrentDirection;
                 IsTargetMoveDefined = true; 
+            }
+
+            else if (!isFrontFree)
+            {
+                // turn left if the way is blocked
+                CurrentDirection = leftHandDirection;
+                didSeeWall = true;
+            }
+            else if (didSeeWall || !isRightHandFree || !isLeftHandFree || !isFrontFree)
+            {
+                TargetMove = CurrentDirection;
+                IsTargetMoveDefined = true; 
+            }
+
+            if (!isRightHandFree)
+                didSeeWall = true;
         }
 
         public static Vector2 RotateVector2(Vector2 point, float radians)
