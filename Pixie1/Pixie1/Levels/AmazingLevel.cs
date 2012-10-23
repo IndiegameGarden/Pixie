@@ -81,11 +81,15 @@ namespace Pixie1.Levels
             SubtitleText t = new SubtitleText();
             t.StartTime = 2f;
             t.AddText("Oh no.", 3f);
-            t.AddText("", 3f);
+            t.AddText("", 1f);
             t.AddText("Where am I?", 3f);
             t.AddText("I'm lost.", 3f);
             t.AddText("Can you help me\nget back home?", 3f);
-            Parent.Add(t);
+            t.AddText("Wanne be there.", 3f);
+            t.AddText("Always.", 3f);
+            t.AddText("What? If I ever\nstop talking?", 3f);
+            t.AddText("Hardly.", 3f);
+            Subtitles.Show(0,t);
 
         }
 

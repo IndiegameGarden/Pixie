@@ -70,12 +70,10 @@ namespace Pixie1
 
         public Level(): base()
         {
+            // create level's objects. These will be added as a child later.
             MotionB = new MotionBehavior();
-            Add(MotionB);
-
             Subtitles = new SubtitleManager();
-            Add(Subtitles);
-
+            debugMsg = new DebugMessage();
         }
 
         /// <summary>
@@ -85,7 +83,6 @@ namespace Pixie1
         {
             Motion.Scale = DEFAULT_SCALE;
             Motion.ScaleTarget = DEFAULT_SCALE;
-
             MySpriteBatch = new TTSpriteBatch(Screen.graphicsDevice,SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
         }
 
@@ -125,9 +122,11 @@ namespace Pixie1
         protected override void OnNewParent()
         {
             base.OnNewParent();
-            debugMsg = new DebugMessage();
+
             Parent.Add(debugMsg);
-            
+            Add(MotionB);
+            Add(Subtitles);
+
             InitLevel();
             InitPixie();
             InitBadPixels();

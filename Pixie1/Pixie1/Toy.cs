@@ -39,6 +39,7 @@ namespace Pixie1
         public int UsesLeft = 1;
 
         float useTime;
+        SubtitleText toyExplanationMessage = null;
 
         public Toy()
             : base("pixie")
@@ -89,11 +90,18 @@ namespace Pixie1
                 useTime = 0f;                
             }
 
-            // pixie facing this Toy == print info message
+            // check if the last message, if any, about this toy is already done and new instance can be started
             Thing pixie = Level.Current.pixie;
-            if (ParentThing == null && Collides(pixie, pixie.FacingDirection))
+            bool pixieFacingToy = Collides(pixie, pixie.FacingDirection);
+            if (toyExplanationMessage != null && toyExplanationMessage.Delete && !pixieFacingToy)
             {
-                Level.Current.Subtitles.ShowNow(ToyName(), 4f);
+                toyExplanationMessage = null;
+            }
+
+            // pixie facing this Toy == print info message
+            if (ParentThing == null && toyExplanationMessage==null && pixieFacingToy)
+            {
+                toyExplanationMessage = Level.Current.Subtitles.Show(5,SayToyName(), 3f);
             }
 
             // collision with pixie = pickup            
@@ -113,5 +121,11 @@ namespace Pixie1
             //cycl.timePeriodG = cyclePeriod * RandomMath.RandomBetween(0.7f, 0.93f); ;
             Add(cycl);        
         }
+
+        protected string SayToyName()
+        {
+            return "It says: \"" + ToyName() + "\"";
+        }
+
     }
 }
