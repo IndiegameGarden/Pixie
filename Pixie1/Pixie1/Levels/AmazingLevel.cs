@@ -73,12 +73,35 @@ namespace Pixie1.Levels
             //pixie.Add(test);
         }
 
+        class MySubtitle: SubtitleText
+        {
+            public MySubtitle()
+            {
+                AddText("", 1f);
+                AddText("Oh no.", 3f);
+                AddText("", 1f);
+                AddText("Where am I?", 3f);
+                AddText("I'm lost.", 3f);
+                AddText("Can you help me\nget back home?", 3f);
+                AddText("Wanne be there.", 3f);
+                AddText("Always.", 3f);
+                AddText("What? If I ever\nstop talking?", 3f);
+                AddText("Hardly.", 3f);              
+            }
+
+            protected override void OnUpdate(ref UpdateParams p)
+            {
+                base.OnUpdate(ref p);
+            }
+        }
+
         protected override void InitLevelSpecific()
         {
             Music = new GameMusic();
             //Add(Music);
 
-            SubtitleText t = new SubtitleText();
+            SubtitleText t = new MySubtitle();
+            /*
             t.StartTime = 2f;
             t.AddText("Oh no.", 3f);
             t.AddText("", 1f);
@@ -89,8 +112,8 @@ namespace Pixie1.Levels
             t.AddText("Always.", 3f);
             t.AddText("What? If I ever\nstop talking?", 3f);
             t.AddText("Hardly.", 3f);
+             */
             Subtitles.Show(0,t);
-
         }
 
         protected override bool ScreenBorderHit()
