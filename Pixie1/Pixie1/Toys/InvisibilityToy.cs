@@ -18,7 +18,7 @@ namespace Pixie1.Toys
 
         public override string ToyName()
         {
-            return "CLOAKING DEVICE";
+            return "ALPHA MASK";
         }
 
         protected override void StartUsing()

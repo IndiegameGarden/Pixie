@@ -24,7 +24,7 @@ namespace Pixie1.Toys
 
         public override string ToyName()
         {
-            return "TURBO";
+            return "GRAPHICS ACCELERATOR";
         }
 
         protected override void StartUsing()

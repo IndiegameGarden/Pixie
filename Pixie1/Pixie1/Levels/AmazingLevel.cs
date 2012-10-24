@@ -60,7 +60,8 @@ namespace Pixie1.Levels
             for (int i = 0; i < 20; i++)
             {
                 Toy test = new SpeedModifyToy(2f);
-                test.PositionAndTarget = PIXIE_STARTING_POS + new Vector2(RandomMath.RandomBetween(10f, 50f), RandomMath.RandomBetween(-40f, 40f));
+                Vector2 p = PIXIE_STARTING_POS + new Vector2(RandomMath.RandomBetween(10f, 50f), RandomMath.RandomBetween(-40f, 40f));
+                test.PositionAndTarget = p;
                 Add(test);
             }
 

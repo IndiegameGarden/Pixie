@@ -42,7 +42,7 @@ namespace Pixie1.Actors
             Add(sub);
 
             Chasing = new ChaseBehavior(chaseTarget);
-            Chasing.MoveSpeed = RandomMath.RandomBetween(0.57f, 1.01f);
+            Chasing.MoveSpeed = RandomMath.RandomBetween(0.47f, 0.75f);
             Chasing.ChaseRange = 10f; // RandomMath.RandomBetween(12f, 40f);
             sub.Add(Chasing);
 
@@ -78,8 +78,6 @@ namespace Pixie1.Actors
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
-            //MotionB.Target = TargetPos; // FIXME mappin to screen
-            //MotionB.TargetSpeed = 1f;
         }
     }
 }

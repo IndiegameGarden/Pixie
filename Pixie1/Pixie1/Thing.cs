@@ -102,6 +102,8 @@ namespace Pixie1
             {
                 Position = value;
                 Target = value;
+                TTutil.Round(Position);
+                TTutil.Round(Target);
             }
         }
 
@@ -181,6 +183,7 @@ namespace Pixie1
             }
 
             // compute target move for this thing based on child controls
+            TargetMove = Vector2.Zero;
             foreach (Gamelet g in Children)
             {
                 if (g is ThingControl)
@@ -193,6 +196,7 @@ namespace Pixie1
                     }
                 }
             }
+
             // compute new facingDirection from TargetMove
             if (TargetMove.LengthSquared() > 0f)
             {
@@ -212,7 +216,7 @@ namespace Pixie1
                         // check all attached Things too                        
                         foreach (Gamelet g in Children)
                         {
-                            if (g is Thing)
+                            if (g is Thing && g.Visible)
                             {
                                 Thing t = g as Thing;
                                 if (t.IsGodMode) continue;
@@ -224,9 +228,11 @@ namespace Pixie1
                             }
                         }
                     }
+                    // if there are no objections of main Thing (or its attachment) to the move, then move.
                     if (ok)
                     {
                         Target += TargetMove;
+                        TTutil.Round(Target);
                     }
                 }
                 
@@ -252,9 +258,6 @@ namespace Pixie1
                 }
             }
 
-            // reset TargetMove for next round - child ThingControls adapt this value.
-            TargetMove = Vector2.Zero;
-
         }
 
         public bool Collides(Thing other)
@@ -264,10 +267,11 @@ namespace Pixie1
 
         public bool Collides(Thing other, Vector2 potentialThingMove)
         {
-            Rectangle brect = other.BoundingRectangle;
-            brect.X += (int) Math.Round(potentialThingMove.X);
-            brect.Y += (int) Math.Round(potentialThingMove.Y);
-            return IntersectPixels(BoundingRectangle, textureData, brect, other.textureData);
+            Rectangle or = other.BoundingRectangle;
+            Rectangle otherBoundRectMoved = new Rectangle(or.X + (int) Math.Round(potentialThingMove.X) ,
+                                            or.Y + (int) Math.Round(potentialThingMove.Y) ,
+                                            or.Width,or.Height);
+            return IntersectPixels(BoundingRectangle, textureData, otherBoundRectMoved, other.textureData);
         }
 
         /// <summary>
@@ -277,9 +281,8 @@ namespace Pixie1
         /// <returns>true if Thing would collide with background after a potentialMove has been made, false otherwise</returns>
         public bool CollidesWithBackground(Vector2 potentialMove)
         {
-            TTutil.Round(potentialMove);
-            int posX = TargetX + (int)potentialMove.X;
-            int posY = TargetY + (int)potentialMove.Y;
+            int posX = TargetX + (int)Math.Round(potentialMove.X);
+            int posY = TargetY + (int)Math.Round(potentialMove.Y);
             if (posX < 0) 
                 return true;
             if (posY < 0) 
