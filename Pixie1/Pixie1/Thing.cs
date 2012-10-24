@@ -102,8 +102,8 @@ namespace Pixie1
             {
                 Position = value;
                 Target = value;
-                TTutil.Round(Position);
-                TTutil.Round(Target);
+                TTutil.Round(ref Position);
+                TTutil.Round(ref Target);
             }
         }
 
@@ -232,7 +232,7 @@ namespace Pixie1
                     if (ok)
                     {
                         Target += TargetMove;
-                        TTutil.Round(Target);
+                        TTutil.Round(ref Target);
                     }
                 }
                 
