@@ -124,7 +124,8 @@ namespace Pixie1
 
         protected string SayToyName()
         {
-            return "It says: \"" + ToyName() + "\"";
+            string tname = ToyName();
+            return "It says:"+ (tname.Length > 16? "\n":" ") +"\"" + tname + "\"";
         }
 
     }
