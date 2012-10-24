@@ -13,17 +13,20 @@ namespace Pixie1.Levels
     public class AmazingLevel : Level
     {
         int numberOfZoomOuts = 0;
+        Vector2 WINNING_POSITION = new Vector2(192f, 2f);
+        float timeInWinningPos = 0f;
+        bool hasWon = false;
 
         public AmazingLevel()
             : base()
-        {
-            Current = this; // pointer to level instance singleton
-
+        {           
             // Level settings
             SCREEN_MOTION_SPEED = 8.0f;
-            DEFAULT_SCALE = 30f;
-            PIXIE_STARTING_POS = new Vector2(20f, 20f); // in pixels        
-            BG_STARTING_POS = new Vector2(20f, 20f); // in pixels; bg=background            
+            DEFAULT_SCALE = 20f;
+            PIXIE_STARTING_POS = new Vector2(3f, 51f); // in pixels        
+            PIXIE_STARTING_POS = new Vector2(188f, 0f); // close to win pos
+            BG_STARTING_POS = new Vector2(3f, 51f); // in pixels; bg=background            
+            BG_STARTING_POS = new Vector2(188f, 0f); // in pixels; bg=background            
         }
 
         protected override void InitLevel()
@@ -31,7 +34,7 @@ namespace Pixie1.Levels
             base.InitLevel();
 
             // select bitmap bg
-            Background = new LevelBackground("maze4.png");
+            Background = new LevelBackground("amazing1.png");
             Background.TargetSpeed = SCREEN_MOTION_SPEED;
             Add(Background);
             Background.Target = PIXIE_STARTING_POS;
@@ -99,22 +102,8 @@ namespace Pixie1.Levels
         protected override void InitLevelSpecific()
         {
             Music = new GameMusic();
-            //Add(Music);
+            Add(Music);
 
-            SubtitleText t = new MySubtitle();
-            /*
-            t.StartTime = 2f;
-            t.AddText("Oh no.", 3f);
-            t.AddText("", 1f);
-            t.AddText("Where am I?", 3f);
-            t.AddText("I'm lost.", 3f);
-            t.AddText("Can you help me\nget back home?", 3f);
-            t.AddText("Wanne be there.", 3f);
-            t.AddText("Always.", 3f);
-            t.AddText("What? If I ever\nstop talking?", 3f);
-            t.AddText("Hardly.", 3f);
-             */
-            Subtitles.Show(0,t);
         }
 
         protected override bool ScreenBorderHit()
@@ -135,6 +124,33 @@ namespace Pixie1.Levels
             base.OnUpdate(ref p);
             // adapt scroll speed to how fast pixie goes
             Background.TargetSpeed = SCREEN_MOTION_SPEED * pixie.Velocity;
+
+            if (pixie.Target.Equals(WINNING_POSITION))
+            {
+                timeInWinningPos += p.Dt;
+
+                if (timeInWinningPos > 2f && !hasWon)
+                {
+                    SubtitleText t = new SubtitleText();
+                    t.AddText("We DID IT!", 3f);
+                    t.AddText("I found my friends!", 3f);
+                    t.AddText("Hi, Trixie!", 3f);
+                    t.AddText("Hi, Dixie!", 3f);
+                    t.AddText("Hi, Fixie!", 3f);
+                    t.AddText("Hi, everyone!", 3f);
+                    t.AddText("This is...", 3f);
+                    t.AddText("AMAZING!!!", 7f);
+                    Subtitles.Show(10, t);
+                    Motion.ScaleTarget = 3f;
+                    Motion.ScaleSpeed = 0.004f;
+                    Background.Target = new Vector2(Background.Texture.Width/2, Background.Texture.Height/2);
+                    Background.TargetSpeed = 0.005f;
+                    hasWon = true;
+                    isBackgroundScrollingOn = false;
+                }
+            }else{
+                timeInWinningPos = 0f;
+            }
         }
     }
 }

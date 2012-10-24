@@ -32,6 +32,7 @@ namespace Pixie1
         /// <summary>
         /// scrolling screen trigger boundaries (in TTengine coordinates)
         /// </summary>
+        public bool isBackgroundScrollingOn = true;
         public float BOUND_X = 0.3f;
         public float BOUND_Y = 0.3f;
 
@@ -70,6 +71,8 @@ namespace Pixie1
 
         public Level(): base()
         {
+            Current = this; // pointer to level instance singleton
+
             // create level's objects. These will be added as a child later.
             MotionB = new MotionBehavior();
             Subtitles = new SubtitleManager();
@@ -218,7 +221,8 @@ namespace Pixie1
 
             // do some level tasks
             LevelKeyControl(ref p);
-            ScrollBackground(ref p);
+            if (isBackgroundScrollingOn)
+                ScrollBackground(ref p);
 
             debugMsg.Text = "Pixie: trg=" + pixie.Target +", pos=" + pixie.Position;
             // DEBUG sample pixel
