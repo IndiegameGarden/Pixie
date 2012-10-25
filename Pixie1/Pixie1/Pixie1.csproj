@@ -150,6 +150,7 @@
     <Compile Include="Toys\PixelitisToy.cs" />
     <Compile Include="Toys\PowerPillToy.cs" />
     <Compile Include="Toys\ShaderToy.cs" />
+    <Compile Include="Toys\ShowMessageToy.cs" />
     <Compile Include="Toys\SpeedModifyToy.cs" />
     <Compile Include="Toys\ZoomOutToy.cs" />
     <Compile Include="Levels\TrainwrecksLevel.cs" />

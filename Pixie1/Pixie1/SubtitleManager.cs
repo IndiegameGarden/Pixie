@@ -92,7 +92,7 @@ namespace Pixie1
                 {
                     // by default, text is not active. Only the winning text will be.
                     t.Text.Active = false; 
-                    if (t.Priority > highestPri)
+                    if (t.Priority > highestPri && t.Text.StartTime <= SimTime )
                     {
                         highestPri = t.Priority;
                         winnerItem = t;

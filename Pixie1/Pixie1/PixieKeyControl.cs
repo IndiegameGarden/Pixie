@@ -17,6 +17,7 @@ namespace Pixie1
         public PixieKeyControl()
             : base()
         {
+            this.MoveSpeed = 1.5f;
         }
 
         protected override void OnUpdate(ref UpdateParams p)

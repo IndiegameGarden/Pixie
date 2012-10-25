@@ -24,9 +24,22 @@ namespace Pixie1.Levels
             SCREEN_MOTION_SPEED = 8.0f;
             DEFAULT_SCALE = 20f;
             PIXIE_STARTING_POS = new Vector2(3f, 51f); // in pixels        
-            PIXIE_STARTING_POS = new Vector2(188f, 0f); // close to win pos
             BG_STARTING_POS = new Vector2(3f, 51f); // in pixels; bg=background            
-            BG_STARTING_POS = new Vector2(188f, 0f); // in pixels; bg=background            
+            //PIXIE_STARTING_POS = new Vector2(188f, 0f); // close to win pos
+            //BG_STARTING_POS = new Vector2(188f, 0f); 
+        }
+
+        class MusicCreditsToy : ShowMessageToy
+        {
+            public MusicCreditsToy(): base(1,new SubtitleText())
+            {                
+                Message.AddText("Music: Nostalgika by\nTorley! CC BY-NC-SA.\nmusic.torley.com", 5f);
+                Message.AddText("and also...", 3f);
+                Message.AddText("B01 from the album \"mini\"\nby BERTIN! CC BY-NC-SA.\nbertin.bandcamp.com", 5f);
+                Message.AddText("I hope the artists aren't\n     mad at me, now.", 4f);
+                SetColors(3.34f, Color.DarkGoldenrod, Color.LightYellow);
+            }
+
         }
 
         protected override void InitLevel()
@@ -68,6 +81,11 @@ namespace Pixie1.Levels
                 Add(test);
             }
 
+            // music credits object
+            Toy musicMsg = new MusicCreditsToy();
+            musicMsg.PositionAndTarget = new Vector2(2f, 36f);            
+            Add(musicMsg);
+
             Toy invisToy = new InvisibilityToy();
             invisToy.PositionAndTarget = PIXIE_STARTING_POS + new Vector2(20f, 0f);
             Add(invisToy);
@@ -77,33 +95,19 @@ namespace Pixie1.Levels
             //pixie.Add(test);
         }
 
-        class MySubtitle: SubtitleText
-        {
-            public MySubtitle()
-            {
-                AddText("", 1f);
-                AddText("Oh no.", 3f);
-                AddText("", 1f);
-                AddText("Where am I?", 3f);
-                AddText("I'm lost.", 3f);
-                AddText("Can you help me\nget back home?", 3f);
-                AddText("Wanne be there.", 3f);
-                AddText("Always.", 3f);
-                AddText("What? If I ever\nstop talking?", 3f);
-                AddText("Hardly.", 3f);              
-            }
-
-            protected override void OnUpdate(ref UpdateParams p)
-            {
-                base.OnUpdate(ref p);
-            }
-        }
-
         protected override void InitLevelSpecific()
         {
             Music = new GameMusic();
             Add(Music);
 
+            SubtitleText t = new SubtitleText();
+            t.AddText("Don't you just hate\ntitle screens?", 4f);
+            t.AddText("Me too.", 3f);
+            t.AddText("", 2f);
+            t.AddText("So, let's get started now!", 3f);
+            t.AddText("Push the arrows to\nhelp me a bit.", 4f);
+            t.StartTime = 2f;
+            Subtitles.Show(0, t);
         }
 
         protected override bool ScreenBorderHit()
@@ -125,6 +129,7 @@ namespace Pixie1.Levels
         protected void PixieHasWon()
         {
             SubtitleText t = new SubtitleText();
+
             t.AddText("We DID IT!", 3f);
             t.AddText("I found my friends!", 3f);
             t.AddText("Hi, Trixie!", 3f);
@@ -133,14 +138,30 @@ namespace Pixie1.Levels
             t.AddText("This is...", 3f);
             t.AddText("it's...", 2f);
             t.AddText("AMAZING!!!", 9f);
+            t.AddText("", 9f);             
+            t.AddText("And now, bring...", 3f);
+            t.AddText("...me back to the entrance!", 4f);
+            t.AddText("", 1f);
+            t.AddText("JUST KIDDING :-)",3f);
+            t.AddText("", 7f);
+            t.AddText("See you in another\ngreat Pixie game:", 3f);
+             
+            const float showTitleDuration = 5.5f;
+            t.AddText("Pixie: Escape from the\n  Game Art Graveyard", showTitleDuration);
+            t.AddText("         Pixie vs.\nThe Shader Legions", showTitleDuration);
+            t.AddText("Pixie Goes Retro", showTitleDuration);
+            t.AddText(" Pixie's Journey\nto the Cuda Core", showTitleDuration);
+            t.AddText("Pixie and the City", showTitleDuration);
             Subtitles.Show(10, t);
             //Motion.ScaleTarget = 3f;
             //Motion.ScaleSpeed = 0.04f;
-            Motion.ZoomTarget = 0.13f;
-            Motion.ZoomSpeed = 0.001f;
+            Motion.ZoomTarget = 0.15f;
+            Motion.ZoomSpeed = 0.0007f;
             Motion.ZoomCenterTarget = pixie.Motion;
+            //Motion.ZoomCenter = Screen.Center;
             Background.Target = new Vector2(Background.Texture.Width / 2, Background.Texture.Height / 2);
-            Background.TargetSpeed = 0.05f;
+            Background.TargetSpeed = 0.5f;
+            Background.Velocity = 0.51f;
             hasWon = true;
             isBackgroundScrollingOn = false;
         }

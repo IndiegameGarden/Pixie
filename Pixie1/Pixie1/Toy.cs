@@ -112,7 +112,7 @@ namespace Pixie1
             }
         }
 
-        protected void SetColors(float cyclePeriod, Color minColor, Color maxColor)
+        public void SetColors(float cyclePeriod, Color minColor, Color maxColor)
         {
             ColorCycleBehavior cycl = new ColorCycleBehavior(cyclePeriod);
             cycl.minColor = minColor;
@@ -125,7 +125,10 @@ namespace Pixie1
         protected string SayToyName()
         {
             string tname = ToyName();
-            return "It says:"+ (tname.Length > 16? "\n":" ") +"\"" + tname + "\"";
+            if (tname.Length > 0)
+                return "It says:" + (tname.Length > 16 ? "\n" : " ") + "\"" + tname + "\"";
+            else
+                return "";
         }
 
     }

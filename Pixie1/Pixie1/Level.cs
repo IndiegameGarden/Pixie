@@ -163,13 +163,13 @@ namespace Pixie1
             if (st.IsKeyDown(Keys.PageUp) && Motion.Zoom == Motion.ZoomTarget)
             {
                 Motion.ZoomTarget *= 2.0f;
-                Motion.ZoomSpeed = 0.1f;
+                Motion.ZoomSpeed = 0.02f;
             }
 
             if (st.IsKeyDown(Keys.PageDown) && Motion.Zoom == Motion.ZoomTarget)
             {
                 Motion.ZoomTarget *= 0.5f;
-                Motion.ZoomSpeed = 0.1f;
+                Motion.ZoomSpeed = 0.02f;
             }
 
             if (st.IsKeyDown(Keys.LeftControl))
