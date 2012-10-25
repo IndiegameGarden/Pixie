@@ -119,6 +119,32 @@ namespace Pixie1.Levels
             return true;
         }
 
+        /// <summary>
+        /// called when player wins game
+        /// </summary>
+        protected void PixieHasWon()
+        {
+            SubtitleText t = new SubtitleText();
+            t.AddText("We DID IT!", 3f);
+            t.AddText("I found my friends!", 3f);
+            t.AddText("Hi, Trixie!", 3f);
+            t.AddText("Hi, Dixie!", 3f);
+            t.AddText("Hi, everyone!", 3f);
+            t.AddText("This is...", 3f);
+            t.AddText("it's...", 2f);
+            t.AddText("AMAZING!!!", 9f);
+            Subtitles.Show(10, t);
+            //Motion.ScaleTarget = 3f;
+            //Motion.ScaleSpeed = 0.04f;
+            Motion.ZoomTarget = 0.13f;
+            Motion.ZoomSpeed = 0.001f;
+            Motion.ZoomCenterTarget = pixie.Motion;
+            Background.Target = new Vector2(Background.Texture.Width / 2, Background.Texture.Height / 2);
+            Background.TargetSpeed = 0.05f;
+            hasWon = true;
+            isBackgroundScrollingOn = false;
+        }
+
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
@@ -131,22 +157,7 @@ namespace Pixie1.Levels
 
                 if (timeInWinningPos > 2f && !hasWon)
                 {
-                    SubtitleText t = new SubtitleText();
-                    t.AddText("We DID IT!", 3f);
-                    t.AddText("I found my friends!", 3f);
-                    t.AddText("Hi, Trixie!", 3f);
-                    t.AddText("Hi, Dixie!", 3f);
-                    t.AddText("Hi, Fixie!", 3f);
-                    t.AddText("Hi, everyone!", 3f);
-                    t.AddText("This is...", 3f);
-                    t.AddText("AMAZING!!!", 7f);
-                    Subtitles.Show(10, t);
-                    Motion.ScaleTarget = 3f;
-                    Motion.ScaleSpeed = 0.004f;
-                    Background.Target = new Vector2(Background.Texture.Width/2, Background.Texture.Height/2);
-                    Background.TargetSpeed = 0.005f;
-                    hasWon = true;
-                    isBackgroundScrollingOn = false;
+                    PixieHasWon();
                 }
             }else{
                 timeInWinningPos = 0f;

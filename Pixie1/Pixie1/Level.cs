@@ -159,6 +159,7 @@ namespace Pixie1
                 PixieGame.Instance.StopPlay();
             }
 
+            // FIXME remove debug keys
             if (st.IsKeyDown(Keys.PageUp) && Motion.Zoom == Motion.ZoomTarget)
             {
                 Motion.ZoomTarget *= 2.0f;
