@@ -40,6 +40,10 @@ namespace Pixie1.Levels
                 SetColors(3.34f, Color.DarkGoldenrod, Color.LightYellow);
             }
 
+            protected override string SayToyName()
+            {
+                return "What's this...?";
+            }
         }
 
         protected override void InitLevel()

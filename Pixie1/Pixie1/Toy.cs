@@ -18,6 +18,8 @@ namespace Pixie1
         /// </summary>
         public Thing ParentThing = null;
 
+        public bool CanBePickedUp = true;
+
         /// <summary>
         /// if true this Toy is immediately used (once) by ParentThing upon pickup
         /// </summary>
@@ -107,8 +109,20 @@ namespace Pixie1
             // collision with pixie = pickup            
             if (ParentThing==null && Collides(pixie))
             {
-                pixie.Add(this);
-                Visible = false;
+                if (CanBePickedUp)
+                {
+                    pixie.Add(this);
+                    Visible = false;
+                }
+                else
+                {
+                    if (UsedUponPickup)
+                    {
+                        useTime = 0f;
+                        IsUsed = true;
+                        StartUsing();
+                    }
+                }
             }
         }
 
@@ -122,7 +136,7 @@ namespace Pixie1
             Add(cycl);        
         }
 
-        protected string SayToyName()
+        protected virtual string SayToyName()
         {
             string tname = ToyName();
             if (tname.Length > 0)

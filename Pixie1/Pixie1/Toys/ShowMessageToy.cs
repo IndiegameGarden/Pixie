@@ -13,6 +13,7 @@ namespace Pixie1.Toys
 
         public ShowMessageToy(int priority, string msg, float duration)
         {
+            CanBePickedUp = false;
             this.Priority = priority;
             Message = new SubtitleText(msg);
             Message.Duration = duration;
@@ -21,6 +22,7 @@ namespace Pixie1.Toys
 
         public ShowMessageToy(int priority, SubtitleText msg)
         {
+            CanBePickedUp = false;
             this.Priority = priority;
             Message = msg;
             DrawInfo.DrawColor = Color.Transparent;
@@ -34,6 +36,7 @@ namespace Pixie1.Toys
         protected override void StartUsing()
         {
             base.StartUsing();
+            Message.Delete = false; // restore message if it was already used once.
             Level.Current.Subtitles.Show(Priority, Message);
         }
     }
