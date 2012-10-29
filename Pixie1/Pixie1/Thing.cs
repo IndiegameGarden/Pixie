@@ -28,7 +28,7 @@ namespace Pixie1
         /// Intensity is the sum of R,G,B bytes of pixel. Any background pixel at threshold value or
         /// brighter is passable for this Thing.
         /// </summary>
-        public int PassableIntensityThreshold = 298; // TODO get from level the default
+        public int PassableIntensityThreshold = 350; // TODO get from level the default
 
         /// <summary>
         /// centre of screen viewing pos in pixels for ALL PixieSpritelets

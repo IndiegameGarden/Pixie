@@ -76,14 +76,21 @@ namespace Pixie1.Levels
         protected override void InitToys()
         {
             base.InitToys();
+            Vector2 p;
 
             for (int i = 0; i < 20; i++)
             {
-                Toy test = new SpeedModifyToy(2f);
-                Vector2 p = PIXIE_STARTING_POS + new Vector2(RandomMath.RandomBetween(10f, 50f), RandomMath.RandomBetween(-40f, 40f));
-                test.PositionAndTarget = p;
-                Add(test);
+                Toy t = new SpeedModifyToy(2f);
+                p = PIXIE_STARTING_POS + new Vector2(RandomMath.RandomBetween(10f, 50f), RandomMath.RandomBetween(-40f, 40f));
+                t.PositionAndTarget = p;
+                Add(t);
             }
+
+            // test zoomout
+            Toy zo = new ZoomOutToy();
+            p = PIXIE_STARTING_POS + new Vector2(5f, 1f);
+            zo.PositionAndTarget = p;
+            Add(zo);
 
             // music credits object
             Toy musicMsg = new MusicCreditsToy();

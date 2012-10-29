@@ -18,6 +18,7 @@ namespace Pixie1.Toys
 
         public SpeedModifyToy(float initialSpeedFactor)
         {
+            UseTimeMax = 25f;
             this.SpeedFactor = initialSpeedFactor;
             SetColors(0.4f, Color.LightPink, Color.LightSalmon);
         }
