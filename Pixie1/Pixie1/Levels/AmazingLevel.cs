@@ -87,6 +87,12 @@ namespace Pixie1.Levels
                 Add(t);
             }
 
+            // test paint
+            Toy pt = new PaintToy();
+            p = PIXIE_STARTING_POS + new Vector2(3f, 0f);
+            pt.PositionAndTarget = p;
+            Add(pt);
+
             // test zoomout
             Toy zo = new ZoomOutToy();
             p = PIXIE_STARTING_POS + new Vector2(5f, 1f);
@@ -120,10 +126,11 @@ namespace Pixie1.Levels
 
             SubtitleText t = new SubtitleText();
             t.AddText("Don't you just hate\ntitle screens?", 4f);
-            t.AddText("Me too.", 3f);
+            t.AddText("Me too. I'd rather\nbe in the game.", 3f);
             t.AddText("", 2f);
-            t.AddText("So, let's get started now!", 3f);
-            t.AddText("Push the arrows to\nhelp me a bit.", 4f);
+            t.AddText("I'm Pixie, by the way.", 2.6f);
+            t.AddText("Look, I'm a pixel!", 2.6f);
+            t.AddText("Push the arrows to\nhelp me a bit.", 3f);
             t.StartTime = 2f;
             Subtitles.Show(0, t);
         }

@@ -89,7 +89,7 @@ namespace Pixie1
              {
                  ParentThing = Parent as Thing;
                  ParentThing.ToyActive = this;
-                 if (UsedUponPickup)
+                 if (UsedUponPickup && UsesLeft > 0)
                  {
                      useTime = 0f;
                      IsUsed = true;
@@ -134,9 +134,12 @@ namespace Pixie1
                 }
                 else
                 {
-                    useTime = 0f;
-                    IsUsed = true;
-                    StartUsing();
+                    if (UsesLeft > 0)
+                    {
+                        useTime = 0f;
+                        IsUsed = true;
+                        StartUsing();
+                    }
                 }
             }
         }

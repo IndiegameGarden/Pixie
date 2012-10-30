@@ -147,6 +147,7 @@
     <Compile Include="Toys\EnlargeSizeToy.cs" />
     <Compile Include="Toys\GravityToy.cs" />
     <Compile Include="Toys\InvisibilityToy.cs" />
+    <Compile Include="Toys\PaintToy.cs" />
     <Compile Include="Toys\PixelGunToy.cs" />
     <Compile Include="Toys\PixelitisToy.cs" />
     <Compile Include="Toys\PowerPillToy.cs" />

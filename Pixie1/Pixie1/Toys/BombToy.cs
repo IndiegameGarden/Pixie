@@ -25,7 +25,7 @@ namespace Pixie1.Toys
             BombMissile b = new BombMissile();
             Level.Current.AddNextUpdate(b);
             b.PositionAndTarget = Level.Current.pixie.Position + new Vector2(0f,1f);
-            
+            ShowToyMsg("Take this! " + UsesLeftMsg(), 2f);
         }
 
     }

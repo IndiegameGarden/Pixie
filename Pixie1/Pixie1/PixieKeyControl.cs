@@ -66,7 +66,7 @@ namespace Pixie1
                 Toy t = ParentThing.ToyActive;
                 if (t != null)
                 {
-                    if (!t.IsUsed)
+                    if (!t.IsUsed && t.UsesLeft > 0)
                         t.StartUsing();
                 }
             }
