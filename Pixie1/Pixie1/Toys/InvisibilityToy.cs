@@ -13,6 +13,7 @@ namespace Pixie1.Toys
     {
         public InvisibilityToy(): base()
         {
+            UseTimeMax = 8f;
             SetColors(1.9f, Color.LightSkyBlue, new Color(1f,1f,1f,0f));
         }
 
@@ -21,16 +22,18 @@ namespace Pixie1.Toys
             return "ALPHA MASK";
         }
 
-        protected override void StartUsing()
+        public override void StartUsing()
         {
             base.StartUsing();
             ParentThing.Visible = false;
+            Level.Current.Subtitles.Show(2, "Hey! Where am I?", 3f);
         }
 
-        protected override void StopUsing()
+        public override void StopUsing()
         {
             base.StopUsing();
             ParentThing.Visible = true;
+            Level.Current.Subtitles.Show(0, "...and back!", 3f);
         }
     }
 }

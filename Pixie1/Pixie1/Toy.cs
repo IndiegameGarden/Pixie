@@ -42,10 +42,12 @@ namespace Pixie1
 
         float useTime;
         SubtitleText toyExplanationMessage = null;
+        SubtitleText currentToyMsg = null;
 
         public Toy()
-            : base("pixie")
-        {            
+            : base()
+        {          
+            // nothing yet.
         }
 
         public abstract string ToyName();
@@ -53,15 +55,30 @@ namespace Pixie1
         /// <summary>
         /// a ParentThing starts using the Toy
         /// </summary>
-        protected virtual void StartUsing()
+        public virtual void StartUsing()
         {
             UsesLeft--;
+        }
+
+        protected String UsesLeftMsg()
+        {
+            string s = "";
+            if (UsesLeft > 0)
+                s = "(" + UsesLeft + " more)";
+            return s;
+        }
+
+        protected void ShowToyMsg(string text, float duration)
+        {
+            if (currentToyMsg != null)
+                currentToyMsg.Delete = true;
+            currentToyMsg = Level.Current.Subtitles.Show(1, text, duration);
         }
 
         /// <summary>
         /// a ParentThing stops using the Toy (or Toy times out)
         /// </summary>
-        protected virtual void StopUsing()
+        public virtual void StopUsing()
         {
         }
 
@@ -70,7 +87,8 @@ namespace Pixie1
  	         base.OnNewParent();
              if (Parent is Thing)
              {
-                 ParentThing = Parent as Thing;                 
+                 ParentThing = Parent as Thing;
+                 ParentThing.ToyActive = this;
                  if (UsedUponPickup)
                  {
                      useTime = 0f;
@@ -103,7 +121,7 @@ namespace Pixie1
             // pixie facing this Toy == print info message
             if (ParentThing == null && toyExplanationMessage==null && pixieFacingToy)
             {
-                toyExplanationMessage = Level.Current.Subtitles.Show(5,SayToyName(), 3f);
+                toyExplanationMessage = Level.Current.Subtitles.Show(5,SayToyName(), 2.1f);
             }
 
             // collision with pixie = pickup            
@@ -116,12 +134,9 @@ namespace Pixie1
                 }
                 else
                 {
-                    if (UsedUponPickup)
-                    {
-                        useTime = 0f;
-                        IsUsed = true;
-                        StartUsing();
-                    }
+                    useTime = 0f;
+                    IsUsed = true;
+                    StartUsing();
                 }
             }
         }

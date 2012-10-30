@@ -172,7 +172,7 @@ namespace Pixie1
                 Motion.ZoomSpeed = 0.02f;
             }
 
-            if (st.IsKeyDown(Keys.LeftControl))
+            if (st.IsKeyDown(Keys.RightControl))
                 pixie.IsGodMode = true;
             else
                 pixie.IsGodMode = false;

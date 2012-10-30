@@ -127,17 +127,22 @@ namespace Pixie1
         /// </summary>
         public Vector2 TargetMove = Vector2.Zero;
 
+        /// <summary>
+        /// the Toy that is carried by and active for this Thing, or null if none
+        /// </summary>
+        public Toy ToyActive = null;
+
         // used for the collision detection per-pixel
         protected Color[] textureData;
         protected LevelBackground bg;
 
         /// <summary>
-        /// create a single-pixel Thing
+        /// create a single-pixel default Thing
         /// </summary>
         public Thing()
-            : base("pixie")
+            : this("pixie")
         {
-            DrawInfo.Center = Vector2.Zero;
+            // nothing yet.
         }
 
         /// <summary>

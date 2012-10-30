@@ -30,7 +30,7 @@ namespace Pixie1.Actors
         bool isCloaky = false;
 
         public BadPixel(Thing chaseTarget)
-            : base("pixie")
+            : base()
         {
             DrawInfo.DrawColor = new Color(255, 10, 4);
             float blinkPeriod = RandomMath.RandomBetween(0.64f, 2.12f);

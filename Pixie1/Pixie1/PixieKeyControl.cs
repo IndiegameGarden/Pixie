@@ -1,23 +1,21 @@
 // (c) 2010-2011 TranceTrance.com. Distributed under the FreeBSD license in LICENSE.txt
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
-
 using TTengine.Core;
+using Pixie1.Actors;
 
 namespace Pixie1
 {
     public class PixieKeyControl: ThingControl
     {
         float pressTime = 0f;
+        bool isTriggerPressed = false;
 
         public PixieKeyControl()
             : base()
         {
-            this.MoveSpeed = 1.5f;
+            MoveSpeed = 1.5f;
         }
 
         protected override void OnUpdate(ref UpdateParams p)
@@ -55,8 +53,30 @@ namespace Pixie1
                 pressTime = 0f;
             }
 
+            // trigger Toy
+            KeyboardState kbstate = Keyboard.GetState();
+            bool isSpacePressed =   kbstate.IsKeyDown(Keys.Space) ||
+                                    kbstate.IsKeyDown(Keys.X) ||
+                                    kbstate.IsKeyDown(Keys.LeftControl);
+            if (!isTriggerPressed && isSpacePressed)
+            {
+                isTriggerPressed = true;
+
+                // use toy
+                Toy t = ParentThing.ToyActive;
+                if (t != null)
+                {
+                    if (!t.IsUsed)
+                        t.StartUsing();
+                }
+            }
+            else if (!isSpacePressed)
+            {
+                isTriggerPressed = false;
+            }
+
             // key rep
-            if (pressTime > 0.2f / ParentThing.Velocity ) // TODO 0.1 const
+            if (pressTime > 0.2f / ParentThing.Velocity ) 
                 pressTime = 0f;
 
             // make user's requested motion vector

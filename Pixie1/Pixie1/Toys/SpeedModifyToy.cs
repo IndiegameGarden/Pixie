@@ -28,13 +28,14 @@ namespace Pixie1.Toys
             return "GRAPHICS ACCELERATOR";
         }
 
-        protected override void StartUsing()
+        public override void StartUsing()
         {
             base.StartUsing();
             ParentThing.Velocity *= SpeedFactor;
+            ShowToyMsg("Go, go, go! "+UsesLeftMsg(), 2f);
         }
 
-        protected override void StopUsing()
+        public override void StopUsing()
         {
             base.StopUsing();
             ParentThing.Velocity /= SpeedFactor;

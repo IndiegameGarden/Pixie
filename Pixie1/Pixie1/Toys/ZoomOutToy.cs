@@ -24,22 +24,24 @@ namespace Pixie1.Toys
             return "HI-RES";
         }
 
-        protected override void StartUsing()
+        public override void StartUsing()
         {
             base.StartUsing();
             Motion m = Level.Current.Motion;
             m.ZoomTarget *= zoomFactor;
             m.ZoomSpeed = zoomSpeed;
             m.ZoomCenterTarget = Level.Current.pixie.Motion;
+            Level.Current.Subtitles.Show(1, "Wow! I can see\nmuch clearer now.", 4f);
         }
 
-        protected override void StopUsing()
+        public override void StopUsing()
         {
             base.StopUsing();
             Motion m = Level.Current.Motion;
             m.ZoomTarget /= zoomFactor;
             m.ZoomSpeed = zoomSpeed;
             m.ZoomCenterTarget = Level.Current.pixie.Motion;
+            Level.Current.Subtitles.Show(0, "Oh. Back to lo-res.", 3f);
         }
 
     }

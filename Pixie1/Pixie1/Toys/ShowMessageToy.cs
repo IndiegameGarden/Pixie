@@ -33,7 +33,7 @@ namespace Pixie1.Toys
             return "";
         }
 
-        protected override void StartUsing()
+        public override void StartUsing()
         {
             base.StartUsing();
             Message.Delete = false; // restore message if it was already used once.

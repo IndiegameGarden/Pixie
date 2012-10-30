@@ -113,6 +113,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actors\BombMissile.cs" />
     <Compile Include="Levels\AmazingLevel.cs" />
     <Compile Include="Actors\BadPixel.cs" />
     <Compile Include="Behaviors\AlwaysTurnRightBehavior.cs" />
