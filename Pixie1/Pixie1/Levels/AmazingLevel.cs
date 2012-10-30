@@ -42,7 +42,7 @@ namespace Pixie1.Levels
 
             protected override string SayToyName()
             {
-                return "What's this...?";
+                return "*WARNING* credits,\nstraight ahead!";
             }
         }
 
@@ -64,7 +64,7 @@ namespace Pixie1.Levels
             base.InitBadPixels();
 
             BadPixel bp = BadPixel.Create(); // Cloaky();
-            bp.PositionAndTarget = new Vector2(72f, 34f);
+            bp.PositionAndTarget = new Vector2(4f, 34f);
             //bp.TargetSpeed = 18.0f; // TODO
             Add(bp);
 
@@ -78,7 +78,7 @@ namespace Pixie1.Levels
             base.InitToys();
             Vector2 p;
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Toy t = new SpeedModifyToy(2f);
                 t.UsesLeft = 3;

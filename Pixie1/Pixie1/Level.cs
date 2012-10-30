@@ -173,9 +173,9 @@ namespace Pixie1
             }
 
             if (st.IsKeyDown(Keys.RightControl))
-                pixie.IsGodMode = true;
+                pixie.IsCollisionFree = true;
             else
-                pixie.IsGodMode = false;
+                pixie.IsCollisionFree = false;
 
         }
 

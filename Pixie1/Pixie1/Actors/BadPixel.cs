@@ -32,6 +32,7 @@ namespace Pixie1.Actors
         public BadPixel(Thing chaseTarget)
             : base()
         {
+            IsCollisionFree = false;
             DrawInfo.DrawColor = new Color(255, 10, 4);
             float blinkPeriod = RandomMath.RandomBetween(0.64f, 2.12f);
             float blinkDutycycle = RandomMath.RandomBetween(0.848f, 0.99f);

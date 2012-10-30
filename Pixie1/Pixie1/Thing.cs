@@ -21,7 +21,7 @@ namespace Pixie1
         /// <summary>
         /// if true can pass anything
         /// </summary>
-        public bool IsGodMode = false;
+        public bool IsCollisionFree = true;
 
         /// <summary>
         /// Determines what intensity levels of background pixel color this Thing can pass.
@@ -136,6 +136,9 @@ namespace Pixie1
         protected Color[] textureData;
         protected LevelBackground bg;
 
+        // used for thing-to-thing collisions
+        private static List<Thing> allThingsList = new List<Thing>();
+
         /// <summary>
         /// create a single-pixel default Thing
         /// </summary>
@@ -156,13 +159,15 @@ namespace Pixie1
             BoundingRectangle.Height = Texture.Height;
             textureData = new Color[BoundingRectangle.Width * BoundingRectangle.Height];
             Texture.GetData(textureData);
-            DrawInfo.Center = Vector2.Zero;
+            DrawInfo.Center = Vector2.Zero;            
         }
 
         protected override void OnNewParent()
         {
             base.OnNewParent();
             bg = Level.Current.Background;
+            if(!IsCollisionFree)
+                allThingsList.Add(this);
         }
 
         protected override void OnUpdate(ref UpdateParams p)
@@ -202,21 +207,22 @@ namespace Pixie1
                 }
             }
 
-            // compute new facingDirection from TargetMove
+            // compute new facingDirection from final TargetMove
             if (TargetMove.LengthSquared() > 0f)
             {
                 FacingDirection = TargetMove;
                 FacingDirection.Normalize();
             }
 
-            // take steering inputs if any, and move pixie, applying collision detection
+            // take steering inputs if any, and move Thing, applying collision detection
             if (TargetMove.LengthSquared() > 0f)
             {
                 // if passable...
-                if (IsGodMode || !CollidesWithBackground(TargetMove))
+                List<Thing> cols = DetectCollisions(TargetMove);
+                if (IsCollisionFree || (!CollidesWithBackground(TargetMove) && cols.Count==0 ) )
                 {
                     bool ok = true;
-                    if (!IsGodMode)
+                    if (!IsCollisionFree)
                     {
                         // check all attached Things too                        
                         foreach (Gamelet g in Children)
@@ -224,8 +230,18 @@ namespace Pixie1
                             if (g is Thing && g.Visible)
                             {
                                 Thing t = g as Thing;
-                                if (t.IsGodMode) continue;
+                                if (t.IsCollisionFree) continue;
+
+                                // first, test if hits background
                                 if (t.CollidesWithBackground(TargetMove))
+                                {
+                                    ok = false;
+                                    break;
+                                }
+
+                                // if not, test if it hits others
+                                List<Thing> colsChild = t.DetectCollisions(TargetMove);
+                                if (colsChild.Count > 0)
                                 {
                                     ok = false;
                                     break;
@@ -265,18 +281,49 @@ namespace Pixie1
 
         }
 
+        /// <summary>
+        /// detect all collisions with other collidable Things (that have IsCollisionFree=false set)
+        /// </summary>
+        /// <param name="myPotentialMove">a potential move of this Thing, collision checked after applying potential move.</param>
+        /// <returns></returns>
+        public List<Thing> DetectCollisions(Vector2 myPotentialMove)
+        {
+            List<Thing> l = new List<Thing>();
+            foreach (Thing t in allThingsList)
+            {
+                if (t == this) continue;
+                if (!t.Active) continue;
+                if (!t.Visible) continue;
+                if (t.Delete) continue;
+                if (CollidesWhenThisMoves(t, myPotentialMove))
+                {
+                    l.Add(t);
+                }
+            }
+            return l;
+        }
+
         public bool Collides(Thing other)
         {
             return IntersectPixels(BoundingRectangle, textureData, other.BoundingRectangle, other.textureData );
         }
 
-        public bool Collides(Thing other, Vector2 potentialThingMove)
+        public bool CollidesWhenThisMoves(Thing other, Vector2 myPotentialMove)
         {
-            Rectangle or = other.BoundingRectangle;
-            Rectangle otherBoundRectMoved = new Rectangle(or.X + (int) Math.Round(potentialThingMove.X) ,
-                                            or.Y + (int) Math.Round(potentialThingMove.Y) ,
-                                            or.Width,or.Height);
-            return IntersectPixels(BoundingRectangle, textureData, otherBoundRectMoved, other.textureData);
+            Rectangle rectNow = BoundingRectangle;
+            Rectangle rectMoved = new Rectangle(rectNow.X + (int) Math.Round(myPotentialMove.X) ,
+                                            rectNow.Y + (int) Math.Round(myPotentialMove.Y) ,
+                                            rectNow.Width,rectNow.Height);
+            return IntersectPixels(rectMoved, textureData, other.BoundingRectangle, other.textureData);
+        }
+
+        public bool CollidesWhenOtherMoves(Thing other, Vector2 othersPotentialMove)
+        {
+            Rectangle rectOther = other.BoundingRectangle;
+            Rectangle rectMoved = new Rectangle(rectOther.X + (int)Math.Round(othersPotentialMove.X),
+                                            rectOther.Y + (int)Math.Round(othersPotentialMove.Y),
+                                            rectOther.Width, rectOther.Height);
+            return IntersectPixels(BoundingRectangle, textureData, rectMoved, other.textureData);
         }
 
         /// <summary>

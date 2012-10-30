@@ -36,6 +36,7 @@ namespace Pixie1.Actors
 
         public BombMissile(): base()
         {
+            IsCollisionFree = false;
             control = new BombMissileControl();
             DrawInfo.DrawColor = Color.DarkGoldenrod;
         }

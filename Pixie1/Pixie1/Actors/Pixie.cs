@@ -13,6 +13,7 @@ namespace Pixie1.Actors
             : base()   //base("shape2x2")
         {
             DrawInfo.DrawColor = Level.PIXIE_COLOR;
+            IsCollisionFree = false;
         }
 
         protected override void OnDraw(ref DrawParams p)

@@ -112,7 +112,7 @@ namespace Pixie1
 
             // check if the last message, if any, about this toy is already done and new instance can be started
             Thing pixie = Level.Current.pixie;
-            bool pixieFacingToy = Collides(pixie, pixie.FacingDirection);
+            bool pixieFacingToy = CollidesWhenOtherMoves(pixie, pixie.FacingDirection);
             if (toyExplanationMessage != null && toyExplanationMessage.Delete && !pixieFacingToy)
             {
                 toyExplanationMessage = null;
