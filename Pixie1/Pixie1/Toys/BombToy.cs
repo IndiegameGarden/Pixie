@@ -12,6 +12,7 @@ namespace Pixie1.Toys
         public BombToy()
         {
             UsedUponPickup = false;
+            UsesLeft = 10;
         }
 
         public override string ToyName()

@@ -10,12 +10,16 @@ using Pixie1.Toys;
 
 namespace Pixie1.Levels
 {
+    /// <summary>
+    /// a level featuring a big maze
+    /// </summary>
     public class AmazingLevel : Level
     {
-        int numberOfZoomOuts = 0;
         Vector2 WINNING_POSITION = new Vector2(192f, 2f);
+        Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
         float timeInWinningPos = 0f;
         bool hasWon = false;
+        int numberOfZoomOuts = 0;
 
         public AmazingLevel()
             : base()
@@ -52,6 +56,7 @@ namespace Pixie1.Levels
 
             // select bitmap bg
             Background = new LevelBackground("amazing1.png");
+            Background.ForegroundColor = LEVEL_FOREGROUND_COLOR;
             Background.TargetSpeed = SCREEN_MOTION_SPEED;
             Add(Background);
             Background.Target = PIXIE_STARTING_POS;

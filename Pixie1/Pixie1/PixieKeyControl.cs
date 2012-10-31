@@ -55,24 +55,30 @@ namespace Pixie1
 
             // trigger Toy
             KeyboardState kbstate = Keyboard.GetState();
-            bool isSpacePressed =   kbstate.IsKeyDown(Keys.Space) ||
+            bool isTriggerKeyPressed =   kbstate.IsKeyDown(Keys.Space) ||
                                     kbstate.IsKeyDown(Keys.X) ||
                                     kbstate.IsKeyDown(Keys.LeftControl);
-            if (!isTriggerPressed && isSpacePressed)
+            Toy t = ParentThing.ToyActive; 
+            if (!isTriggerPressed && isTriggerKeyPressed)
             {
                 isTriggerPressed = true;
 
-                // use toy
-                Toy t = ParentThing.ToyActive;
+                // use toy                
                 if (t != null)
                 {
                     if (!t.IsUsed && t.UsesLeft > 0)
                         t.StartUsing();
                 }
             }
-            else if (!isSpacePressed)
+            else if (!isTriggerKeyPressed)
             {
                 isTriggerPressed = false;
+            }
+
+            // send trigger state to Toy
+            if (t != null)
+            {
+                t.IsTriggered = isTriggerKeyPressed;
             }
 
             // key rep

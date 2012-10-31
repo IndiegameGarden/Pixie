@@ -31,16 +31,26 @@ namespace Pixie1
         public bool IsUsed = false;
 
         /// <summary>
+        /// whether the Toy usage is being actively triggered now (true) or not (false).
+        /// Triggering is for example by keypress or by the AI of a Thing.
+        /// </summary>
+        public bool IsTriggered = false;
+
+        /// <summary>
         /// time this Toy can be used at most (remains active) in a single usage
         /// </summary>
         public float UseTimeMax = 5f;
+
+        /// <summary>
+        /// How long the Toy is in use since last activation. 0 if not in use.
+        /// </summary>
+        public float UseTime = 0f;
 
         /// <summary>
         /// how many times using this Toy has still left (e.g. 'shots')
         /// </summary>
         public int UsesLeft = 1;
 
-        float useTime;
         SubtitleText toyExplanationMessage = null;
         SubtitleText currentToyMsg = null;
 
@@ -57,7 +67,19 @@ namespace Pixie1
         /// </summary>
         public virtual void StartUsing()
         {
+            IsUsed = true;
+            UseTime = 0f;
             UsesLeft--;
+        }
+
+        /// <summary>
+        /// a ParentThing stops using the Toy (or Toy times out)
+        /// </summary>
+        public virtual void StopUsing()
+        {
+            UseTime = 0f;
+            IsUsed = false;
+            IsTriggered = false;
         }
 
         protected String UsesLeftMsg()
@@ -75,13 +97,6 @@ namespace Pixie1
             currentToyMsg = Level.Current.Subtitles.Show(1, text, duration);
         }
 
-        /// <summary>
-        /// a ParentThing stops using the Toy (or Toy times out)
-        /// </summary>
-        public virtual void StopUsing()
-        {
-        }
-
         protected override void  OnNewParent()
         {
  	         base.OnNewParent();
@@ -91,8 +106,6 @@ namespace Pixie1
                  ParentThing.ToyActive = this;
                  if (UsedUponPickup && UsesLeft > 0)
                  {
-                     useTime = 0f;
-                     IsUsed = true;
                      StartUsing();
                  }
              }
@@ -102,12 +115,10 @@ namespace Pixie1
         {
             base.OnUpdate(ref p);
             if(IsUsed)
-                useTime += p.Dt;    
-            if (useTime > UseTimeMax)
+                UseTime += p.Dt;    
+            if (UseTime > UseTimeMax)
             {
-                IsUsed = false;
-                StopUsing();
-                useTime = 0f;                
+                StopUsing();                                
             }
 
             // check if the last message, if any, about this toy is already done and new instance can be started
@@ -136,8 +147,6 @@ namespace Pixie1
                 {
                     if (UsesLeft > 0)
                     {
-                        useTime = 0f;
-                        IsUsed = true;
                         StartUsing();
                     }
                 }

@@ -10,9 +10,22 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Pixie1
 {
+    /// <summary>
+    /// the level bitmap that scrolls around the player's view
+    /// </summary>
     public class LevelBackground: Thing
     {
+        /// <summary>
+        /// background color is the non-passable color of the level borders and also the color
+        /// of any transparent parts in the level bitmap.
+        /// </summary>
         public Color BackgroundColor = Color.Black;
+
+        /// <summary>
+        /// foreground color is the default passable color of the level where Pixie walks, i.e.
+        /// the most common color she walks on.
+        /// </summary>
+        public Color ForegroundColor = Color.White;
 
         SpriteBatch spriteBatch;
 
