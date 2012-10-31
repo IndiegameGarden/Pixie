@@ -28,7 +28,7 @@ namespace Pixie1
         /// Intensity is the sum of R,G,B bytes of pixel. Any background pixel at threshold value or
         /// brighter is passable for this Thing.
         /// </summary>
-        public int PassableIntensityThreshold = 350; // TODO get from level the default
+        public int PassableIntensityThreshold;
 
         /// <summary>
         /// centre of screen viewing pos in pixels for ALL PixieSpritelets
@@ -155,6 +155,7 @@ namespace Pixie1
         public Thing(string bitmapFile)
             : base(bitmapFile)
         {
+            PassableIntensityThreshold = Level.Current.DefaultPassableIntensityThreshold;
             BoundingRectangle.Width = Texture.Width;
             BoundingRectangle.Height = Texture.Height;
             textureData = new Color[BoundingRectangle.Width * BoundingRectangle.Height];
@@ -327,10 +328,21 @@ namespace Pixie1
         }
 
         /// <summary>
+        /// check whether this Thing would collide with anything (Thing or background), when attempting
+        /// to do a given move
+        /// </summary>
+        /// <param name="potentialMove">the move to attempt for this Thing</param>
+        /// <returns>true if Thing would collide with something after the potentialMove would have been made, false otherwise</returns>
+        public bool CollidesWithSomething(Vector2 potentialMove)
+        {
+            return CollidesWithBackground(potentialMove) || (DetectCollisions(potentialMove).Count > 0 );
+        }
+
+        /// <summary>
         /// check whether this Thing would collide with background, when attempting to do a given potential move
         /// </summary>
         /// <param name="potentialMove">the move vector, delta from current Target, that we would like to apply</param>
-        /// <returns>true if Thing would collide with background after a potentialMove has been made, false otherwise</returns>
+        /// <returns>true if Thing would collide with background after a potentialMove would have been made, false otherwise</returns>
         public bool CollidesWithBackground(Vector2 potentialMove)
         {
             int posX = TargetX + (int)Math.Round(potentialMove.X);

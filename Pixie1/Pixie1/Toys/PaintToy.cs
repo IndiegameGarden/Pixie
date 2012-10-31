@@ -5,15 +5,12 @@ namespace Pixie1.Toys
 {
     public class PaintToy: Toy
     {
-        LevelBackground bg;
-
         public PaintToy()
         {
             UsesLeft = 256;
             UsedUponPickup = false;
             UseTimeMax = 8f;
             SetColors(1.9f, Color.LightSkyBlue, Color.MediumVioletRed);
-            bg = Level.Current.Background;
         }
 
         public override string ToyName()

@@ -31,7 +31,7 @@ namespace Pixie1.Toys
             m.ZoomTarget *= zoomFactor;
             m.ZoomSpeed = zoomSpeed;
             m.ZoomCenterTarget = Level.Current.pixie.Motion;
-            Level.Current.Subtitles.Show(1, "Wow! I can see\nmuch clearer now.", 4f);
+            Level.Current.Subtitles.Show(1, "Wow! The world looks\nbetter in hi-res.", 4f);
         }
 
         public override void StopUsing()

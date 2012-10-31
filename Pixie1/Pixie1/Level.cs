@@ -21,11 +21,12 @@ namespace Pixie1
         /// </summary>
         public static Level Current = null;
 
-        // some default colors and settings
+        // some default colors and settings that may be changed by Level subclasses
         public static Color PIXIE_COLOR = new Color(251, 101, 159); // pink
         public float DEFAULT_SCALE = 20.0f;
         public float SCREEN_MOTION_SPEED = 15.0f;
         public float PIXIE_TARGETSPEED = 5.0f;
+        public int DefaultPassableIntensityThreshold = 380;
         public Vector2 PIXIE_STARTING_POS = Vector2.Zero; // in pixels        
         public Vector2 BG_STARTING_POS = Vector2.Zero;    // in pixels; bg=background
 

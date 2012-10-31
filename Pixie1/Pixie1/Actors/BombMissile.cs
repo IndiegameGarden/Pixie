@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using TTengine.Core;
 
 namespace Pixie1.Actors
 {
@@ -10,16 +11,17 @@ namespace Pixie1.Actors
     {
         public BombMissileControl()
         {
+            MoveSpeed = 5f;
         }
 
         protected override void OnNextMove()
         {
             base.OnNextMove();
-            TargetMove = new Vector2(0, 1f);
+            TargetMove = BombMissile.MISSILE_DIRECTION;
             IsTargetMoveDefined = true;
         }
 
-        protected override void OnUpdate(ref TTengine.Core.UpdateParams p)
+        protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
             AllowNextMove();
@@ -32,11 +34,16 @@ namespace Pixie1.Actors
     /// </summary>
     public class BombMissile: Thing
     {
+        public static Vector2 MISSILE_DIRECTION = new Vector2(0, 1f);
+        public int ExplosionRange = 5;
+        public bool IsExploding = false;
+
         BombMissileControl control;
 
         public BombMissile(): base()
         {
             IsCollisionFree = false;
+            Velocity = 5f;
             control = new BombMissileControl();
             DrawInfo.DrawColor = Color.DarkGoldenrod;
         }
@@ -45,6 +52,58 @@ namespace Pixie1.Actors
         {
             base.OnNewParent();
             Add(control);
+        }
+
+        public void StartExplode()
+        {
+            IsExploding = true;
+            Duration = SimTime + 3.0f; // explosion duration
+        }
+
+        void Explode()
+        {
+            Vector2 pos = Target;
+            int posX = (int) Math.Round(pos.X);
+            int posY = (int) Math.Round(pos.Y);
+            LevelBackground bg = Level.Current.Background;
+            Vector2 pixPos;
+            for (int x = posX - ExplosionRange; x <= posX + ExplosionRange; x++)            
+            {
+                for (int y = posY - ExplosionRange; y <= posY + ExplosionRange; y++)
+                {
+                    pixPos.X = x;
+                    pixPos.Y = y;
+                    bg.SetPixel(pixPos, RandomMath.RandomColor());
+                }
+            }
+        }
+
+        void OnExploding()
+        {
+            Vector2 pos = Target;
+            LevelBackground bg = Level.Current.Background;
+            Vector2 pixPos;
+            pixPos.X = pos.X + RandomMath.RandomBetween(-ExplosionRange, ExplosionRange);
+            pixPos.Y = pos.Y + RandomMath.RandomBetween(-ExplosionRange, ExplosionRange); 
+            bg.SetPixel(pixPos, RandomMath.RandomColor());
+        }
+
+        protected override void OnUpdate(ref UpdateParams p)
+        {
+            base.OnUpdate(ref p);
+
+            if (!IsExploding && TargetMove.LengthSquared() > 0) {
+                if (CollidesWithSomething(TargetMove))
+                {
+                    // EXPLODE !!!
+                    StartExplode();
+                }
+            }
+
+            if (IsExploding)
+            {
+                OnExploding();
+            }
         }
     }
 }

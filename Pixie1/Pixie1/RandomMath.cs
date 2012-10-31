@@ -99,5 +99,15 @@ namespace Pixie1
 
 
         #endregion
+
+        /// <summary>
+        /// generate a random Color with non-transparent alpha
+        /// </summary>
+        /// <returns></returns>
+        public static Color RandomColor()
+        {
+            return new Color(RandomUnit(), RandomUnit(), RandomUnit());
+        }
+
     }
 }

@@ -13,6 +13,7 @@ namespace Pixie1.Toys
         {
             UsedUponPickup = false;
             UsesLeft = 10;
+            UseTimeMax = 1f;
         }
 
         public override string ToyName()
