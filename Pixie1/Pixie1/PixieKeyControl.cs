@@ -24,25 +24,26 @@ namespace Pixie1
 
             float dx = 0f, dy = 0f;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            KeyboardState kb = Keyboard.GetState();
+            if (kb.IsKeyDown(Keys.Up) || kb.IsKeyDown(Keys.W))
             {
                 if (pressTime == 0f)
                     dy = -1.0f;
                 pressTime += p.Dt;
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            else if (kb.IsKeyDown(Keys.Down) || kb.IsKeyDown(Keys.S))
             {
                 if (pressTime == 0f)
                     dy = +1.0f;
                 pressTime += p.Dt;
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            else if (kb.IsKeyDown(Keys.Left) || kb.IsKeyDown(Keys.A))
             {
                 if (pressTime == 0f)
                     dx = -1.0f;
                 pressTime += p.Dt;
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            else if (kb.IsKeyDown(Keys.Right) || kb.IsKeyDown(Keys.D))
             {
                 if (pressTime == 0f)
                     dx = +1.0f;

@@ -30,21 +30,17 @@ namespace Pixie1.Actors
         bool isCloaky = false;
 
         public BadPixel(Thing chaseTarget)
-            : base()
+            : base("shape2x2")
         {
             IsCollisionFree = false;
             DrawInfo.DrawColor = new Color(255, 10, 4);
-            float blinkPeriod = RandomMath.RandomBetween(0.64f, 2.12f);
-            float blinkDutycycle = RandomMath.RandomBetween(0.848f, 0.99f);
-            Blinking = new BlinkBehavior(blinkPeriod, blinkDutycycle);
-            Add(Blinking);
 
             SubsumptionBehavior sub = new SubsumptionBehavior();
             Add(sub);
 
             Chasing = new ChaseBehavior(chaseTarget);
             Chasing.MoveSpeed = RandomMath.RandomBetween(0.47f, 0.75f);
-            Chasing.ChaseRange = 10f; // RandomMath.RandomBetween(12f, 40f);
+            Chasing.ChaseRange = 6f; // RandomMath.RandomBetween(12f, 40f);
             sub.Add(Chasing);
 
             Turning = new AlwaysTurnRightBehavior();
@@ -79,6 +75,17 @@ namespace Pixie1.Actors
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
+
+            if (TargetMove.LengthSquared() > 0)
+            {
+                if (CollidesWhenThisMoves(Level.Current.pixie, TargetMove))
+                {
+                    if (Level.Current.Subtitles.Children.Count <= 2)
+                    {
+                        Level.Current.Subtitles.Show(3, "HALT! Thou shalt\n   not pass.", 3.5f);
+                    }
+                }
+            }
         }
     }
 }

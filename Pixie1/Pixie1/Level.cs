@@ -66,7 +66,7 @@ namespace Pixie1
 
         // class internal
         protected ThingControl keyControl; // for pixie
-        protected DebugMessage debugMsg;
+        //protected DebugMessage debugMsg;
         protected SubtitleText subTitles;
         float timeEscDown = 0f;        
 
@@ -77,7 +77,7 @@ namespace Pixie1
             // create level's objects. These will be added as a child later.
             MotionB = new MotionBehavior();
             Subtitles = new SubtitleManager();
-            debugMsg = new DebugMessage();
+            //debugMsg = new DebugMessage();
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Pixie1
         {
             base.OnNewParent();
 
-            Parent.Add(debugMsg);
+            //Parent.Add(debugMsg);
             Add(MotionB);
             Add(Subtitles);
 
@@ -146,37 +146,19 @@ namespace Pixie1
             {
                 timeEscDown += p.Dt;
                 MotionB.ScaleTarget = 1.5f*DEFAULT_SCALE;
-                MotionB.ScaleSpeed = 0.0004f;
+                MotionB.ScaleSpeed = 0.004f;
                 //Motion.RotateModifier = timeEscDown * 0.05f;
-                PixieGame.Instance.Exit();
+                //PixieGame.Instance.Exit();
             }
             else
             {
                 timeEscDown = 0f;
                 MotionB.ScaleTarget = DEFAULT_SCALE; // TODO
             }
-            if (timeEscDown > 1.0f)
+            if (timeEscDown > 0.45f)
             {
                 PixieGame.Instance.StopPlay();
             }
-
-            // FIXME remove debug keys
-            if (st.IsKeyDown(Keys.PageUp) && Motion.Zoom == Motion.ZoomTarget)
-            {
-                Motion.ZoomTarget *= 2.0f;
-                Motion.ZoomSpeed = 0.02f;
-            }
-
-            if (st.IsKeyDown(Keys.PageDown) && Motion.Zoom == Motion.ZoomTarget)
-            {
-                Motion.ZoomTarget *= 0.5f;
-                Motion.ZoomSpeed = 0.02f;
-            }
-
-            if (st.IsKeyDown(Keys.RightControl))
-                pixie.IsCollisionFree = true;
-            else
-                pixie.IsCollisionFree = false;
 
         }
 
@@ -226,10 +208,10 @@ namespace Pixie1
             if (isBackgroundScrollingOn)
                 ScrollBackground(ref p);
 
-            debugMsg.Text = "Pixie: trg=" + pixie.Target +", pos=" + pixie.Position;
+            //debugMsg.Text = "Pixie: trg=" + pixie.Target +", pos=" + pixie.Position;
             // DEBUG sample pixel
-            Color c= Background.SamplePixel(pixie.Target);
-            debugMsg.Text += "Color: " + c.R + "," + c.G + "," + c.B + "," + c.A;
+            //Color c= Background.SamplePixel(pixie.Target);
+            //debugMsg.Text += "Color: " + c.R + "," + c.G + "," + c.B + "," + c.A;
 
         }
     }

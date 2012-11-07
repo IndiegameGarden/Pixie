@@ -42,57 +42,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TTDebugFont.spritefont">
-      <Name>TTDebugFont</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-    </Compile>
-    <Compile Include="TTFrameRateCounter.spritefont">
-      <Name>TTFrameRateCounter</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="pixie.png">
       <Name>pixie</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Subtitles1.spritefont">
       <Name>Subtitles1</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <SubType>Designer</SubType>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="m41_lovebit.spritefont">
-      <Name>m41_lovebit</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="m06_quadra.spritefont">
-      <Name>m06_quadra</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Nostalgika.ogg">
-      <Name>Nostalgika</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="B01.ogg">
-      <Name>B01</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="shape2x2.png">
@@ -102,10 +62,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="amazing1.png">
-      <Name>amazing1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>PassThroughProcessor</Processor>
+    <None Include="quest.ogg">
+      <Name>quest</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="quest1.dat">
+      <Name>quest1</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

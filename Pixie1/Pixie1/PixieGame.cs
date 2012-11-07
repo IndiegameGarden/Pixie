@@ -35,7 +35,7 @@ namespace Pixie1
         {
             instance = this;
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
             graphics.PreferredBackBufferHeight = myWindowHeight;
             graphics.PreferredBackBufferWidth = myWindowWidth;
             Content.RootDirectory = "Content";
@@ -73,9 +73,7 @@ namespace Pixie1
         protected override void LoadContent()
         {
             //mainScreenlet.Add(new FrameRateCounter(1.0f, 0f)); // TODO
-
-            //level = new TrainwrecksLevel();
-            level = new AmazingLevel();
+            level = new QuestLevel();
 
             mainScreenlet.Add(level);
 
@@ -88,6 +86,7 @@ namespace Pixie1
 
         public void StopPlay()
         {
+            Exit();
         }
 
         public void WinGame()

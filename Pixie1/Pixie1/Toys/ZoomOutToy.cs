@@ -21,7 +21,7 @@ namespace Pixie1.Toys
 
         public override string ToyName()
         {
-            return "HI-RES";
+            return "The Potion of Vision";
         }
 
         public override void StartUsing()
@@ -31,7 +31,7 @@ namespace Pixie1.Toys
             m.ZoomTarget *= zoomFactor;
             m.ZoomSpeed = zoomSpeed;
             m.ZoomCenterTarget = Level.Current.pixie.Motion;
-            Level.Current.Subtitles.Show(1, "Wow! The world looks\nbetter in hi-res.", 4f);
+            Level.Current.Subtitles.Show(1, "(gulk, gulk)", 3f);
         }
 
         public override void StopUsing()
@@ -41,7 +41,7 @@ namespace Pixie1.Toys
             m.ZoomTarget /= zoomFactor;
             m.ZoomSpeed = zoomSpeed;
             m.ZoomCenterTarget = Level.Current.pixie.Motion;
-            Level.Current.Subtitles.Show(0, "Oh. Back to lo-res.", 3f);
+            //Level.Current.Subtitles.Show(0, "The Potion", 3f);
         }
 
     }

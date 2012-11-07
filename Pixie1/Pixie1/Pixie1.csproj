@@ -123,6 +123,7 @@
     <Compile Include="Behaviors\ChaseBehavior.cs" />
     <Compile Include="Behaviors\ColorCycleBehavior.cs" />
     <Compile Include="Behaviors\SubsumptionBehavior.cs" />
+    <Compile Include="Levels\QuestLevel.cs" />
     <Compile Include="RotatingBackground.cs" />
     <Compile Include="FinalScreen.cs" />
     <Compile Include="GameMusic.cs" />

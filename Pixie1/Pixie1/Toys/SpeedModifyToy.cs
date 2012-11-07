@@ -18,21 +18,21 @@ namespace Pixie1.Toys
 
         public SpeedModifyToy(float initialSpeedFactor)
         {
-            UseTimeMax = 25f;
             this.SpeedFactor = initialSpeedFactor;
             SetColors(0.4f, Color.LightPink, Color.LightSalmon);
+            UseTimeMax = 30f;
         }
 
         public override string ToyName()
         {
-            return "GRAPHICS ACCELERATOR";
+            return "Potion of Winged Feet";
         }
 
         public override void StartUsing()
         {
             base.StartUsing();
             ParentThing.Velocity *= SpeedFactor;
-            ShowToyMsg("Go, go, go! "+UsesLeftMsg(), 2f);
+            ShowToyMsg("Hark! My feet hath\nsprouted wings!", 4f);
         }
 
         public override void StopUsing()
