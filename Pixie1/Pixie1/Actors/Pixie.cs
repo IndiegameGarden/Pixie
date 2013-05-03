@@ -11,7 +11,7 @@ namespace Pixie1.Actors
     {
 
         public Pixie()
-            : base("shape2x2")
+            : base("pixie")
         {            
             IsCollisionFree = false;
             SetColors(4f,new Color(205,130,1),Color.DarkGoldenrod);

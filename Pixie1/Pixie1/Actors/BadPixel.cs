@@ -30,7 +30,7 @@ namespace Pixie1.Actors
         bool isCloaky = false;
 
         public BadPixel(Thing chaseTarget)
-            : base("shape2x2")
+            : base("pixie")
         {
             IsCollisionFree = false;
             DrawInfo.DrawColor = new Color(255, 10, 4);

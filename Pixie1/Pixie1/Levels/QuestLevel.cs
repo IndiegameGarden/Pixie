@@ -27,9 +27,9 @@ namespace Pixie1.Levels
             // Level settings
             SCREEN_MOTION_SPEED = 8.0f;
             DEFAULT_SCALE = 15f;// 15f;
-            PIXIE_STARTING_POS = new Vector2(1f, 25f); // in pixels        
+            PIXIE_STARTING_POS = new Vector2(42f, 155f); // in pixels        
             //PIXIE_STARTING_POS = new Vector2(73f, 10f); // in pixels        
-            BG_STARTING_POS = new Vector2(1f, 25f); // in pixels; bg=background            
+            BG_STARTING_POS = new Vector2(30f, 155f); // in pixels; bg=background            
             //PIXIE_STARTING_POS = new Vector2(188f, 0f); // close to win pos
             //BG_STARTING_POS = new Vector2(188f, 0f); 
         }
@@ -39,7 +39,7 @@ namespace Pixie1.Levels
             base.InitLevel();
 
             // select bitmap bg
-            Background = new LevelBackground("quest1.dat");
+            Background = new LevelBackground("Level1.png");
             Background.ForegroundColor = LEVEL_FOREGROUND_COLOR;
             Background.TargetSpeed = SCREEN_MOTION_SPEED;
             Add(Background);
@@ -51,26 +51,14 @@ namespace Pixie1.Levels
         {
             base.InitBadPixels();
 
-            BadPixel bp = BadPixel.Create(); // Cloaky();
-            bp.PositionAndTarget = new Vector2(5f, 34f);
-            //bp.TargetSpeed = 18.0f; // TODO
-            Add(bp);
+            for (int i = 0; i < 299; i++)
+            {
+                BadPixel bp = BadPixel.Create(); // Cloaky();
+                bp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(0f,740f), RandomMath.RandomBetween(0f,300f) );
+                //bp.TargetSpeed = 18.0f; // TODO
+                Add(bp);
+            }
 
-            bp = BadPixel.Create();
-            bp.PositionAndTarget = new Vector2(37f, 48f);
-            Add(bp);
-
-            bp = BadPixel.Create();
-            bp.PositionAndTarget = new Vector2(65f, 101f);
-            Add(bp);
-
-            bp = BadPixel.Create();
-            bp.PositionAndTarget = new Vector2(121f,13f);
-            Add(bp);
-
-            bp = BadPixel.Create();
-            bp.PositionAndTarget = new Vector2(77f, 5f);
-            Add(bp);
         }
 
         protected override void InitToys()
@@ -101,8 +89,9 @@ namespace Pixie1.Levels
             Add(Music);
 
             SubtitleText t = new SubtitleText();
-            t.AddText("QUEST FOR THE\nPIXEL PRINCESS", 6f);
+            t.AddText("QUEST FOR THE\nPIXEL PRINCESS XIV", 6f);
             t.AddText("You, The Golden Knight, must\nrescue the princess...", 5f);
+            t.AddText("...once more...", 5f);
             t.AddText("...from the clutches of\nthe evil Red Guard.", 5f);
             //t.AddText("...from the clutches of\nthe evil Red Guard.", 5f);
             Subtitles.Show(0, t);

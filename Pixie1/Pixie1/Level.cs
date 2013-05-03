@@ -26,7 +26,7 @@ namespace Pixie1
         public float DEFAULT_SCALE = 20.0f;
         public float SCREEN_MOTION_SPEED = 15.0f;
         public float PIXIE_TARGETSPEED = 5.0f;
-        public int DefaultPassableIntensityThreshold = 380;
+        public int DefaultPassableIntensityThreshold = 280;
         public Vector2 PIXIE_STARTING_POS = Vector2.Zero; // in pixels        
         public Vector2 BG_STARTING_POS = Vector2.Zero;    // in pixels; bg=background
 
