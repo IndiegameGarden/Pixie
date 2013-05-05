@@ -14,18 +14,8 @@ namespace Pixie1.Actors
             : base("pixie")
         {            
             IsCollisionFree = false;
-            SetColors(4f,new Color(205,130,1),Color.DarkGoldenrod);
+            SetColors(4f, Color.DarkGoldenrod, new Color(230, 210, 10));
             Velocity = 1.5f;
-        }
-
-        public void SetColors(float cyclePeriod, Color minColor, Color maxColor)
-        {
-            ColorCycleBehavior cycl = new ColorCycleBehavior(cyclePeriod);
-            cycl.minColor = minColor;
-            cycl.maxColor = maxColor;
-            //cycl.timePeriodR = cyclePeriod * RandomMath.RandomBetween(1.02f, 1.537f); ;
-            //cycl.timePeriodG = cyclePeriod * RandomMath.RandomBetween(0.7f, 0.93f); ;
-            Add(cycl);
         }
 
         protected override void OnDraw(ref DrawParams p)

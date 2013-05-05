@@ -16,23 +16,43 @@ namespace Pixie1.Behaviors
         /// followed target of this chase behavior
         /// </summary>
         public Thing ChaseTarget;
+        public Type ChaseTargetType;
 
         /// <summary>
         /// chase range in pixels
         /// </summary>
         public float ChaseRange = 10.0f;
 
+        /// <summary>
+        /// range reached when chaser is satisfied and stops chasing (0 means chase all the way)
+        /// </summary>
+        public float SatisfiedRange = 0f;
+
         public ChaseBehavior(Thing chaseTarget)
         {
             this.ChaseTarget = chaseTarget;
         }
 
-        protected override void  OnNextMove()
+        public ChaseBehavior(Type chaseClass)
+        {
+            this.ChaseTargetType = chaseClass;
+        }
+
+        protected override void OnNextMove()
         {
  	        base.OnNextMove();
-
-            // compute direction towards chase-target
-            Vector2 dif = ChaseTarget.Position - ParentThing.Target;
+            Vector2 dif = Vector2.Zero;
+            if (ChaseTarget != null)
+            {
+                // compute direction towards chase-target
+                dif = ChaseTarget.Position - ParentThing.Target;
+            }
+            else if (ChaseTargetType != null)
+            {
+                ChaseTarget = ParentThing.FindNearest(ChaseTargetType);
+                dif = ChaseTarget.Position - ParentThing.Target;
+            }
+            
             // choose one direction randomly, if diagonals would be required
             if (dif.X != 0f && dif.Y != 0f)
             {
@@ -50,11 +70,11 @@ namespace Pixie1.Behaviors
         {
             base.OnUpdate(ref p);
 
-            if (ChaseTarget.Visible)
+            if (ChaseTarget != null && ChaseTarget.Visible)
             {
                 Vector2 dif = ChaseTarget.Position - ParentThing.Target;
                 float dist = dif.Length();
-                if (dist > 0f && dist <= ChaseRange )
+                if (dist > 0f && dist <= ChaseRange && dist > SatisfiedRange)
                 {
                     // indicate we're chasing
                     IsTargetMoveDefined = true;

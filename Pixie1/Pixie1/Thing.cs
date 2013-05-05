@@ -9,6 +9,7 @@ using TTengine.Core;
 using TTengine.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pixie1.Behaviors;
 
 namespace Pixie1
 {
@@ -304,6 +305,29 @@ namespace Pixie1
             return l;
         }
 
+        public Thing FindNearest(Type thingType)
+        {
+            Thing foundThing = null;
+            float bestDist = 99999999f;
+            foreach (Thing t in allThingsList)
+            {
+                if (t == this) continue;
+                if (!t.Active) continue;
+                if (!t.Visible) continue;
+                if (t.Delete) continue;
+                if (t.GetType() == thingType)
+                {
+                    float dist = (t.Position - this.Position).Length();
+                    if (dist < bestDist)
+                    {
+                        bestDist = dist;
+                        foundThing = t;
+                    }
+                }
+            }
+            return foundThing;
+        }
+
         public bool Collides(Thing other)
         {
             return IntersectPixels(BoundingRectangle, textureData, other.BoundingRectangle, other.textureData );
@@ -451,6 +475,16 @@ namespace Pixie1
 
             // No intersection found
             return false;
+        }
+
+        public void SetColors(float cyclePeriod, Color minColor, Color maxColor)
+        {
+            ColorCycleBehavior cycl = new ColorCycleBehavior(cyclePeriod);
+            cycl.minColor = minColor;
+            cycl.maxColor = maxColor;
+            //cycl.timePeriodR = cyclePeriod * RandomMath.RandomBetween(1.02f, 1.537f); ;
+            //cycl.timePeriodG = cyclePeriod * RandomMath.RandomBetween(0.7f, 0.93f); ;
+            Add(cycl);
         }
 
     }

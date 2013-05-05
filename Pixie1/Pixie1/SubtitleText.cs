@@ -18,7 +18,7 @@ namespace Pixie1
         /// <summary>
         /// scaling vector for subtitles text (horizontal scale, vertical scale)
         /// </summary>
-        public Vector2 ScaleVector = new Vector2(2f, 1.5f);
+        public Vector2 ScaleVector = new Vector2(1.5f, 1.5f);
 
         /// <summary>
         /// displacement (in pixels) of the shadow below subtitles

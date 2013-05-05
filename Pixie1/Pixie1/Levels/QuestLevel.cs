@@ -51,10 +51,18 @@ namespace Pixie1.Levels
         {
             base.InitBadPixels();
 
-            for (int i = 0; i < 299; i++)
+            for (int i = 0; i < 99; i++)
             {
                 BadPixel bp = BadPixel.Create(); // Cloaky();
                 bp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(0f,740f), RandomMath.RandomBetween(0f,300f) );
+                //bp.TargetSpeed = 18.0f; // TODO
+                Add(bp);
+            }
+
+            for (int i = 0; i < 14; i++)
+            {
+                Companion bp = Companion.Create(); // Cloaky();
+                bp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(PIXIE_STARTING_POS.X - 10f, PIXIE_STARTING_POS.X + 10f), RandomMath.RandomBetween(PIXIE_STARTING_POS.Y - 6f, PIXIE_STARTING_POS.Y + 6f));
                 //bp.TargetSpeed = 18.0f; // TODO
                 Add(bp);
             }
@@ -107,7 +115,7 @@ namespace Pixie1.Levels
             //t.Duration = 10f;
             Parent.Add(t);
             t.ScaleVector = new Vector2(1f, 1f);
-            t.Motion.Scale = 0.35f ;/// DEFAULT_SCALE;
+            t.Motion.Scale = 0.4f ;
             t.Motion.Position = new Vector2(0.35f,0.25f);
             //t.DrawInfo.Center = Vector2.Zero;
             t.StartTime = 17f;

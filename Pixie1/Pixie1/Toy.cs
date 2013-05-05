@@ -153,16 +153,6 @@ namespace Pixie1
             }
         }
 
-        public void SetColors(float cyclePeriod, Color minColor, Color maxColor)
-        {
-            ColorCycleBehavior cycl = new ColorCycleBehavior(cyclePeriod);
-            cycl.minColor = minColor;
-            cycl.maxColor = maxColor;
-            //cycl.timePeriodR = cyclePeriod * RandomMath.RandomBetween(1.02f, 1.537f); ;
-            //cycl.timePeriodG = cyclePeriod * RandomMath.RandomBetween(0.7f, 0.93f); ;
-            Add(cycl);        
-        }
-
         protected virtual string SayToyName()
         {
             string tname = ToyName();
