@@ -133,6 +133,11 @@ namespace Pixie1
         /// </summary>
         public Toy ToyActive = null;
 
+        /// <summary>
+        /// things can push and be pushed by others
+        /// </summary>
+        public PushBehavior Pushing;
+
         // used for the collision detection per-pixel
         protected Color[] textureData;
         protected LevelBackground bg;
@@ -221,6 +226,17 @@ namespace Pixie1
             {
                 // if passable...
                 List<Thing> cols = DetectCollisions(TargetMove);
+
+                if (cols.Count > 0)
+                {
+                    // try to push neighbouring thing
+                    foreach (Thing t in cols)
+                    {
+                        if (t.Pushing != null)
+                            t.Pushing.BePushed(TargetMove);
+                    }
+                }
+
                 if (IsCollisionFree || (!CollidesWithBackground(TargetMove) && cols.Count==0 ) )
                 {
                     bool ok = true;

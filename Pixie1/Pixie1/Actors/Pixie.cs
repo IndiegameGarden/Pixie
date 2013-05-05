@@ -16,6 +16,13 @@ namespace Pixie1.Actors
             IsCollisionFree = false;
             SetColors(4f, Color.DarkGoldenrod, new Color(230, 210, 10));
             Velocity = 1.5f;
+
+            SubsumptionBehavior sub = new SubsumptionBehavior();
+            Add(sub);
+
+            Pushing = new PushBehavior();
+            Pushing.Force = 1.6f;
+            sub.Add(Pushing);
         }
 
         protected override void OnDraw(ref DrawParams p)
