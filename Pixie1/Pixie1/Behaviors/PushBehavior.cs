@@ -18,6 +18,7 @@ namespace Pixie1.Behaviors
         public float Force = 1.0f;
 
         Vector2 pushFromOthers = Vector2.Zero;
+        Vector2 pushFromOthersRemainder = Vector2.Zero;
 
         public PushBehavior()
         {
@@ -47,34 +48,40 @@ namespace Pixie1.Behaviors
         {
             base.OnUpdate(ref p);
 
-            float dist = pushFromOthers.Length();
+						// transfer collected push forces until now into 'remainder' variable. Reset to restart collecting for next round.
+						pushFromOthersRemainder = pushFromOthers;
+						pushFromOthers = Vector2.Zero;
+						
+            float dist = pushFromOthersRemainder.Length();
             if (dist > 0f)
             {
                 // check if square occupied
-                Vector2 pushFromOthersNorm = pushFromOthers;
+                Vector2 dif = pushFromOthersRemainder;
                 // choose one direction randomly, if diagonals would be required
-                if (pushFromOthersNorm.X != 0f && pushFromOthersNorm.Y != 0f)
+                if (dif.X != 0f && dif.Y != 0f)
                 {
                     float r = RandomMath.RandomUnit();
                     if (r > 0.5f)
-                        pushFromOthersNorm.X = 0f;
+                        dif.X = 0f;
                     else
-                        pushFromOthersNorm.Y = 0f;
+                        dif.Y = 0f;
                 }
-                pushFromOthersNorm.Normalize();
-                TargetMove = pushFromOthersNorm;
+                dif.Normalize();                
 
-                List<Thing> lt = ParentThing.DetectCollisions(pushFromOthersNorm);
+								// if the square being pushed to is free, allow move to go there
+                List<Thing> lt = ParentThing.DetectCollisions(dif);
                 if (lt.Count == 0)
                 {
+                		TargetMove = dif;
                     IsTargetMoveDefined = true;
                     AllowNextMove();
                 }
                 else
                 {
+                		// if square is taken, transfer my push to the Thing there with my own Force
                     foreach (Thing t in lt)
                     {
-                        t.Pushing.BePushed(TargetMove * Force);
+                        t.Pushing.BePushed(dif * Force);
                     }
                 }
             }

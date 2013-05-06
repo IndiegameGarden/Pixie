@@ -134,7 +134,7 @@ namespace Pixie1
         public Toy ToyActive = null;
 
         /// <summary>
-        /// things can push and be pushed by others
+        /// things can push and be pushed by others. If set to null, it can't be pushed anymore.
         /// </summary>
         public PushBehavior Pushing;
 
@@ -151,7 +151,7 @@ namespace Pixie1
         public Thing()
             : this("pixie")
         {
-            // nothing yet.
+            // see other constructor for all code!
         }
 
         /// <summary>
@@ -166,14 +166,16 @@ namespace Pixie1
             BoundingRectangle.Height = Texture.Height;
             textureData = new Color[BoundingRectangle.Width * BoundingRectangle.Height];
             Texture.GetData(textureData);
-            DrawInfo.Center = Vector2.Zero;            
+            DrawInfo.Center = Vector2.Zero;       
+						Pushing = new PushBehavior();
+						Add(Pushing);     
         }
 
         protected override void OnNewParent()
         {
             base.OnNewParent();
             bg = Level.Current.Background;
-            if(!IsCollisionFree)
+            if(!IsCollisionFree && !allThingsList.Contains(this))
                 allThingsList.Add(this);
         }
 
@@ -199,7 +201,7 @@ namespace Pixie1
                 //Motion.Position = Position - ViewPos; // alternative to above
             }
 
-            // compute target move for this thing based on child controls
+            // compute target move for this thing based on child ThingControl controls
             TargetMove = Vector2.Zero;
             foreach (Gamelet g in Children)
             {
@@ -224,12 +226,12 @@ namespace Pixie1
             // take steering inputs if any, and move Thing, applying collision detection
             if (TargetMove.LengthSquared() > 0f)
             {
-                // if passable...
+                // check if passable...
                 List<Thing> cols = DetectCollisions(TargetMove);
 
-                if (cols.Count > 0)
+                if (!IsCollisionFree && cols.Count > 0)
                 {
-                    // try to push neighbouring thing
+                    // no - so try to push neighbouring things
                     foreach (Thing t in cols)
                     {
                         if (t.Pushing != null)
@@ -239,6 +241,7 @@ namespace Pixie1
 
                 if (IsCollisionFree || (!CollidesWithBackground(TargetMove) && cols.Count==0 ) )
                 {
+                	  // yes - passable
                     bool ok = true;
                     if (!IsCollisionFree)
                     {
