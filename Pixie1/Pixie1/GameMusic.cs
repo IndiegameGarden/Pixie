@@ -19,7 +19,7 @@ namespace Pixie1
         {
             //track = TTengineMaster.ActiveGame.Content.Load<Song>("A01");
             soundScript = new SoundEvent("GameMusic");
-            SampleSoundEvent ev1 = new SampleSoundEvent("quest.ogg"); 
+            SampleSoundEvent ev1 = new SampleSoundEvent("ductia.ogg"); 
             soundScript.AddEvent(0, ev1);
             soundScript.AddEvent(300, ev1);
             soundScript.AddEvent(600, ev1);

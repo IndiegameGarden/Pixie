@@ -29,27 +29,25 @@ namespace Pixie1.Actors
             //DrawInfo.DrawColor = new Color(220, 200, 14);
             SetColors(4f, new Color(38, 30, 240), new Color(150, 150, 255));
 
+            Pushing.Force = RandomMath.RandomBetween(1f, 1.5f);
+
             SubsumptionBehavior sub = new SubsumptionBehavior();
             Add(sub);
 
-            Pushing = new PushBehavior();
-            Pushing.Force = RandomMath.RandomBetween(1f, 1.5f);
-            sub.Add(Pushing);
-
             Chasing = new ChaseBehavior(Level.Current.pixie);
-            Chasing.ChaseRange = 60f;
-            Chasing.SatisfiedRange = 6f;
+            Chasing.ChaseRange = 70f;
+            Chasing.SatisfiedRange = 10f;
             Chasing.MoveSpeed = RandomMath.RandomBetween(1.2f, 1.5f);
-            sub.Add(Chasing);
+            //sub.Add(Chasing);
 
             Chasing = new ChaseBehavior(typeof(BadPixel));
             Chasing.ChaseRange = 20f;
-            Chasing.MoveSpeed = RandomMath.RandomBetween(0.8f, 1.3f);
-            sub.Add(Chasing);
+            Chasing.MoveSpeed = RandomMath.RandomBetween(0.95f, 1.3f);
+            //sub.Add(Chasing);
 
             Wandering = new RandomWanderBehavior(2.7f, 11.3f);
-            Wandering.MoveSpeed = 0.5f;
-            sub.Add(Wandering);
+            Wandering.MoveSpeed = 0.05f;
+            //sub.Add(Wandering);
             
         }
 

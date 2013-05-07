@@ -30,17 +30,14 @@ namespace Pixie1.Behaviors
         /// <param name="dir"></param>
         public void BePushed(Vector2 dir)
         {
-            pushFromOthers += dir;
+            if (Force < 5f)  // FIXME hack to let pixie not be pushed
+                pushFromOthers += dir;
         }
 
         protected override void OnNextMove()
         {
  	        base.OnNextMove();
-            Vector2 dif = TargetMove;
-            if (dif.Length() > 0)
-            {
-                pushFromOthers = Vector2.Zero;
-            }
+ 	         	        
         }
 
 
@@ -48,43 +45,41 @@ namespace Pixie1.Behaviors
         {
             base.OnUpdate(ref p);
 
-						// transfer collected push forces until now into 'remainder' variable. Reset to restart collecting for next round.
-						pushFromOthersRemainder = pushFromOthers;
-						pushFromOthers = Vector2.Zero;
-						
-            float dist = pushFromOthersRemainder.Length();
-            if (dist > 0f)
+			// check if there is push from others. This push can build up over time, only
+			// released upon a next move
+            float dist = pushFromOthers.Length();
+            if (dist > 0f )
             {
-                // check if square occupied
-                Vector2 dif = pushFromOthersRemainder;
-                // choose one direction randomly, if diagonals would be required
-                if (dif.X != 0f && dif.Y != 0f)
-                {
-                    float r = RandomMath.RandomUnit();
-                    if (r > 0.5f)
-                        dif.X = 0f;
-                    else
-                        dif.Y = 0f;
-                }
-                dif.Normalize();                
+                // yes - check if push direction square occupied
+                Vector2 dif = pushFromOthers;              
 
-								// if the square being pushed to is free, allow move to go there
+                // choose dominant direction, if diagonals would be required
+                if (Math.Abs(dif.X) > Math.Abs(dif.Y))
+                    dif.Y = 0f;
+                else
+                    dif.X = 0f;
+                dif.Normalize();
+               	
+                // if that square is taken, transfer my push to the Thing there with my own Force
                 List<Thing> lt = ParentThing.DetectCollisions(dif);
-                if (lt.Count == 0)
+                foreach (Thing t in lt)
                 {
-                		TargetMove = dif;
+                    t.Pushing.BePushed(dif);
+                }
+
+                // if the square being pushed to is free, allow the move to go there
+                if (lt.Count == 0)
+                {                    
+                    TargetMove = dif;
                     IsTargetMoveDefined = true;
+                    wTime = 0f; // FIXME hack to trigger instant-move
                     AllowNextMove();
                 }
-                else
-                {
-                		// if square is taken, transfer my push to the Thing there with my own Force
-                    foreach (Thing t in lt)
-                    {
-                        t.Pushing.BePushed(dif * Force);
-                    }
-                }
             }
+
+            // reset the push buildup
+            pushFromOthers = Vector2.Zero;
+
         }
     }
 }

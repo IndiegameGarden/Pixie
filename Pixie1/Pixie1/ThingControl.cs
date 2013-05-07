@@ -39,7 +39,7 @@ namespace Pixie1
         /// </summary>
         public Vector2 LastTargetMove = new Vector2();
 
-        protected float wTime = 0f;
+        protected float wTime = RandomMath.RandomBetween(0f,0.2f); // TODO value would depend on MoveSpeed.
 
         protected override void OnNewParent()
         {

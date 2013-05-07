@@ -88,7 +88,8 @@ namespace Pixie1
 
             // make user's requested motion vector
             TargetMove = new Vector2(dx, dy);
-            IsTargetMoveDefined = true;
+            if (TargetMove.LengthSquared() > 0f)
+                IsTargetMoveDefined = true;
 
         }
 

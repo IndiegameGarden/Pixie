@@ -167,8 +167,8 @@ namespace Pixie1
             textureData = new Color[BoundingRectangle.Width * BoundingRectangle.Height];
             Texture.GetData(textureData);
             DrawInfo.Center = Vector2.Zero;       
-						Pushing = new PushBehavior();
-						Add(Pushing);     
+			Pushing = new PushBehavior();
+			Add(Pushing);     
         }
 
         protected override void OnNewParent()
@@ -229,7 +229,7 @@ namespace Pixie1
                 // check if passable...
                 List<Thing> cols = DetectCollisions(TargetMove);
 
-                if (!IsCollisionFree && cols.Count > 0)
+                if (!IsCollisionFree && Pushing != null && !IsCollisionFree && cols.Count > 0)
                 {
                     // no - so try to push neighbouring things
                     foreach (Thing t in cols)

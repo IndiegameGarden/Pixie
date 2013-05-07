@@ -42,22 +42,30 @@ namespace Pixie1.Behaviors
         {
  	        base.OnNextMove();
             Vector2 dif = Vector2.Zero;
-            if (ChaseTarget != null)
-            {
-                // compute direction towards chase-target
-                dif = ChaseTarget.Position - ParentThing.Target;
-            }
-            else if (ChaseTargetType != null)
+
+            // recheck for nearest chase target
+            if (ChaseTargetType != null)
             {
                 ChaseTarget = ParentThing.FindNearest(ChaseTargetType);
-                dif = ChaseTarget.Position - ParentThing.Target;
             }
             
-            // choose one direction randomly, if diagonals would be required
+            if (ChaseTarget != null)
+            {
+                // check for dead chase targets
+                if (ChaseTarget.Delete)
+                    ChaseTarget = null;
+                else                    
+                    // compute direction towards chase-target
+                    dif = ChaseTarget.Position - ParentThing.Target;
+            }
+
+            // choose one direction semi-randomly, if diagonals would be required
             if (dif.X != 0f && dif.Y != 0f)
             {
                 float r = RandomMath.RandomUnit();
-                if (r > 0.5f)
+                // the larger dif.X wrt dif.Y, the smaller the probability of moving in the Y direction
+                float thres = Math.Abs(dif.X) / (Math.Abs(dif.X) + Math.Abs(dif.Y));
+                if (r > thres)
                     dif.X = 0f;
                 else
                     dif.Y = 0f;

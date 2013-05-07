@@ -62,8 +62,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="quest.ogg">
-      <Name>quest</Name>
+    <None Include="ductia.ogg">
+      <Name>ductia</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="quest1.dat">

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Quest for the Pixel Princess")]
-[assembly: AssemblyProduct("Maze game. Pixel must rescue the princess.")]
-[assembly: AssemblyDescription("Maze game. Pixel must rescue the princess.")]
-[assembly: AssemblyCompany("TranceTrance.com")]
-[assembly: AssemblyCopyright("Copyright © TranceTrance.com 2012")]
+[assembly: AssemblyTitle("Quest for the Pixel Princess XIV")]
+[assembly: AssemblyProduct("You, prince, must rescue the pixel princess.")]
+[assembly: AssemblyDescription("You, prince, must rescue the pixel princess.")]
+[assembly: AssemblyCompany("IndiegameGarden.com")]
+[assembly: AssemblyCopyright("Copyright © IndiegameGarden.com 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 // On Windows, the following GUID is for the ID of the typelib if this
 // project is exposed to COM. On other platforms, it unique identifies the
 // title storage container when deploying this assembly to the device.
-[assembly: Guid("7bd1aafd-77be-48c8-9ac3-0b928ba0d8a5")]
+[assembly: Guid("7bd1aafd-76be-48c8-9ac3-1b928ba0d8a5")]
 
 // Version information for an assembly consists of the following four values:
 //

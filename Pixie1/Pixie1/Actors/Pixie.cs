@@ -20,9 +20,8 @@ namespace Pixie1.Actors
             SubsumptionBehavior sub = new SubsumptionBehavior();
             Add(sub);
 
-            Pushing = new PushBehavior();
-            Pushing.Force = 1.6f;
-            sub.Add(Pushing);
+            Pushing.Force = 10f; // force higher than companions.
+
         }
 
         protected override void OnDraw(ref DrawParams p)
