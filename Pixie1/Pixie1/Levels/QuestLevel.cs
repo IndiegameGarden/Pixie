@@ -51,22 +51,22 @@ namespace Pixie1.Levels
         {
             base.InitBadPixels();
 
-            for (int i = 0; i < 99; i++)
+            for (int i = 0; i < 299; i++)
             {
                 BadPixel bp = BadPixel.Create(); // Cloaky();
                 bp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(0f,740f), RandomMath.RandomBetween(0f,300f) );
                 //bp.TargetSpeed = 18.0f; // TODO
                 Add(bp);
-                //FindWalkableGround(bp);
+                FindWalkableGround(bp);
             }
 
-            for (int i = 0; i < 14; i++)
+            for (int i = 0; i < 14; i++) // XIV companions!
             {
                 Companion cp = Companion.Create(); // Cloaky();
                 cp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(PIXIE_STARTING_POS.X - 10f, PIXIE_STARTING_POS.X + 10f), RandomMath.RandomBetween(PIXIE_STARTING_POS.Y - 6f, PIXIE_STARTING_POS.Y + 6f));
                 //bp.TargetSpeed = 18.0f; // TODO
                 Add(cp);
-                //FindWalkableGround(cp);
+                FindWalkableGround(cp);
             }
 
         }
