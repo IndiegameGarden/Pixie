@@ -36,14 +36,14 @@ namespace Pixie1.Actors
 
             Chasing = new ChaseBehavior(Level.Current.pixie);
             Chasing.ChaseRange = 70f;
-            Chasing.SatisfiedRange = 10f;
+            Chasing.SatisfiedRange = 11f;
             Chasing.MoveSpeed = RandomMath.RandomBetween(1.2f, 1.5f);
-            //sub.Add(Chasing);
+            sub.Add(Chasing);
 
             Chasing = new ChaseBehavior(typeof(BadPixel));
             Chasing.ChaseRange = 20f;
             Chasing.MoveSpeed = RandomMath.RandomBetween(0.95f, 1.3f);
-            //sub.Add(Chasing);
+            sub.Add(Chasing);
 
             Wandering = new RandomWanderBehavior(2.7f, 11.3f);
             Wandering.MoveSpeed = 0.05f;

@@ -108,10 +108,19 @@ namespace Pixie1
             }
         }
 
+        private Rectangle boundingRectangle = new Rectangle();
+
         /// <summary>
         /// the bounding rectangle of the sprite of this Thing
         /// </summary>
-        protected Rectangle BoundingRectangle = new Rectangle();
+        protected Rectangle BoundingRectangle
+        {
+            get {
+                boundingRectangle.X = PositionX;
+                boundingRectangle.Y = PositionY;
+                return boundingRectangle; 
+            }
+        }
 
         /// <summary>
         /// a 'relative to normal' velocity-of-moving factor i.e. 1f == normal velocity
@@ -162,8 +171,8 @@ namespace Pixie1
             : base(bitmapFile)
         {
             PassableIntensityThreshold = Level.Current.DefaultPassableIntensityThreshold;
-            BoundingRectangle.Width = Texture.Width;
-            BoundingRectangle.Height = Texture.Height;
+            boundingRectangle.Width = Texture.Width;
+            boundingRectangle.Height = Texture.Height;
             textureData = new Color[BoundingRectangle.Width * BoundingRectangle.Height];
             Texture.GetData(textureData);
             DrawInfo.Center = Vector2.Zero;       
@@ -182,10 +191,6 @@ namespace Pixie1
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
-
-            // update BoundingRectangle values
-            BoundingRectangle.X = PositionX;
-            BoundingRectangle.Y = PositionY;
 
             // update position of the smooth motion of this Thing in the TTengine
             // update position when attached to a parent Thing
@@ -316,7 +321,7 @@ namespace Pixie1
                 if (!t.Active) continue;
                 if (!t.Visible) continue;
                 if (t.Delete) continue;
-                if (CollidesWhenThisMoves(t, myPotentialMove))
+                if (CollidesWhenThisMoves(t,myPotentialMove))
                 {
                     l.Add(t);
                 }
@@ -378,7 +383,10 @@ namespace Pixie1
         /// <returns>true if Thing would collide with something after the potentialMove would have been made, false otherwise</returns>
         public bool CollidesWithSomething(Vector2 potentialMove)
         {
-            return CollidesWithBackground(potentialMove) || (DetectCollisions(potentialMove).Count > 0 );
+            if (CollidesWithBackground(potentialMove))
+                return true;
+            List<Thing> lt = DetectCollisions(potentialMove);
+            return  lt.Count > 0 ;
         }
 
         /// <summary>

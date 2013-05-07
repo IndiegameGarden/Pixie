@@ -57,16 +57,32 @@ namespace Pixie1.Levels
                 bp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(0f,740f), RandomMath.RandomBetween(0f,300f) );
                 //bp.TargetSpeed = 18.0f; // TODO
                 Add(bp);
+                //FindWalkableGround(bp);
             }
 
             for (int i = 0; i < 14; i++)
             {
-                Companion bp = Companion.Create(); // Cloaky();
-                bp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(PIXIE_STARTING_POS.X - 10f, PIXIE_STARTING_POS.X + 10f), RandomMath.RandomBetween(PIXIE_STARTING_POS.Y - 6f, PIXIE_STARTING_POS.Y + 6f));
+                Companion cp = Companion.Create(); // Cloaky();
+                cp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(PIXIE_STARTING_POS.X - 10f, PIXIE_STARTING_POS.X + 10f), RandomMath.RandomBetween(PIXIE_STARTING_POS.Y - 6f, PIXIE_STARTING_POS.Y + 6f));
                 //bp.TargetSpeed = 18.0f; // TODO
-                Add(bp);
+                Add(cp);
+                //FindWalkableGround(cp);
             }
 
+        }
+
+        protected void FindWalkableGround(Thing t)
+        {
+            // move down until on walkable area
+            while(t.CollidesWithSomething(Vector2.Zero)) {
+                t.PositionY += 1;
+                // when unit goes off-screen, delete.
+                if (t.PositionY > this.Background.Texture.Height)
+                {
+                    t.Delete = true;
+                    break;
+                }
+            }
         }
 
         protected override void InitToys()
