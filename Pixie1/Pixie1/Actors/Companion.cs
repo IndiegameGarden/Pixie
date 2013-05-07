@@ -46,8 +46,8 @@ namespace Pixie1.Actors
             sub.Add(Chasing);
 
             Wandering = new RandomWanderBehavior(2.7f, 11.3f);
-            Wandering.MoveSpeed = 0.05f;
-            //sub.Add(Wandering);
+            Wandering.MoveSpeed = RandomMath.RandomBetween(0.09f, 0.3f);
+            sub.Add(Wandering);
             
         }
 

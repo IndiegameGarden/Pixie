@@ -54,7 +54,7 @@ namespace Pixie1.Levels
             for (int i = 0; i < 299; i++)
             {
                 BadPixel bp = BadPixel.Create(); // Cloaky();
-                bp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(0f,740f), RandomMath.RandomBetween(0f,300f) );
+                bp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(123f,720f), RandomMath.RandomBetween(9f,290f) );
                 //bp.TargetSpeed = 18.0f; // TODO
                 Add(bp);
                 FindWalkableGround(bp);
@@ -113,28 +113,28 @@ namespace Pixie1.Levels
             Add(Music);
 
             SubtitleText t = new SubtitleText();
-            t.AddText("QUEST FOR THE\nPIXEL PRINCESS XIV", 6f);
-            t.AddText("You, The Golden Knight, must\nrescue the princess...", 5f);
-            t.AddText("...once more...", 5f);
-            t.AddText("...from the clutches of\nthe evil Red Guard.", 5f);
-            //t.AddText("...from the clutches of\nthe evil Red Guard.", 5f);
+            t.AddText("COMPANIONS!", 4f);
+            t.AddText("Follow me! Together, we will rescue\nthe Princess!", 5f);            
+            t.AddText("Beware of the Red Guards. Attack!!", 5f);
             Subtitles.Show(0, t);
-
-            t = new SubtitleText("My ears! Hark the drums\nof the Red Guard!");
-            t.StartTime = 64.0f;
-            t.Duration = 10.0f;
-            Subtitles.Show(0, t);
+            t.StartTime = 1f;
 
             t = new SubtitleText();
-            t.AddText("Music 'The Never Ending Quest For The\nPrincess II' by Producer Snafu!\nCC-BY-NC  producersnafu.bandcamp.com", 10f);
-            t.AddText("FMOD Audio engine\n(c) Firelight Technologies Pty, Ltd. 2004-2009.", 6f);
+            t.AddText("Quest for the Pixel Princess XIV - by Indiegame Garden", 10f);
+            t.AddText("You, The Golden Knight, must rescue the princess once more...", 5f);
+            t.AddText("...from the clutches of the evil Red Guard.", 5f);
+            t.AddText("The Fourteen Blue Companions have come to your aid!", 5f);
+            t.AddText("The peasants told you that the Princess was taken deep into the Red Castle.", 5f);
+            t.AddText("Go get her, Knight!", 5f);
+            t.AddText("", 3f);
+            t.AddText("FMOD Audio engine (c) Firelight Technologies 2004-2013", 6f);
             //t.Duration = 10f;
             Parent.Add(t);
             t.ScaleVector = new Vector2(1f, 1f);
-            t.Motion.Scale = 0.4f ;
-            t.Motion.Position = new Vector2(0.35f,0.25f);
+            t.Motion.Scale = 0.5f ;
+            t.Motion.Position = new Vector2(Screen.Center.X,0.08f);
             //t.DrawInfo.Center = Vector2.Zero;
-            t.StartTime = 17f;
+            t.StartTime = 12f;
         }
 
         protected override bool ScreenBorderHit()

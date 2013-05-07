@@ -36,14 +36,14 @@ namespace Pixie1.Actors
             DrawInfo.DrawColor = new Color(255, 10, 4);
 
             SubsumptionBehavior sub = new SubsumptionBehavior();
-            //Add(sub);
+            Add(sub);
 
             Chasing = new ChaseBehavior(chaseTarget);
             Chasing.MoveSpeed = RandomMath.RandomBetween(0.47f, 0.75f);
-            Chasing.ChaseRange = 6f; // RandomMath.RandomBetween(12f, 40f);
+            Chasing.ChaseRange = 8f; // RandomMath.RandomBetween(12f, 40f);
             sub.Add(Chasing);
 
-            Turning = new AlwaysTurnRightBehavior();
+            Turning = new AlwaysTurnRightBehavior(); // patrolling
             Turning.MoveSpeed = Chasing.MoveSpeed; //RandomMath.RandomBetween(0.57f, 1.05f);
             Turning.MoveSpeed = 0.7f;
             sub.Add(Turning);
