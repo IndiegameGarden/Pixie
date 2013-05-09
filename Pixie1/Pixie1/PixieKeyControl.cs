@@ -11,11 +11,18 @@ namespace Pixie1
     {
         float pressTime = 0f;
         bool isTriggerPressed = false;
+        Pixie pixie = null;
 
         public PixieKeyControl()
             : base()
         {
             MoveSpeed = 1.5f;
+        }
+
+        protected override void OnNewParent()
+        {
+            base.OnNewParent();
+            pixie = ParentThing as Pixie; // TODO hardwired
         }
 
         protected override void OnUpdate(ref UpdateParams p)
@@ -54,10 +61,16 @@ namespace Pixie1
                 pressTime = 0f;
             }
 
-            // trigger Toy
             KeyboardState kbstate = Keyboard.GetState();
-            bool isTriggerKeyPressed =   kbstate.IsKeyDown(Keys.Space) ||
-                                    kbstate.IsKeyDown(Keys.X) ||
+
+            // trigger attack
+            if (kbstate.IsKeyDown(Keys.Space))
+            {
+                pixie.LeadAttack();
+            }
+
+            // trigger Toy
+            bool isTriggerKeyPressed = kbstate.IsKeyDown(Keys.X) ||
                                     kbstate.IsKeyDown(Keys.LeftControl);
             Toy t = ParentThing.ToyActive; 
             if (!isTriggerPressed && isTriggerKeyPressed)

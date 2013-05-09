@@ -53,6 +53,11 @@ namespace Pixie1
         public GameMusic Music;
 
         /// <summary>
+        /// level sounds object
+        /// </summary>
+        public GameSound Sound;
+
+        /// <summary>
         /// background bitmap
         /// </summary>
         public LevelBackground Background;

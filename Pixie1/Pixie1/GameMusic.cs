@@ -11,7 +11,7 @@ namespace Pixie1
 {
     public class GameMusic: Gamelet
     {
-        float vol = 1.0f;
+        float vol = 2f;
         SoundEvent soundScript;
         RenderParams rp = new RenderParams();
 

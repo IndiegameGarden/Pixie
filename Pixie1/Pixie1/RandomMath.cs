@@ -55,6 +55,17 @@ namespace Pixie1
         }
 
         /// <summary>
+        /// random int value
+        /// </summary>
+        /// <param name="minimum"></param>
+        /// <param name="maximum"></param>
+        /// <returns></returns>
+        public static int RandomIntBetween(int minimum, int maximum)
+        {
+            return (int) Math.Round(RandomBetween(((float)minimum) - 0.499f, ((float)maximum) + 0.499f));
+        }
+
+        /// <summary>
         /// generate a random floating-point value between 0 and 1
         /// </summary>
         /// <returns>a random floating-point value between 0 and 1</returns>

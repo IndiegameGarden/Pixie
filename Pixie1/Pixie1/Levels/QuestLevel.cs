@@ -66,6 +66,7 @@ namespace Pixie1.Levels
                 cp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(PIXIE_STARTING_POS.X - 10f, PIXIE_STARTING_POS.X + 10f), RandomMath.RandomBetween(PIXIE_STARTING_POS.Y - 6f, PIXIE_STARTING_POS.Y + 6f));
                 //bp.TargetSpeed = 18.0f; // TODO
                 Add(cp);
+                pixie.Companions.Add(cp);
                 FindWalkableGround(cp);
             }
 
@@ -110,31 +111,35 @@ namespace Pixie1.Levels
         protected override void InitLevelSpecific()
         {
             Music = new GameMusic();
+            Sound = new GameSound();
             Add(Music);
+            Add(Sound);
 
             SubtitleText t = new SubtitleText();
             t.AddText("COMPANIONS!", 4f);
-            t.AddText("Follow me! Together, we will rescue\nthe Princess!", 5f);            
-            t.AddText("Beware of the Red Guards. Attack!!", 5f);
+            t.AddText("Go with me! Together, we will rescue\nthe Princess!", 4f);            
+            t.AddText("Squash those Red Ridders!", 4f);
             Subtitles.Show(0, t);
             t.StartTime = 1f;
 
             t = new SubtitleText();
-            t.AddText("Quest for the Pixel Princess XIV - by Indiegame Garden", 10f);
-            t.AddText("You, The Golden Knight, must rescue the princess once more...", 5f);
-            t.AddText("...from the clutches of the evil Red Guard.", 5f);
-            t.AddText("The Fourteen Blue Companions have come to your aid!", 5f);
-            t.AddText("The peasants told you that the Princess was taken deep into the Red Castle.", 5f);
-            t.AddText("Go get her, Knight!", 5f);
+            t.AddText("Quest for the Pixel Princess XIV", 5f);
+            t.AddText("You, Golden Galad, must rescue the Pink Princess once more...", 5f);
+            t.AddText("...from the clutches of the evil Red Ridders.", 5f);
+            t.AddText("The Fourteen Cobalt Companions have come to your aid!", 5f);
+            t.AddText("The peasants told you that the princess was taken deep into the Keep.", 5f);
+            t.AddText("Get her, valiant knight!", 5f);
             t.AddText("", 3f);
-            t.AddText("FMOD Audio engine (c) Firelight Technologies 2004-2013", 6f);
+            t.AddText("Arrows / WASD to move. SPACE to lead your Companions.", 5f);
+            t.AddText("Created by Indiegame Garden", 4f);
+            t.AddText("FMOD Audio engine (c) Firelight Technologies 2004-2013", 4f);
             //t.Duration = 10f;
             Parent.Add(t);
             t.ScaleVector = new Vector2(1f, 1f);
             t.Motion.Scale = 0.5f ;
             t.Motion.Position = new Vector2(Screen.Center.X,0.08f);
             //t.DrawInfo.Center = Vector2.Zero;
-            t.StartTime = 12f;
+            t.StartTime = 13f;
         }
 
         protected override bool ScreenBorderHit()

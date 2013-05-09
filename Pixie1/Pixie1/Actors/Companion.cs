@@ -11,8 +11,10 @@ namespace Pixie1.Actors
     {
         public BlinkBehavior Blinking;
         public ChaseBehavior  Chasing;
+        public CombatBehavior Combat;
         public AlwaysTurnRightBehavior Turning;
         public RandomWanderBehavior Wandering;
+        public AttackBehavior Attacking;
 
         public static Companion Create()
         {
@@ -34,19 +36,26 @@ namespace Pixie1.Actors
             SubsumptionBehavior sub = new SubsumptionBehavior();
             Add(sub);
 
+            Combat = new CombatBehavior(typeof(BadPixel));
+            sub.Add(Combat);
+
             Chasing = new ChaseBehavior(Level.Current.pixie);
             Chasing.ChaseRange = 70f;
-            Chasing.SatisfiedRange = 11f;
+            Chasing.SatisfiedRange = 5f;
             Chasing.MoveSpeed = RandomMath.RandomBetween(1.2f, 1.5f);
             sub.Add(Chasing);
 
             Chasing = new ChaseBehavior(typeof(BadPixel));
             Chasing.ChaseRange = 20f;
-            Chasing.MoveSpeed = RandomMath.RandomBetween(0.95f, 1.3f);
+            Chasing.MoveSpeed = RandomMath.RandomBetween(1.1f, 1.5f);
             sub.Add(Chasing);
 
+            Attacking = new AttackBehavior(Level.Current.pixie);
+            Attacking.AttackDuration = RandomMath.RandomBetween(1.5f, 2.8f);
+            sub.Add(Attacking);
+
             Wandering = new RandomWanderBehavior(2.7f, 11.3f);
-            Wandering.MoveSpeed = RandomMath.RandomBetween(0.09f, 0.3f);
+            Wandering.MoveSpeed = RandomMath.RandomBetween(0.09f, 0.25f);
             sub.Add(Wandering);
             
         }
