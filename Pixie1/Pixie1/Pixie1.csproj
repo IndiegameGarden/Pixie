@@ -149,15 +149,8 @@
     <Compile Include="LevelBackground.cs" />
     <Compile Include="RandomMath.cs" />
     <Compile Include="Toys\BombToy.cs" />
-    <Compile Include="Toys\DecoysToy.cs" />
-    <Compile Include="Toys\EnlargeSizeToy.cs" />
-    <Compile Include="Toys\GravityToy.cs" />
     <Compile Include="Toys\InvisibilityToy.cs" />
     <Compile Include="Toys\PaintToy.cs" />
-    <Compile Include="Toys\PixelGunToy.cs" />
-    <Compile Include="Toys\PixelitisToy.cs" />
-    <Compile Include="Toys\PowerPillToy.cs" />
-    <Compile Include="Toys\ShaderToy.cs" />
     <Compile Include="Toys\ShowMessageToy.cs" />
     <Compile Include="Toys\SpeedModifyToy.cs" />
     <Compile Include="Toys\ZoomOutToy.cs" />

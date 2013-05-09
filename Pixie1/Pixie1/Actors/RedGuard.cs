@@ -94,7 +94,7 @@ namespace Pixie1.Actors
                 {
                     if (Level.Current.Subtitles.Children.Count <= 4)
                     {
-                        Level.Current.Subtitles.Show(3, attackString[RandomMath.RandomIntBetween(0, attackString.Length - 1)], 3.5f);
+                        Level.Current.Subtitles.Show(3, attackString[RandomMath.RandomIntBetween(0, attackString.Length - 1)], 3.5f, Color.IndianRed);
                         Level.Current.pixie.Health -= RandomMath.RandomBetween(1f, 3f);
                     }
                 }

@@ -121,6 +121,7 @@ namespace Pixie1.Levels
             t.AddText("Squash those Red Guards!", 4f);
             Subtitles.Show(0, t);
             t.StartTime = 1f;
+            //t.DrawInfo.DrawColor = Color.LightCoral;
 
             t = new SubtitleText();
             t.AddText("Quest for the Pixel Princess XIV", 5f);
@@ -132,7 +133,7 @@ namespace Pixie1.Levels
             t.AddText("", 3f);
             t.AddText("Arrows / WASD to move. SPACE to let your Companions attack.", 5f);
             t.AddText("Created by Indiegame Garden", 4f);
-            t.AddText("FMOD Audio engine (c) Firelight Technologies 2004-2013", 4f);
+            t.AddText("FMOD Audio engine (c) Firelight Technologies 2004-2013", 4f);            
             
             Parent.Add(t);
             t.ScaleVector = new Vector2(1f, 1f);
