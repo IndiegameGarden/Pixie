@@ -161,7 +161,7 @@ namespace Pixie1
             {
                 timeEscDown += p.Dt;
                 MotionB.ScaleTarget = 1.5f*DEFAULT_SCALE;
-                MotionB.ScaleSpeed = 0.004f;
+                MotionB.ScaleSpeed = 0.005f;
                 //Motion.RotateModifier = timeEscDown * 0.05f;
                 //PixieGame.Instance.Exit();
             }
