@@ -9,9 +9,10 @@ namespace Pixie1.Actors
 {
     public class RedGuard: Thing
     {
-        // behaviors - the things that bad pixels do 
+        // behaviors - the things that red guards do 
         public BlinkBehavior Blinking;
         public ChaseBehavior  Chasing;
+        public ChaseBehavior ChasingComp;
         public AlwaysTurnRightBehavior Turning;
         public RandomWanderBehavior Wandering;
 
@@ -38,9 +39,16 @@ namespace Pixie1.Actors
             SubsumptionBehavior sub = new SubsumptionBehavior();
             Add(sub);
 
+            // chase companions that are very close
+            ChasingComp = new ChaseBehavior(typeof(Companion));
+            ChasingComp.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
+            ChasingComp.ChaseRange = 1.5f; // RandomMath.RandomBetween(12f, 40f);
+            sub.Add(ChasingComp);
+
+            // chase hero
             Chasing = new ChaseBehavior(chaseTarget);
             Chasing.MoveSpeed = RandomMath.RandomBetween(0.47f, 0.75f);
-            Chasing.ChaseRange = 8f; // RandomMath.RandomBetween(12f, 40f);
+            Chasing.ChaseRange = 10f; // RandomMath.RandomBetween(12f, 40f);
             sub.Add(Chasing);
 
             Turning = new AlwaysTurnRightBehavior(); // patrolling

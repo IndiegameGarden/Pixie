@@ -14,6 +14,12 @@ namespace Pixie1.Behaviors
         public bool IsAttacking = false;
         public float CurrentAttackDuration = 0f;
 
+        protected string[] attackString = new string[] { "Attack!", "Forward, men!", "Go!", "Companions!", "To arms!", "Attack!", 
+            "Kill them!", "Cover me!", "Engage!", "Forward, companions!", "", "ATTACK!!", "Get me his head!", "Swords!", "Drive them back!",
+            "Begone, thou knave!", "Red traitors, die!", "Easy... not too fast.", "Strike now!", "STRIKE!" ,
+            "A thousand battles,\na thousand victories!", "ATTAAAAAACK!", "We shall prevail!", "Princess, all to your service!",
+            "Squash the red vermin.", "Blue and Gold! For honor!", "For honor! For justice!"};
+
         public AttackBehavior(Thing leader)
         {
             Leader = leader;
@@ -22,8 +28,8 @@ namespace Pixie1.Behaviors
         public void TriggerAttack() {
             if (!IsAttacking)
             {
-                if (Level.Current.Subtitles.Children.Count == 0)
-                    Level.Current.Subtitles.Show(4, "Attack!", 1.5f);
+                if (Level.Current.Subtitles.Children.Count <= 3)
+                    Level.Current.Subtitles.Show(0, attackString[RandomMath.RandomIntBetween(0,attackString.Length-1)], 1.5f);
                 IsAttacking = true;
                 CurrentAttackDuration = 0f;
             }
