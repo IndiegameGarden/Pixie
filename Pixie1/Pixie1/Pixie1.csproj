@@ -120,7 +120,7 @@
     <Compile Include="Behaviors\PushBehavior.cs" />
     <Compile Include="GameSound.cs" />
     <Compile Include="Levels\AmazingLevel.cs" />
-    <Compile Include="Actors\BadPixel.cs" />
+    <Compile Include="Actors\RedGuard.cs" />
     <Compile Include="Behaviors\AlwaysTurnRightBehavior.cs" />
     <Compile Include="Behaviors\RandomWanderBehavior.cs" />
     <Compile Include="Behaviors\ReverseControlBehavior.cs" />

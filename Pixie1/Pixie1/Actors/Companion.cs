@@ -7,12 +7,13 @@ using Pixie1.Behaviors;
 
 namespace Pixie1.Actors
 {
+    /**
+     * companion of the hero that helps him
+     */
     public class Companion: Thing
     {
-        public BlinkBehavior Blinking;
         public ChaseBehavior  Chasing;
-        public CombatBehavior Combat;
-        public AlwaysTurnRightBehavior Turning;
+        public CombatBehavior Combat;     
         public RandomWanderBehavior Wandering;
         public AttackBehavior Attacking;
 
@@ -20,15 +21,12 @@ namespace Pixie1.Actors
         {
             return new Companion();
         }
-
-        bool isCloaky = false;
-
+        
         public Companion()
             : base("pixie")
         {
             IsCollisionFree = false;
             
-            //DrawInfo.DrawColor = new Color(220, 200, 14);
             SetColors(4f, new Color(38, 30, 240), new Color(150, 150, 255));
 
             Pushing.Force = RandomMath.RandomBetween(1f, 1.5f);
@@ -36,7 +34,7 @@ namespace Pixie1.Actors
             SubsumptionBehavior sub = new SubsumptionBehavior();
             Add(sub);
 
-            Combat = new CombatBehavior(typeof(BadPixel));
+            Combat = new CombatBehavior(typeof(RedGuard));
             sub.Add(Combat);
 
             Chasing = new ChaseBehavior(Level.Current.pixie);
@@ -45,7 +43,7 @@ namespace Pixie1.Actors
             Chasing.MoveSpeed = RandomMath.RandomBetween(1.2f, 1.5f);
             sub.Add(Chasing);
 
-            Chasing = new ChaseBehavior(typeof(BadPixel));
+            Chasing = new ChaseBehavior(typeof(RedGuard));
             Chasing.ChaseRange = 20f;
             Chasing.MoveSpeed = RandomMath.RandomBetween(1.1f, 1.5f);
             sub.Add(Chasing);
@@ -60,38 +58,9 @@ namespace Pixie1.Actors
             
         }
 
-        /// <summary>
-        /// set 'cloaky' status, a cloaky is a hardly visible bad pixel
-        /// </summary>
-        public bool IsCloaky
-        {
-            get
-            {
-                return isCloaky;
-            }
-            set
-            {
-                if (IsCloaky == value)
-                    return;
-                // if change - swap dutycycle
-                Blinking.DutyCycle = 1f - Blinking.DutyCycle;
-                isCloaky = value;                
-            }
-        }
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
-
-            if (TargetMove.LengthSquared() > 0)
-            {
-                if (CollidesWhenThisMoves(Level.Current.pixie, TargetMove))
-                {
-                    if (Level.Current.Subtitles.Children.Count <= 2)
-                    {
-                        Level.Current.Subtitles.Show(3, "HALT! Thou shalt\n   not pass.", 3.5f);
-                    }
-                }
-            }
         }
     }
 }

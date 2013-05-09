@@ -68,12 +68,12 @@ namespace Pixie1.Levels
         {
             base.InitBadPixels();
 
-            BadPixel bp = BadPixel.Create(); // Cloaky();
+            RedGuard bp = RedGuard.Create(); // Cloaky();
             bp.PositionAndTarget = new Vector2(4f, 34f);
             //bp.TargetSpeed = 18.0f; // TODO
             Add(bp);
 
-            bp = BadPixel.Create();
+            bp = RedGuard.Create();
             bp.PositionAndTarget = new Vector2(37f, 44f);
             Add(bp);
         }

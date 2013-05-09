@@ -53,7 +53,7 @@ namespace Pixie1.Levels
 
             for (int i = 0; i < 299; i++)
             {
-                BadPixel bp = BadPixel.Create(); // Cloaky();
+                RedGuard bp = RedGuard.Create(); // Cloaky();
                 bp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(123f,720f), RandomMath.RandomBetween(9f,290f) );
                 //bp.TargetSpeed = 18.0f; // TODO
                 Add(bp);
@@ -118,22 +118,22 @@ namespace Pixie1.Levels
             SubtitleText t = new SubtitleText();
             t.AddText("COMPANIONS!", 4f);
             t.AddText("Go with me! Together, we will rescue\nthe Princess!", 4f);            
-            t.AddText("Squash those Red Ridders!", 4f);
+            t.AddText("Squash those Red Guards!", 4f);
             Subtitles.Show(0, t);
             t.StartTime = 1f;
 
             t = new SubtitleText();
             t.AddText("Quest for the Pixel Princess XIV", 5f);
             t.AddText("You, Golden Galad, must rescue the Pink Princess once more...", 5f);
-            t.AddText("...from the clutches of the evil Red Ridders.", 5f);
+            t.AddText("...from the clutches of the evil Red Guard.", 5f);
             t.AddText("The Fourteen Cobalt Companions have come to your aid!", 5f);
-            t.AddText("The peasants told you that the princess was taken deep into the Keep.", 5f);
+            t.AddText("A peasant told you that he saw the princess being taken into the Keep.", 5f);
             t.AddText("Get her, valiant knight!", 5f);
             t.AddText("", 3f);
-            t.AddText("Arrows / WASD to move. SPACE to lead your Companions.", 5f);
+            t.AddText("Arrows / WASD to move. SPACE to let your Companions attack.", 5f);
             t.AddText("Created by Indiegame Garden", 4f);
             t.AddText("FMOD Audio engine (c) Firelight Technologies 2004-2013", 4f);
-            //t.Duration = 10f;
+            
             Parent.Add(t);
             t.ScaleVector = new Vector2(1f, 1f);
             t.Motion.Scale = 0.5f ;

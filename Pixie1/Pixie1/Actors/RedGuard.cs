@@ -7,7 +7,7 @@ using Pixie1.Behaviors;
 
 namespace Pixie1.Actors
 {
-    public class BadPixel: Thing
+    public class RedGuard: Thing
     {
         // behaviors - the things that bad pixels do 
         public BlinkBehavior Blinking;
@@ -15,21 +15,21 @@ namespace Pixie1.Actors
         public AlwaysTurnRightBehavior Turning;
         public RandomWanderBehavior Wandering;
 
-        public static BadPixel Create()
+        public static RedGuard Create()
         {
-            return new BadPixel(Level.Current.pixie);
+            return new RedGuard(Level.Current.pixie);
         }
 
-        public static BadPixel CreateCloaky()
+        public static RedGuard CreateCloaky()
         {
-            BadPixel p = new BadPixel(Level.Current.pixie);
+            RedGuard p = new RedGuard(Level.Current.pixie);
             p.IsCloaky = true;
             return p;
         }
 
         bool isCloaky = false;
 
-        public BadPixel(Thing chaseTarget)
+        public RedGuard(Thing chaseTarget)
             : base("pixie")
         {
             IsCollisionFree = false;
