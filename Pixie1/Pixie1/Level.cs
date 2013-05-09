@@ -123,6 +123,16 @@ namespace Pixie1
         {
         }
 
+        public virtual void LoseLevel()
+        {
+            SubtitleText t = new SubtitleText();
+            t.AddText("BADLY WOUNDED, YOU DIE.", 7f);
+            t.AddText("Gawyn the Golden is no more.", 7f);
+            t.AddText("The princess remains captive\nfor all her life.", 7f);
+            Subtitles.Show(9,  t);
+            keyControl.Delete = true;
+        }
+
         /// <summary>
         /// Init: level-specific items (not fitting in the existing init categories) to be initialized by subclasses
         /// </summary>

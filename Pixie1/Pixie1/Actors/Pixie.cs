@@ -13,6 +13,8 @@ namespace Pixie1.Actors
 
         public List<Companion> Companions = new List<Companion>();
 
+        protected float health = 10f;
+
         public Pixie()
             : base("pixie")
         {            
@@ -25,6 +27,21 @@ namespace Pixie1.Actors
 
             Pushing.Force = 10f; // force higher than companions.
 
+        }
+
+        public float Health
+        {
+            get
+            {
+                return health;
+            }
+
+            set
+            {
+                health = value;
+                if (health <= 0f)
+                    Level.Current.LoseLevel();
+            }
         }
 
         public void LeadAttack()

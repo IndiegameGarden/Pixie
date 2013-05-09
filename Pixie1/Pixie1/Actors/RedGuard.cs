@@ -16,6 +16,9 @@ namespace Pixie1.Actors
         public AlwaysTurnRightBehavior Turning;
         public RandomWanderBehavior Wandering;
 
+        protected string[] attackString = new string[] { "Take this, golden villain!", "We hurt him!", "He bleeds!", "Our swords struck true!",
+            "He bleeds!", "To the grave, golden traitor!", "Die, golden scum!" , "HALT! Thou shalt not pass.", "He stumbles!"};
+
         public static RedGuard Create()
         {
             return new RedGuard(Level.Current.pixie);
@@ -80,6 +83,7 @@ namespace Pixie1.Actors
                 isCloaky = value;                
             }
         }
+
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
@@ -88,9 +92,10 @@ namespace Pixie1.Actors
             {
                 if (CollidesWhenThisMoves(Level.Current.pixie, TargetMove))
                 {
-                    if (Level.Current.Subtitles.Children.Count <= 2)
+                    if (Level.Current.Subtitles.Children.Count <= 4)
                     {
-                        Level.Current.Subtitles.Show(3, "HALT! Thou shalt\n   not pass.", 3.5f);
+                        Level.Current.Subtitles.Show(3, attackString[RandomMath.RandomIntBetween(0, attackString.Length - 1)], 3.5f);
+                        Level.Current.pixie.Health -= RandomMath.RandomBetween(1f, 3f);
                     }
                 }
             }
