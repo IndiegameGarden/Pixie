@@ -28,8 +28,10 @@ namespace Pixie1.Levels
             SCREEN_MOTION_SPEED = 8.0f;
             DEFAULT_SCALE = 15f;// 15f;
             PIXIE_STARTING_POS = new Vector2(42f, 155f); // in pixels        
+            PIXIE_STARTING_POS += new Vector2(200f, 4f);
             //PIXIE_STARTING_POS = new Vector2(73f, 10f); // in pixels        
             BG_STARTING_POS = new Vector2(30f, 155f); // in pixels; bg=background            
+            BG_STARTING_POS += new Vector2(200f, 4f);
             //PIXIE_STARTING_POS = new Vector2(188f, 0f); // close to win pos
             //BG_STARTING_POS = new Vector2(188f, 0f); 
         }
@@ -92,6 +94,8 @@ namespace Pixie1.Levels
             Vector2 p;
             Toy t;
 
+            Block b = new Block(); p = new Vector2(PIXIE_STARTING_POS.X+15f, PIXIE_STARTING_POS.Y); b.PositionAndTarget = p; Add(b);
+
             t = new ZoomOutToy(); p = new Vector2(70f,48f); t.PositionAndTarget = p; Add(t);
             t = new ZoomOutToy(); p = new Vector2(93f, 9f); t.PositionAndTarget = p; Add(t);            
             t = new ZoomOutToy(); p = new Vector2(17f, 13f); t.PositionAndTarget = p; Add(t);
@@ -117,7 +121,7 @@ namespace Pixie1.Levels
 
             SubtitleText t = new SubtitleText();
             t.AddText("COMPANIONS!", 4f);
-            t.AddText("Go with me! Together, we will rescue\nthe Princess!", 4f);            
+            t.AddText("Follow me! Together, we will rescue\nthe Princess!", 4f);            
             t.AddText("Squash those Red Guards!", 4f);
             Subtitles.Show(0, t);
             t.StartTime = 1f;
@@ -125,15 +129,17 @@ namespace Pixie1.Levels
 
             t = new SubtitleText();
             t.AddText("Quest for the Pixel Princess XIV", 5f);
-            t.AddText("You, Golden Galad, must rescue the Pink Princess once more...", 5f);
+            t.AddText("You, Galad the Golden, must rescue the Pink Princess once more...", 5f);
             t.AddText("...from the clutches of the evil Red Guard.", 5f);
             t.AddText("The Fourteen Cobalt Companions have come to your aid!", 5f);
-            t.AddText("A peasant told you that he saw the princess being taken into the Keep.", 5f);
+            t.AddText("The princess was taken into Red's Keep.", 5f);
             t.AddText("Get her, valiant knight!", 5f);
             t.AddText("", 3f);
             t.AddText("Arrows / WASD to move. SPACE to let your Companions attack.", 5f);
             t.AddText("Created by Indiegame Garden", 4f);
-            t.AddText("FMOD Audio engine (c) Firelight Technologies 2004-2013", 4f);            
+            t.AddText("FMOD Audio engine (c) Firelight Technologies 2004-2013", 4f);
+            t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 4f);
+            t.AddText("Music by you-may-know-who", 4f);
             
             Parent.Add(t);
             t.ScaleVector = new Vector2(1f, 1f);

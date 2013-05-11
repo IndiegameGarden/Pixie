@@ -127,10 +127,11 @@ namespace Pixie1
         {
             SubtitleText t = new SubtitleText();
             t.AddText("BADLY WOUNDED, YOU DIE.", 7f);
-            t.AddText("Gawyn the Golden is no more.", 7f);
+            t.AddText("Galad the Golden is no more.", 7f);
             t.AddText("The princess remains captive\nfor all her life.", 7f);
             Subtitles.Show(9,  t);
-            keyControl.Delete = true;
+            pixie.PositionAndTarget = new Vector2(-200f,240f);
+            isBackgroundScrollingOn = false;
         }
 
         /// <summary>
