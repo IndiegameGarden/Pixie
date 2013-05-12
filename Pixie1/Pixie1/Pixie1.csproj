@@ -129,6 +129,7 @@
     <Compile Include="Behaviors\ChaseBehavior.cs" />
     <Compile Include="Behaviors\ColorCycleBehavior.cs" />
     <Compile Include="Behaviors\SubsumptionBehavior.cs" />
+    <Compile Include="LevelItemLoader.cs" />
     <Compile Include="Levels\QuestLevel.cs" />
     <Compile Include="GameMusic.cs" />
     <Compile Include="Level.cs" />

@@ -17,6 +17,8 @@ namespace Pixie1.Levels
     {
         Vector2 WINNING_POSITION = new Vector2(73f, 7f);
         Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
+        Color ITEM_BLOCK_COLOR = new Color(179, 102, 27); // 179,102,27 brown: block
+
         float timeInWinningPos = 0f;
         bool hasWon = false;
         int numberOfZoomOuts = 0;
@@ -47,6 +49,10 @@ namespace Pixie1.Levels
             Add(Background);
             Background.Target = PIXIE_STARTING_POS;
             Background.Position = BG_STARTING_POS;
+
+            // bitmap for things/items to load
+            ItemsMap = new LevelItemLoader("Level1Items.png");            
+            ItemsMap.AddItems(this, ITEM_BLOCK_COLOR, typeof(Block));
         }
 
         protected override void InitBadPixels()

@@ -51,7 +51,7 @@ namespace Pixie1.Actors
             // chase hero
             Chasing = new ChaseBehavior(chaseTarget);
             Chasing.MoveSpeed = RandomMath.RandomBetween(0.47f, 0.75f);
-            Chasing.ChaseRange = 10f; // RandomMath.RandomBetween(12f, 40f);
+            Chasing.ChaseRange = 15f; // RandomMath.RandomBetween(12f, 40f);
             sub.Add(Chasing);
 
             Turning = new AlwaysTurnRightBehavior(); // patrolling

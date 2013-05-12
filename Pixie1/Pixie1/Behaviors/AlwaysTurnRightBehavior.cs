@@ -41,9 +41,9 @@ namespace Pixie1.Behaviors
 
             Vector2 rightHandDirection = RotateVector2(CurrentDirection, MathHelper.PiOver2);
             Vector2 leftHandDirection = RotateVector2(CurrentDirection, -MathHelper.PiOver2);
-            bool isRightHandFree = !ParentThing.CollidesWithBackground(rightHandDirection);
-            bool isLeftHandFree = !ParentThing.CollidesWithBackground(leftHandDirection);
-            bool isFrontFree = !ParentThing.CollidesWithBackground(CurrentDirection);
+            bool isRightHandFree = !ParentThing.CollidesWithSomething(rightHandDirection);
+            bool isLeftHandFree = !ParentThing.CollidesWithSomething(leftHandDirection);
+            bool isFrontFree = !ParentThing.CollidesWithSomething(CurrentDirection);
 
             // change direction to righthand if that's free
             if (didSeeWall && isRightHandFree)

@@ -21,5 +21,8 @@ namespace Pixie1.Actors
             DrawInfo.DrawColor = Color.Brown;
         }
 
+        public static Block Create() {
+            return new Block();
+        }
     }
 }

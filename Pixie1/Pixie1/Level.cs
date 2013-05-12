@@ -63,6 +63,11 @@ namespace Pixie1
         public LevelBackground Background;
 
         /// <summary>
+        /// load items/toys/things to a level using a bitmap
+        /// </summary>
+        public LevelItemLoader ItemsMap;
+
+        /// <summary>
         /// our heroine Pixie
         /// </summary>
         public Pixie pixie;
