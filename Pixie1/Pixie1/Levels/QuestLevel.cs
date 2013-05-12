@@ -11,7 +11,7 @@ using Pixie1.Toys;
 namespace Pixie1.Levels
 {
     /// <summary>
-    /// a level featuring a big maze
+    /// a level featuring a castle
     /// </summary>
     public class QuestLevel : Level
     {

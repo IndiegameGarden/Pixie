@@ -121,7 +121,6 @@
     <Compile Include="Behaviors\CombatBehavior.cs" />
     <Compile Include="Behaviors\PushBehavior.cs" />
     <Compile Include="GameSound.cs" />
-    <Compile Include="Levels\AmazingLevel.cs" />
     <Compile Include="Actors\RedGuard.cs" />
     <Compile Include="Behaviors\AlwaysTurnRightBehavior.cs" />
     <Compile Include="Behaviors\RandomWanderBehavior.cs" />
@@ -131,14 +130,11 @@
     <Compile Include="Behaviors\ColorCycleBehavior.cs" />
     <Compile Include="Behaviors\SubsumptionBehavior.cs" />
     <Compile Include="Levels\QuestLevel.cs" />
-    <Compile Include="RotatingBackground.cs" />
-    <Compile Include="FinalScreen.cs" />
     <Compile Include="GameMusic.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="PixieLogo.cs" />
     <Compile Include="SubtitleManager.cs" />
     <Compile Include="SubtitleText.cs" />
-    <Compile Include="TitleScreen.cs" />
     <Compile Include="Toy.cs" />
     <Compile Include="ThingControl.cs" />
     <Compile Include="PixieKeyControl.cs" />
@@ -156,7 +152,6 @@
     <Compile Include="Toys\ShowMessageToy.cs" />
     <Compile Include="Toys\SpeedModifyToy.cs" />
     <Compile Include="Toys\ZoomOutToy.cs" />
-    <Compile Include="Levels\TrainwrecksLevel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
