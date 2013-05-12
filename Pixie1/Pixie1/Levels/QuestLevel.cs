@@ -29,11 +29,11 @@ namespace Pixie1.Levels
             SCREEN_MOTION_SPEED = 8.0f;
             DEFAULT_SCALE = 15f;// 15f;
             PIXIE_STARTING_POS = new Vector2(42f, 155f); // in pixels        
-            //PIXIE_STARTING_POS = PRINCESS_POSIITON + new Vector2(-10f,-10f); // debug
+            PIXIE_STARTING_POS = PRINCESS_POSITION + new Vector2(-10f,-10f); // debug
             //PIXIE_STARTING_POS += new Vector2(200f, 4f); // debug
             //PIXIE_STARTING_POS = new Vector2(73f, 10f); // debug
             BG_STARTING_POS = new Vector2(30f, 155f); // in pixels; bg=background            
-            //BG_STARTING_POS = PRINCESS_POSIITON; // debug
+            BG_STARTING_POS = PRINCESS_POSITION; // debug
             //BG_STARTING_POS += new Vector2(200f, 4f); // debug
             //PIXIE_STARTING_POS = new Vector2(188f, 0f); // debug, close to win pos
             //BG_STARTING_POS = new Vector2(188f, 0f); // debug
@@ -59,6 +59,9 @@ namespace Pixie1.Levels
         protected override void InitBadPixels()
         {
             base.InitBadPixels();
+            
+            // boss
+            Add(new Boss());
 
             for (int i = 0; i < 249; i++)
             {
