@@ -30,6 +30,10 @@ namespace Pixie1
         public Vector2 PIXIE_STARTING_POS = Vector2.Zero; // in pixels        
         public Vector2 BG_STARTING_POS = Vector2.Zero;    // in pixels; bg=background
 
+        // specific crap FIXME
+        public bool hasFoundPrincess = false;
+        public bool hasWon = false;
+
         /// <summary>
         /// scrolling screen trigger boundaries (in TTengine coordinates)
         /// </summary>
@@ -137,6 +141,35 @@ namespace Pixie1
             Subtitles.Show(9,  t);
             pixie.PositionAndTarget = new Vector2(-200f,240f);
             isBackgroundScrollingOn = false;
+        }
+
+        public void WinLevel()
+        {
+            if (!hasWon)
+            {
+                SubtitleText t = new SubtitleText();
+                t.AddText("YOU WIN!", 5f);
+                t.AddText("The princess\nis rescued.", 4f);
+                t.AddText("", 2f);
+                t.AddText("** THE END **", 13f);
+                float playTime = (float)Math.Round(SimTime);
+                t.AddText("(Rescue time: " + playTime + " heartbeats.)", 15f);
+                Subtitles.Show(6, t);
+                hasWon = true;
+            }
+        }
+
+        public void FoundPrincess()
+        {
+            if (!hasFoundPrincess)
+            {
+                hasFoundPrincess = true;
+                SubtitleText t = new SubtitleText();
+                t.AddText("Princess! Here you are.", 4f);
+                t.AddText("You look more fair than in any tale.", 4f);
+                t.AddText("Follow me, out of this\ncursed place.", 7f);
+                Subtitles.Show(8, t);
+            }
         }
 
         /// <summary>

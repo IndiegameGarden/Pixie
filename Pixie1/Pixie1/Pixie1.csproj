@@ -116,6 +116,7 @@
     <Compile Include="Actors\BombMissile.cs" />
     <Compile Include="Actors\Companion.cs" />
     <Compile Include="Actors\Block.cs" />
+    <Compile Include="Actors\Servant.cs" />
     <Compile Include="Actors\Princess.cs" />
     <Compile Include="Behaviors\AttackBehavior.cs" />
     <Compile Include="Behaviors\CombatBehavior.cs" />

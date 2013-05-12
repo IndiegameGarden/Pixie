@@ -15,12 +15,11 @@ namespace Pixie1.Levels
     /// </summary>
     public class QuestLevel : Level
     {
-        Vector2 WINNING_POSITION = new Vector2(73f, 7f);
+        Vector2 PRINCESS_POSITION = new Vector2(557f, 281f);
+
         Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
         Color ITEM_BLOCK_COLOR = new Color(179, 102, 27); // 179,102,27 brown: block
 
-        float timeInWinningPos = 0f;
-        bool hasWon = false;
         int numberOfZoomOuts = 0;
 
         public QuestLevel()
@@ -30,12 +29,14 @@ namespace Pixie1.Levels
             SCREEN_MOTION_SPEED = 8.0f;
             DEFAULT_SCALE = 15f;// 15f;
             PIXIE_STARTING_POS = new Vector2(42f, 155f); // in pixels        
-            PIXIE_STARTING_POS += new Vector2(200f, 4f);
-            //PIXIE_STARTING_POS = new Vector2(73f, 10f); // in pixels        
+            //PIXIE_STARTING_POS = PRINCESS_POSIITON + new Vector2(-10f,-10f); // debug
+            //PIXIE_STARTING_POS += new Vector2(200f, 4f); // debug
+            //PIXIE_STARTING_POS = new Vector2(73f, 10f); // debug
             BG_STARTING_POS = new Vector2(30f, 155f); // in pixels; bg=background            
-            BG_STARTING_POS += new Vector2(200f, 4f);
-            //PIXIE_STARTING_POS = new Vector2(188f, 0f); // close to win pos
-            //BG_STARTING_POS = new Vector2(188f, 0f); 
+            //BG_STARTING_POS = PRINCESS_POSIITON; // debug
+            //BG_STARTING_POS += new Vector2(200f, 4f); // debug
+            //PIXIE_STARTING_POS = new Vector2(188f, 0f); // debug, close to win pos
+            //BG_STARTING_POS = new Vector2(188f, 0f); // debug
         }
 
         protected override void InitLevel()
@@ -59,13 +60,21 @@ namespace Pixie1.Levels
         {
             base.InitBadPixels();
 
-            for (int i = 0; i < 299; i++)
+            for (int i = 0; i < 249; i++)
             {
                 RedGuard bp = RedGuard.Create(); // Cloaky();
                 bp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(123f,720f), RandomMath.RandomBetween(9f,290f) );
                 //bp.TargetSpeed = 18.0f; // TODO
                 Add(bp);
                 FindWalkableGround(bp);
+            }
+
+            for (int i = 0; i < 40; i++)
+            {
+                Servant s = Servant.Create();
+                s.PositionAndTarget = new Vector2(RandomMath.RandomBetween(140f, 720f), RandomMath.RandomBetween(9f, 290f));
+                Add(s);
+                FindWalkableGround(s);
             }
 
             for (int i = 0; i < 14; i++) // XIV companions!
@@ -125,6 +134,12 @@ namespace Pixie1.Levels
             Add(Music);
             Add(Sound);
 
+            // princess
+            Princess p = new Princess();
+            p.PositionAndTarget = PRINCESS_POSITION;
+            //p.PositionAndTarget = new Vector2(90f,158f); // debug
+            Add(p);
+
             SubtitleText t = new SubtitleText();
             t.AddText("COMPANIONS!", 4f);
             t.AddText("Follow me! Together, we will rescue\nthe Princess!", 4f);            
@@ -168,39 +183,11 @@ namespace Pixie1.Levels
             return true;
         }
 
-        /// <summary>
-        /// called when player wins game
-        /// </summary>
-        protected void PixieHasWon()
-        {
-            SubtitleText t = new SubtitleText();
-            t.AddText("YOU WIN!", 5f);
-            t.AddText("The princess\nis rescued.", 4f);
-            t.AddText("", 2f);
-            t.AddText("But wait a minute...", 3f);
-            t.AddText("How do we get out??", 3f);
-            t.AddText("*THE END*", 3f);
-            Subtitles.Show(6, t);
-            hasWon = true;            
-        }
-
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
             // adapt scroll speed to how fast pixie goes
             Background.TargetSpeed = SCREEN_MOTION_SPEED * pixie.Velocity;
-
-            if (pixie.Target.Equals(WINNING_POSITION))
-            {
-                timeInWinningPos += p.Dt;
-
-                if (timeInWinningPos > 0.2f && !hasWon)
-                {
-                    PixieHasWon();
-                }
-            }else{
-                timeInWinningPos = 0f;
-            }
         }
     }
 }
