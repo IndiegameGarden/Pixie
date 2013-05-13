@@ -12,7 +12,7 @@ namespace Pixie1.Actors
      */
     public class Companion: Thing
     {
-        public ChaseBehavior  Chasing;
+        public ChaseBehavior  ChasingRedGuard, ChasingHero;
         public CombatBehavior Combat;     
         public RandomWanderBehavior Wandering;
         public AttackBehavior Attacking;
@@ -37,16 +37,16 @@ namespace Pixie1.Actors
             Combat = new CombatBehavior(typeof(RedGuard));
             sub.Add(Combat);
 
-            Chasing = new ChaseBehavior(Level.Current.pixie);
-            Chasing.ChaseRange = 370f;
-            Chasing.SatisfiedRange = 6f;
-            Chasing.MoveSpeed = RandomMath.RandomBetween(1.2f, 1.5f);
-            sub.Add(Chasing);
+            ChasingHero = new ChaseBehavior(Level.Current.pixie);
+            ChasingHero.ChaseRange = 370f;
+            ChasingHero.SatisfiedRange = 6f;
+            ChasingHero.MoveSpeed = RandomMath.RandomBetween(1.2f, 1.5f);
+            sub.Add(ChasingHero);
 
-            Chasing = new ChaseBehavior(typeof(RedGuard));
-            Chasing.ChaseRange = 20f;
-            Chasing.MoveSpeed = RandomMath.RandomBetween(1.1f, 1.5f);
-            sub.Add(Chasing);
+            ChasingRedGuard = new ChaseBehavior(typeof(RedGuard));
+            ChasingRedGuard.ChaseRange = 20f;
+            ChasingRedGuard.MoveSpeed = RandomMath.RandomBetween(1.1f, 1.5f);
+            sub.Add(ChasingRedGuard);
 
             Attacking = new AttackBehavior(Level.Current.pixie);
             Attacking.AttackDuration = RandomMath.RandomBetween(1.5f, 2.8f);

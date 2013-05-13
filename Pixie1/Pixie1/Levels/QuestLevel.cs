@@ -29,7 +29,7 @@ namespace Pixie1.Levels
             SCREEN_MOTION_SPEED = 8.0f;
             DEFAULT_SCALE = 15f;// 15f;
             PIXIE_STARTING_POS = new Vector2(42f, 155f); // in pixels        
-            PIXIE_STARTING_POS = new Vector2(242f, 155f); // debug
+            //PIXIE_STARTING_POS = new Vector2(242f, 155f); // debug
             //PIXIE_STARTING_POS = PRINCESS_POSITION + new Vector2(-10f,-10f); // debug
             //PIXIE_STARTING_POS += new Vector2(200f, 4f); // debug
             //PIXIE_STARTING_POS = new Vector2(73f, 10f); // debug

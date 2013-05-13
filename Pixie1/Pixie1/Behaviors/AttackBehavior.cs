@@ -1,6 +1,7 @@
 ﻿using System;
 using TTengine.Core;
 using Microsoft.Xna.Framework;
+using Pixie1.Actors;
 
 namespace Pixie1.Behaviors
 {
@@ -38,13 +39,20 @@ namespace Pixie1.Behaviors
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
-            if (IsAttacking) {
+            if (IsAttacking)
+            {
+                (ParentThing as Companion).ChasingHero.SatisfiedRange = 11f; // more range allowed during attack
                 CurrentAttackDuration += p.Dt;
-                if (CurrentAttackDuration > AttackDuration) {
+                if (CurrentAttackDuration > AttackDuration)
+                {
                     IsAttacking = false;
                     CurrentAttackDuration = 0f;
                 }
                 AllowNextMove();
+            }
+            else
+            {
+                (ParentThing as Companion).ChasingHero.SatisfiedRange = 6f; // more range allowed during attack
             }
         }
 
@@ -56,7 +64,7 @@ namespace Pixie1.Behaviors
             if (IsAttacking && !ParentThing.CollidesWithBackground(Leader.FacingDirection))
             {
                 TargetMove = Leader.FacingDirection;
-                IsTargetMoveDefined = true;
+                IsTargetMoveDefined = true;                
             }
         }
 
