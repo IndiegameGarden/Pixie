@@ -15,13 +15,13 @@ namespace Pixie1.Toys
 
         public override string ToyName()
         {
-            return "PIXEL PAINT\n(Covers 16x16)";
+            return "Spell of Illusions";
         }
 
         public override void StartUsing()
         {
             base.StartUsing();
-            ShowToyMsg("Pixeeels! " + UsesLeftMsg(), 2f);
+            //ShowToyMsg("Pixeeels! " + UsesLeftMsg(), 2f);
         }
 
         public override void StopUsing()
@@ -45,7 +45,7 @@ namespace Pixie1.Toys
                 Vector2 usePos = ParentThing.Position;
                 Color bgCol = bg.SamplePixel(usePos);
 
-                if (bgCol.Equals(bg.ForegroundColor))
+                if (true) //bgCol.Equals(bg.ForegroundColor))
                 {
                     Color paintColor = new Color(RandomMath.RandomUnit(), RandomMath.RandomUnit(), RandomMath.RandomUnit());
                     bg.SetPixel(usePos, paintColor);

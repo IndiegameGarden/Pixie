@@ -25,7 +25,7 @@ namespace Pixie1.Toys
 
         public override string ToyName()
         {
-            return "Potion of Winged Feet";
+            return "Winged Sandals";
         }
 
         public override void StartUsing()

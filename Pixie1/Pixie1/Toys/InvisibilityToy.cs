@@ -19,7 +19,7 @@ namespace Pixie1.Toys
 
         public override string ToyName()
         {
-            return "ALPHA MASK";
+            return "Clock of Transparaence";
         }
 
         public override void StartUsing()

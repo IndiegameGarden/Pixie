@@ -21,7 +21,7 @@ namespace Pixie1.Toys
 
         public override string ToyName()
         {
-            return "The Potion of Vision";
+            return "Potion of Grand Vision";
         }
 
         public override void StartUsing()

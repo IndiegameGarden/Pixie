@@ -17,7 +17,7 @@ namespace Pixie1.Actors
         public RandomWanderBehavior Wandering;
 
         protected string[] attackString = new string[] { "Take this, golden villain!", "We hurt him!", "He bleeds!", "Our swords struck true!",
-            "He bleeds!", "To the grave, golden traitor!", "Die, golden scum!" , "HALT! Thou shalt not pass.", "He stumbles!"};
+            "He bleeds!", "To the grave, golden traitor!", "Die, golden scum!" , "He stumbles!"};
 
         public static RedGuard Create()
         {

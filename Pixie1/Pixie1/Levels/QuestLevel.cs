@@ -112,22 +112,25 @@ namespace Pixie1.Levels
             Vector2 p;
             Toy t;
 
-            Block b = new Block(); p = new Vector2(PIXIE_STARTING_POS.X+15f, PIXIE_STARTING_POS.Y); b.PositionAndTarget = p; Add(b);
+            InitToy(new ZoomOutToy(), 80, 144);
+            InitToy(new ZoomOutToy(), 211,140);
+            InitToy(new ZoomOutToy(), 413,173);
+            InitToy(new PaintToy(), 309,143);
+            InitToy(new PaintToy(), 307, 274);
+            //InitToy(new PaintToy(), 33,154); // debug
+            //InitToy(new InvisibilityToy(), 37, 154); // debug
+            //InitToy(new SpeedModifyToy(2f), 41, 154); // debug
+            InitToy(new InvisibilityToy(), 463,296);
+            InitToy(new InvisibilityToy(), 173, 65);
+            InitToy(new SpeedModifyToy(2f), 172,230);
+            InitToy(new SpeedModifyToy(2f), 450, 291);
+            InitToy(new ZoomOutToy(), 560,57);
+        }
 
-            t = new ZoomOutToy(); p = new Vector2(70f,48f); t.PositionAndTarget = p; Add(t);
-            t = new ZoomOutToy(); p = new Vector2(93f, 9f); t.PositionAndTarget = p; Add(t);            
-            t = new ZoomOutToy(); p = new Vector2(17f, 13f); t.PositionAndTarget = p; Add(t);
-            t = new ZoomOutToy(); p = new Vector2(117f, 29f); t.PositionAndTarget = p; Add(t);
-            t = new ZoomOutToy(); p = new Vector2(73f, 86f); t.PositionAndTarget = p; Add(t);
-            t = new SpeedModifyToy(2f); p = new Vector2(61f, 9f); t.PositionAndTarget = p; Add(t);
-            t = new SpeedModifyToy(2f); p = new Vector2(109f, 65f); t.PositionAndTarget = p; Add(t);
-            t = new ZoomOutToy(); p = new Vector2(121f, 13f); t.PositionAndTarget = p; Add(t);
-            t = new SpeedModifyToy(2f); p = new Vector2(46f, 30f); t.PositionAndTarget = p; Add(t);            
-            t = new SpeedModifyToy(2f); p = new Vector2(13f, 93f); t.PositionAndTarget = p; Add(t);
-            t = new SpeedModifyToy(2f); p = new Vector2(121f, 94f); t.PositionAndTarget = p; Add(t);
-            t = new ZoomOutToy(); p = new Vector2(29f, 113f); t.PositionAndTarget = p; Add(t);
-            t = new SpeedModifyToy(2f); p = new Vector2(53f, 117f); t.PositionAndTarget = p; Add(t);
-            t = new ZoomOutToy(); p = new Vector2(105f, 98f); t.PositionAndTarget = p; Add(t);
+        protected void InitToy(Toy t, int x, int y)
+        {
+            t.PositionAndTarget = new Vector2(x,y);
+            Add(t);
         }
 
         protected override void InitLevelSpecific()
@@ -146,7 +149,7 @@ namespace Pixie1.Levels
             SubtitleText t = new SubtitleText();
             t.AddText("COMPANIONS!", 4f);
             t.AddText("Follow me! Together, we will rescue\nthe Princess!", 4f);            
-            t.AddText("Squash those Red Guards!", 4f);
+            t.AddText("Squash those Red Guards...!", 4f);
             Subtitles.Show(0, t);
             t.StartTime = 1f;
             //t.DrawInfo.DrawColor = Color.LightCoral;
@@ -157,13 +160,15 @@ namespace Pixie1.Levels
             t.AddText("...from the clutches of the evil Red Guard.", 5f);
             t.AddText("The Fourteen Cobalt Companions have come to your aid!", 5f);
             t.AddText("The princess was taken into Red's Keep.", 5f);
-            t.AddText("Get her, valiant knight!", 5f);
-            t.AddText("", 3f);
-            t.AddText("Arrows / WASD to move. SPACE to let your Companions attack.", 5f);
-            t.AddText("Created by Indiegame Garden", 4f);
-            t.AddText("FMOD Audio engine (c) Firelight Technologies 2004-2013", 4f);
+            t.AddText("Get her out, valiant knight!", 5f);
+            t.AddText("", 1f);
+            t.AddText("Arrows / WASD = move, SPACE = Companion's attack, X = Use Spell", 5f);
+            t.AddText("", 1f);
+            t.AddText("Coding & art by Indiegame Garden (IndiegameGarden.com)", 4f);
             t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 4f);
-            t.AddText("Music by you-may-know-who", 4f);
+            t.AddText("Music by you-may-know-who (guess!)", 4f);
+            t.AddText("Sprite by Charles Gabriel (opengameart.org)", 4f);
+            t.AddText("FMOD Audio engine (c) Firelight Technologies 2004-2013 (fmod.org)", 4f);
             
             Parent.Add(t);
             t.ScaleVector = new Vector2(1f, 1f);

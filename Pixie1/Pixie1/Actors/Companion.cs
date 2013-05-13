@@ -38,8 +38,8 @@ namespace Pixie1.Actors
             sub.Add(Combat);
 
             Chasing = new ChaseBehavior(Level.Current.pixie);
-            Chasing.ChaseRange = 70f;
-            Chasing.SatisfiedRange = 5f;
+            Chasing.ChaseRange = 370f;
+            Chasing.SatisfiedRange = 6f;
             Chasing.MoveSpeed = RandomMath.RandomBetween(1.2f, 1.5f);
             sub.Add(Chasing);
 
