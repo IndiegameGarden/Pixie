@@ -7,15 +7,15 @@ namespace Pixie1.Toys
     {
         public PaintToy()
         {
-            UsesLeft = 256;
+            UsesLeft = 22256;
             UsedUponPickup = false;
-            UseTimeMax = 8f;
+            UseTimeMax = 120f;
             SetColors(1.9f, Color.LightSkyBlue, Color.MediumVioletRed);
         }
 
         public override string ToyName()
         {
-            return "Spell of Illusions";
+            return "Spell of Illusions (X to cast!)";
         }
 
         public override void StartUsing()

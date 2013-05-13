@@ -20,7 +20,7 @@ namespace Pixie1.Levels
         Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
         Color ITEM_BLOCK_COLOR = new Color(179, 102, 27); // 179,102,27 brown: block
 
-        int numberOfZoomOuts = 0;
+        int numberOfZoomOuts = 0;        
 
         public QuestLevel()
             : base()
@@ -29,11 +29,12 @@ namespace Pixie1.Levels
             SCREEN_MOTION_SPEED = 8.0f;
             DEFAULT_SCALE = 15f;// 15f;
             PIXIE_STARTING_POS = new Vector2(42f, 155f); // in pixels        
+            PIXIE_STARTING_POS = new Vector2(242f, 155f); // debug
             //PIXIE_STARTING_POS = PRINCESS_POSITION + new Vector2(-10f,-10f); // debug
             //PIXIE_STARTING_POS += new Vector2(200f, 4f); // debug
             //PIXIE_STARTING_POS = new Vector2(73f, 10f); // debug
-            BG_STARTING_POS = new Vector2(30f, 155f); // in pixels; bg=background            
-            //BG_STARTING_POS = PRINCESS_POSITION; // debug
+            //BG_STARTING_POS = new Vector2(30f, 155f); // in pixels; bg=background            
+            BG_STARTING_POS = PIXIE_STARTING_POS + new Vector2(-12f,0f); 
             //BG_STARTING_POS += new Vector2(200f, 4f); // debug
             //PIXIE_STARTING_POS = new Vector2(188f, 0f); // debug, close to win pos
             //BG_STARTING_POS = new Vector2(188f, 0f); // debug
@@ -61,7 +62,8 @@ namespace Pixie1.Levels
             base.InitBadPixels();
             
             // boss
-            Add(new Boss());
+            boss = new Boss();
+            Add(boss);
 
             for (int i = 0; i < 249; i++)
             {
@@ -109,8 +111,6 @@ namespace Pixie1.Levels
         protected override void InitToys()
         {
             base.InitToys();
-            Vector2 p;
-            Toy t;
 
             InitToy(new ZoomOutToy(), 80, 144);
             InitToy(new ZoomOutToy(), 211,140);

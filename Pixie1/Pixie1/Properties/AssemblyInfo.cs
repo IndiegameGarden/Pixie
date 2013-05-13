@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Quest for the Pixel Princess XIV")]
-[assembly: AssemblyProduct("You, prince, must rescue the pixel princess.")]
-[assembly: AssemblyDescription("You, prince, must rescue the pixel princess.")]
+[assembly: AssemblyProduct("You, Golden Knight, must rescue the Princess.")]
+[assembly: AssemblyDescription("You, Golden Knight, must rescue the Princess.")]
 [assembly: AssemblyCompany("IndiegameGarden.com")]
 [assembly: AssemblyCopyright("Copyright © IndiegameGarden.com 2013")]
 [assembly: AssemblyTrademark("")]

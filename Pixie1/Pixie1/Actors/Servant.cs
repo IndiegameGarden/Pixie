@@ -22,6 +22,7 @@ namespace Pixie1.Actors
             : base("pixie")
         {
             IsCollisionFree = false;
+            Pushing.Force = 0f; // servants cant push others.
             DrawInfo.DrawColor = Color.Yellow;
 
             // avoid other things
@@ -34,6 +35,7 @@ namespace Pixie1.Actors
             Avoiding = new ChaseBehavior(typeof(Pixie));
             Avoiding.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
             Avoiding.ChaseRange = 11f; // RandomMath.RandomBetween(12f, 40f);
+            //Avoiding.Avoidance = true;
             Add(Avoiding);
 
             Wandering = new RandomWanderBehavior(9.7f, 14.3f);

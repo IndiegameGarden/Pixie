@@ -28,6 +28,11 @@ namespace Pixie1.Behaviors
         /// </summary>
         public float SatisfiedRange = 0f;
 
+        /// <summary>
+        /// if true, inverts the Chase into an Avoid behavior
+        /// </summary>
+        public bool Avoidance = false;
+
         public ChaseBehavior(Thing chaseTarget)
         {
             this.ChaseTarget = chaseTarget;
@@ -45,6 +50,8 @@ namespace Pixie1.Behaviors
 
             // compute direction towards chase-target
             dif = ChaseTarget.Position - ParentThing.Target;
+            if (Avoidance)
+                dif = -dif;
 
             // choose one direction semi-randomly, if diagonals would be required
             if (dif.X != 0f && dif.Y != 0f)

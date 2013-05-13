@@ -20,10 +20,11 @@ namespace Pixie1
             //track = TTengineMaster.ActiveGame.Content.Load<Song>("A01");
             soundScript = new SoundEvent("GameMusic");
             SampleSoundEvent ev1 = new SampleSoundEvent("ductia.ogg"); 
-            soundScript.AddEvent(0, ev1);
-            soundScript.AddEvent(300, ev1);
-            soundScript.AddEvent(600, ev1);
-            soundScript.AddEvent(900, ev1);
+            soundScript.AddEvent(2, ev1);
+            soundScript.AddEvent(166, ev1);
+            soundScript.AddEvent(332, ev1);
+            soundScript.AddEvent(498, ev1);
+            soundScript.AddEvent(664, ev1);
         }
 
         public float Volume

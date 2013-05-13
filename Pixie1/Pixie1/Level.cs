@@ -75,6 +75,7 @@ namespace Pixie1
         /// our heroine Pixie
         /// </summary>
         public Pixie pixie;
+        public Boss boss;
 
         public SubtitleManager Subtitles;
 

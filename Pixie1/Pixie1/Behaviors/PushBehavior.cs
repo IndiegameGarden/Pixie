@@ -13,7 +13,7 @@ namespace Pixie1.Behaviors
     public class PushBehavior: ThingControl
     {
         /// <summary>
-        /// relative force of pushing (strength of unit related)
+        /// relative force of pushing (strength of unit related). 0f is no pushing force at all but can be pushed.
         /// </summary>
         public float Force = 1.0f;
 

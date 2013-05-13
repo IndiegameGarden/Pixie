@@ -10,6 +10,7 @@ using TTengine.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pixie1.Behaviors;
+using Pixie1.Actors;
 
 namespace Pixie1
 {
@@ -116,8 +117,8 @@ namespace Pixie1
         protected Rectangle BoundingRectangle
         {
             get {
-                boundingRectangle.X = PositionX;
-                boundingRectangle.Y = PositionY;
+                boundingRectangle.X = PositionX; 
+                boundingRectangle.Y = PositionY; 
                 return boundingRectangle; 
             }
         }
@@ -175,7 +176,8 @@ namespace Pixie1
             boundingRectangle.Height = Texture.Height;
             textureData = new Color[BoundingRectangle.Width * BoundingRectangle.Height];
             Texture.GetData(textureData);
-            DrawInfo.Center = Vector2.Zero;       
+            DrawInfo.Center = Vector2.Zero;
+
 			Pushing = new PushBehavior();
 			Add(Pushing);     
         }
@@ -234,9 +236,9 @@ namespace Pixie1
                 // check if passable...
                 List<Thing> cols = DetectCollisions(TargetMove);
 
-                if (!IsCollisionFree && Pushing != null && !IsCollisionFree && cols.Count > 0)
+                if (!IsCollisionFree && Pushing != null && !IsCollisionFree && cols.Count > 0 && Pushing.Force > 0f)
                 {
-                    // no - so try to push neighbouring things
+                    // no - so try to push neighbouring things away
                     foreach (Thing t in cols)
                     {
                         if (t.Pushing != null)

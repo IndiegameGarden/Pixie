@@ -25,6 +25,13 @@ namespace Pixie1.Actors
             //SubsumptionBehavior sub = new SubsumptionBehavior();
             //Add(sub);
 
+            /*
+            ChaseBehavior avoidBoss = new ChaseBehavior(Level.Current.boss);
+            avoidBoss.ChaseRange = 7f;
+            avoidBoss.Avoidance = true;
+            Add(avoidBoss);
+             */
+
             Pushing.Force = 10f; // force higher than companions.
 
         }
