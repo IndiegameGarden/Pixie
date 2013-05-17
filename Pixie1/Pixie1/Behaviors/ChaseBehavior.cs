@@ -46,7 +46,30 @@ namespace Pixie1.Behaviors
         protected override void OnNextMove()
         {
  	        base.OnNextMove();
-            Vector2 dif = Vector2.Zero;
+
+            // check for dead chase targets
+            if (ChaseTarget != null && ChaseTarget.Delete)
+                ChaseTarget = null;
+
+            // recheck for nearest chase target
+            if (ChaseTargetType != null)
+            {
+                ChaseTarget = ParentThing.FindNearest(ChaseTargetType);
+            }
+
+            Vector2 dif;
+            if (ChaseTarget != null && ChaseTarget.Visible)
+            {
+                dif = ChaseTarget.Position - ParentThing.Target;
+                float dist = dif.Length();
+                if (dist > 0f && dist <= ChaseRange && dist > SatisfiedRange)
+                {
+                    // indicate we're chasing
+                    IsTargetMoveDefined = true;
+                }
+            }
+            
+            dif = Vector2.Zero;
 
             // compute direction towards chase-target
             dif = ChaseTarget.Position - ParentThing.Target;
@@ -68,31 +91,5 @@ namespace Pixie1.Behaviors
             TargetMove = dif;
         }
 
-        protected override void OnUpdate(ref UpdateParams p)
-        {
-            base.OnUpdate(ref p);
-
-            // check for dead chase targets
-            if (ChaseTarget != null && ChaseTarget.Delete)
-                ChaseTarget = null;
-
-            // recheck for nearest chase target
-            if (ChaseTargetType != null)
-            {
-                ChaseTarget = ParentThing.FindNearest(ChaseTargetType);
-            }
-            
-            if (ChaseTarget != null && ChaseTarget.Visible)
-            {
-                Vector2 dif = ChaseTarget.Position - ParentThing.Target;
-                float dist = dif.Length();
-                if (dist > 0f && dist <= ChaseRange && dist > SatisfiedRange)
-                {
-                    // indicate we're chasing
-                    IsTargetMoveDefined = true;
-                    AllowNextMove();
-                }
-            }
-        }
     }
 }

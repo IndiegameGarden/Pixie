@@ -29,6 +29,11 @@ namespace Pixie1
         public bool IsTargetMoveDefined = false;
 
         /// <summary>
+        /// flag indicating whether a previously generated TargetMove is still active, or not (active until a next move calculation)
+        /// </summary>
+        public bool IsMoveActive = false;
+
+        /// <summary>
         /// Every update cycle the move produced by this control, if any, is written to TargetMove
         /// </summary>
         public Vector2 TargetMove = new Vector2();
@@ -39,7 +44,8 @@ namespace Pixie1
         /// </summary>
         public Vector2 LastTargetMove = new Vector2();
 
-        protected float wTime = RandomMath.RandomBetween(0f,0.2f); // TODO value would depend on MoveSpeed.
+        // timer that fires when next move is to be computed
+        protected float wTime = RandomMath.RandomBetween(0f,0.2f); 
 
         protected override void OnNewParent()
         {
@@ -53,28 +59,21 @@ namespace Pixie1
             IsTargetMoveDefined = false;
             TargetMove = Vector2.Zero;
 
-            wTime += p.Dt;
-            if (wTime >= 0.2f / MoveSpeed)
-            {
-                wTime = 0f;
-            }
-        }
+            wTime -= p.Dt;
 
-        /// <summary>
-        /// can be called internally by a ThingControl from OnUpdate() if the control-behavior
-        /// allows a next move to be taken.
-        /// </summary>
-        protected void AllowNextMove()
-        {
-            if (wTime == 0f)
+            if (wTime <= 0f )   // timer triggers
             {
+                // do my move                
                 OnNextMove();
+                wTime += 0.2f / MoveSpeed;
+
+                // if no targetmove defined, clear the 'lock'
+                IsMoveActive = IsTargetMoveDefined;
             }
         }
-
+        
         /// <summary>
-        /// called from OnUpdate() when it's time to execute a next move but only if
-        /// AllowNextMove() was called by the control-behavior from OnUpdate().
+        /// called from OnUpdate() when it's time to execute a next move 
         /// </summary>
         protected virtual void OnNextMove()
         {

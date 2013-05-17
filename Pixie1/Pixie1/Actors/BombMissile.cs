@@ -21,12 +21,6 @@ namespace Pixie1.Actors
             IsTargetMoveDefined = true;
         }
 
-        protected override void OnUpdate(ref UpdateParams p)
-        {
-            base.OnUpdate(ref p);
-            AllowNextMove();
-        }
-
     }
 
     /// <summary>

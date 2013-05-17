@@ -9,10 +9,11 @@ namespace Pixie1.Behaviors
      */
     public class SubsumptionBehavior: ThingControl
     {
-        protected override void OnUpdate(ref UpdateParams p)
+        protected override void OnUpdate(ref UpdateParams p) 
         {
             base.OnUpdate(ref p);
-            
+            IsMoveActive = false;
+
             foreach (Gamelet c in Children)
             {
                 if (c is ThingControl)
@@ -21,8 +22,16 @@ namespace Pixie1.Behaviors
                     if (childControl.IsTargetMoveDefined)
                     {
                         IsTargetMoveDefined = true;
+                        IsMoveActive = true;
                         TargetMove = childControl.TargetMove;
                         TargetMoveMultiplier = childControl.TargetMoveMultiplier;
+                        break;
+                    }
+                    // if a THingControl is still active (due to a previous TargetMove), then keep to the input
+                    // of that control, until the 'lock' is released from it.
+                    if (childControl.IsMoveActive)
+                    {
+                        IsMoveActive = true;
                         break;
                     }
                 }

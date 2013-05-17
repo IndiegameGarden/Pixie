@@ -17,24 +17,6 @@ namespace Pixie1.Behaviors
         // keep track of wall last seen
         protected bool didSeeWall = false;
 
-        protected override void OnUpdate(ref UpdateParams p)
-        {
-            base.OnUpdate(ref p);
-
-            Vector2 rightHandDirection = RotateVector2(CurrentDirection, MathHelper.PiOver2);
-            Vector2 leftHandDirection = RotateVector2(CurrentDirection, -MathHelper.PiOver2);
-            bool isRightHandFree = !ParentThing.CollidesWithBackground(rightHandDirection);
-            bool isLeftHandFree = !ParentThing.CollidesWithBackground(leftHandDirection);
-            bool isFrontFree = !ParentThing.CollidesWithBackground(CurrentDirection);
-
-            // keep this control active if near walls
-            if (didSeeWall || !isRightHandFree || !isLeftHandFree || !isFrontFree)
-            {
-                IsTargetMoveDefined = true;
-                AllowNextMove();
-            }
-        }
-
         protected override void OnNextMove() 
         {
             base.OnNextMove();

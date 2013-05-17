@@ -48,7 +48,6 @@ namespace Pixie1.Behaviors
                     IsAttacking = false;
                     CurrentAttackDuration = 0f;
                 }
-                AllowNextMove();
             }
             else
             {

@@ -72,8 +72,6 @@ namespace Pixie1.Behaviors
                 {                    
                     TargetMove = dif;
                     IsTargetMoveDefined = true;
-                    wTime = 0f; // FIXME hack to trigger instant-move
-                    AllowNextMove();
                 }
             }
 

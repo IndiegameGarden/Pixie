@@ -36,9 +36,6 @@ namespace Pixie1.Behaviors
             // time keeping
             timeSinceLastChange += p.Dt;
 
-            // keep this control always-active
-            IsTargetMoveDefined = true;
-            AllowNextMove();
         }
 
         protected override void OnNextMove()
@@ -62,6 +59,7 @@ namespace Pixie1.Behaviors
                 dir.Normalize();
             }
             TargetMove = dir;
+            IsTargetMoveDefined = true;
 
             // direction changing
             if (timeSinceLastChange >= dirChangeTime)

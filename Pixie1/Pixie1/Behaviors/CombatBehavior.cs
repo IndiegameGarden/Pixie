@@ -19,12 +19,6 @@ namespace Pixie1.Behaviors
             EnemyType = enemyType;
         }
 
-        protected override void OnUpdate(ref UpdateParams p)
-        {
-            base.OnUpdate(ref p);
-            AllowNextMove();
-        }
-
         protected override void OnNextMove() 
         {
             base.OnNextMove();
