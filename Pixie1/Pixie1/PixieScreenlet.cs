@@ -20,18 +20,22 @@ namespace Pixie1
 
         protected override void OnNewParent()
         {
-            base.OnNewParent();
+            base.OnNewParent();            
+#if DEBUG
             CpuLoadInfo = new DebugMessage();
             Add(CpuLoadInfo);
+#endif
         }
 
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
+#if DEBUG
             long tm = (PixieGame.Instance.TreeRoot as FixedTimestepPhysics).LastUpdateDurationMs;
             if (tm > maxTime)
                 maxTime = tm;
             CpuLoadInfo.Text = "CPU ms: " + maxTime;
+#endif
         }
     }
 }
