@@ -74,8 +74,8 @@ namespace Pixie1
         {
             //mainScreenlet.Add(new FrameRateCounter(1.0f, 0f)); // TODO
 
-            //level = new TrainwrecksLevel();
-            level = new AmazingLevel();
+            level = new TrainwrecksLevel();
+            //level = new AmazingLevel();
 
             mainScreenlet.Add(level);
 
