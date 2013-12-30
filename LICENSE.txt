@@ -1,5 +1,12 @@
-All software code and graphics, including pixels, 
-Copyright (c) 2012, TranceTrance.com and its domain owner
+(License for fmodex.dll and all files in FMOD folder:)
+FMOD Ex - Copyright (c), Firelight Technologies Pty, Ltd. 2004-2008.      
+Consult http://www.fmod.org/ for license conditions.
+
+---------------------------
+
+(License for other files where License is not indicated in source file header:)
+
+Copyright (c) 2010-2013, TranceTrance.com and its domain owner
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, 
@@ -21,17 +28,3 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
------------------------------------------------------------------------------
-
-Music tracks A01.ogg and B01.ogg from album "mini" by BERTIN,
-Creative Commons license BY-NC-SA applies to these files.
-See http://bertin.bandcamp.com/
-See http://creativecommons.org/licenses/by-nc-sa/3.0/
-
------------------------------------------------------------------------------
-
-Music track Nostalgika.ogg from album "Dream Journal 2" by Torley,
-Creative Commons license BY-NC-SA applies to this file.
-See http://music.torley.com/
-See http://creativecommons.org/licenses/by-nc-sa/3.0/
