@@ -39,26 +39,23 @@ namespace Game1
         /// <summary>
         /// level music
         /// </summary> 
-        public GameMusic Music;
+        //public GameMusic Music;
 
         /// <summary>
         /// background bitmap
         /// </summary>
-        public LevelBackground Background;
+        //public LevelBackground Background;
 
         /// <summary>
         /// our heroine Pixie
         /// </summary>
-        public Pixie pixie;
+        //public Pixie pixie;
 
-        public SubtitleManager Subtitles;
+        //public SubtitleManager Subtitles;
 
-        // class internal
-        float timeEscDown = 0f;        
-
-        public Level(): base()
+        public PixieLevel(): base()
         {
-            Subtitles = new SubtitleManager();
+            //Subtitles = new SubtitleManager();
         }
 
         /// <summary>
@@ -66,9 +63,9 @@ namespace Game1
         /// </summary>
         protected virtual void InitLevel()
         {
-            Motion.Scale = DEFAULT_SCALE;
-            Motion.ScaleTarget = DEFAULT_SCALE;
-            MySpriteBatch = new TTSpriteBatch(Screen.graphicsDevice, SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
+            //Motion.Scale = DEFAULT_SCALE;
+            //Motion.ScaleTarget = DEFAULT_SCALE;
+            //MySpriteBatch = new TTSpriteBatch(Screen.graphicsDevice, SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
         }
 
         /// <summary>
@@ -76,9 +73,9 @@ namespace Game1
         /// </summary>
         protected virtual void InitPixie()
         {
-            pixie = new Pixie();      
-            pixie.PositionAndTarget = PIXIE_STARTING_POS;
-            pixie.TargetSpeed = PIXIE_TARGETSPEED;
+            //pixie = new Pixie();      
+            //pixie.PositionAndTarget = PIXIE_STARTING_POS;
+            //pixie.TargetSpeed = PIXIE_TARGETSPEED;
         }
 
         /// <summary>
@@ -100,7 +97,7 @@ namespace Game1
         /// </summary>
         protected abstract void InitLevelSpecific();
 
-        public sealed void Init()
+        public void Init()
         {
             InitLevel();
             InitPixie();
@@ -110,8 +107,9 @@ namespace Game1
         }
 
         /// check keys specific for level
-        protected virtual void LevelKeyControl(ref UpdateParams p)
+        protected virtual void LevelKeyControl(/*ref UpdateParams p*/)
         {
+            /*
             KeyboardState st = Keyboard.GetState();
             if (st.IsKeyDown(Keys.Escape))
             {
@@ -149,9 +147,11 @@ namespace Game1
             else
                 pixie.IsCollisionFree = false;
 
+             */
         }
 
         // scroll the level background to match pixie
+        /*
         protected virtual void ScrollBackground(ref UpdateParams p)
         {
             // scrolling background at borders
@@ -164,6 +164,7 @@ namespace Game1
                     Background.Target = pixie.Position;
             }
         }
+        */
 
         /// <summary>
         /// can be overridden with custom functions if screen border is hit by pixie
@@ -175,6 +176,7 @@ namespace Game1
 
         public void OnUpdate(ScriptContext ctx)
         {
+            /*
             base.OnUpdate(ref p);
 
             // important: reflect the global viewpos (for sprites to use)
@@ -189,7 +191,11 @@ namespace Game1
             // DEBUG sample pixel
             Color c= Background.SamplePixel(pixie.Target);
             debugMsg.Text += "Color: " + c.R + "," + c.G + "," + c.B + "," + c.A;
+            */
+        }
 
+        public void OnDraw(ScriptContext ctx)
+        {
         }
     }
 }

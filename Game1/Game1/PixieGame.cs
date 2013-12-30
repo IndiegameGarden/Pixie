@@ -1,5 +1,6 @@
 // (c) 2010-2013 TranceTrance.com. Distributed under the FreeBSD license in LICENSE.txt
 
+#region Using statements
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,11 @@ using TTengine.Comps;
 using TTengine.Behaviors;
 using TTengine.Modifiers;
 using TTengine.Util;
-
 using Artemis;
 using Artemis.Interface;
 using TreeSharp;
+using Game1.Levels;
+#endregion
 
 namespace Game1
 {
@@ -39,29 +41,18 @@ namespace Game1
 
         protected override void Initialize()
         {
-            Factory = PixieFactory.Instance;
             base.Initialize();
-        }
-
-        protected override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-            KeyboardState kb = Keyboard.GetState();
-            if (kb.IsKeyDown(Keys.Space))
-            {
-                //
-            }
-            else
-            {
-                //
-            }
+            Factory = PixieFactory.Instance;
         }
 
         protected override void LoadContent()
         {
             base.LoadContent();
 
+            // create a default Channel
             GameChannel = TTFactory.CreateChannel(Color.White, false);
+            // PointClamp to let all grahics be sharp and blocky (non-interpolated pixels)
+            GameChannel.Screen.SpriteBatch.samplerState = SamplerState.PointClamp;
             ChannelMgr.AddChannel(GameChannel);
             GameChannel.ZapTo(); 
 
@@ -69,8 +60,9 @@ namespace Game1
             FrameRateCounter.Create(Color.Black);
 
             // level
-            Level = new TrainwrecksLevel();
+            Level = new Level1();
             Level.Init();
+            TTFactory.CreateScriptlet(Level);
          
         }       
 
