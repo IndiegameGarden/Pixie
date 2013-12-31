@@ -11,6 +11,6 @@ namespace TTengine.Comps
     /// </summary>
     public class TargetMotionComp : IComponent
     {
-        public TargetVector Target;
+        public TargetVector Target = new TargetVector();
     }
 }

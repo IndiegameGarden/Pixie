@@ -9,7 +9,7 @@ namespace Game1.Levels
     {
         protected override void InitLevelSpecific()
         {
-            throw new NotImplementedException();
+            //
         }
     }
 }
