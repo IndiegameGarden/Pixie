@@ -64,7 +64,7 @@ namespace TTengine.Systems
         /// <param name="entity">The entity.</param>
         public override void Process(Entity entity, PositionComp posComp, VelocityComp veloComp)
         {
-            posComp.UpdateComp(dt);
+            posComp.OnUpdate(dt);
             posComp.IsPositionAbsCalculated = false;
             posComp.X += (float)(veloComp.X * dt);
             posComp.Y += (float)(veloComp.Y * dt);

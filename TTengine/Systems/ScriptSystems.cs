@@ -25,7 +25,7 @@ namespace TTengine.Systems
 
         public override void Process(Entity entity, ScriptComp sc)
         {
-            sc.UpdateComp(dt);
+            sc.OnUpdate(dt);
             ctx.ScriptComp = sc;
             ctx.Entity = entity;
             foreach(IScript script in sc.Scripts)

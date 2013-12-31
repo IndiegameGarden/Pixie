@@ -81,6 +81,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comps\UserControlComp.cs" />
     <Compile Include="Levels\Level1.cs" />
     <Compile Include="PixieLevel.cs" />
     <Compile Include="PixieFactory.cs" />
@@ -137,7 +138,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Comps\" />
     <Folder Include="Systems\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

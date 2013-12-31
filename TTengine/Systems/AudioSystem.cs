@@ -38,7 +38,7 @@ namespace TTengine.Systems
 
         public override void Process(Entity entity, AudioComp ac)
         {
-            ac.UpdateComp(dt);
+            ac.OnUpdate(dt);
             rp.Time = ac.SimTime;
             rp.Ampl = ac.Ampl;
             audioEngine.Render(ac.AudioScript, rp);

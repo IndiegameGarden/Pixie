@@ -11,6 +11,8 @@ using TTengine.Behaviors;
 using TTengine.Modifiers;
 using TTengine.Util;
 
+using Game1.Comps;
+
 namespace Game1
 {
     /// <summary>
@@ -18,13 +20,14 @@ namespace Game1
     /// </summary>
     public class PixieFactory
     {
-        private static PixieFactory _instance = null;
-        private PixieGame _game;
-
         private PixieFactory(PixieGame game)
         {
             _game = game;
         }
+
+        private static PixieFactory _instance = null;
+        private PixieGame _game;
+        protected Random rnd = new Random();
 
         public static PixieFactory Instance
         {
@@ -36,7 +39,12 @@ namespace Game1
             }
         }
 
-        protected Random rnd = new Random();
+        public Entity CreatePixie()
+        {
+            Entity e = TTFactory.CreateSpritelet("pixie");
+            e.AddComponent(new UserControlComp());
+            return e;
+        }
 
         /// <summary>
         /// create a ball Spritelet that can be scaled

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
 
+using Artemis;
 using TTengine.Core;
 using TTengine.Comps;
 using TTengine.Util;
@@ -11,10 +9,15 @@ using TTengine.Util;
 namespace Game1
 {
     /// <summary>
-    /// base class for all levels (common functions)
+    /// base class for all Pixie levels (common functions)
     /// </summary>
     public abstract class PixieLevel: IScript
     {
+        public PixieLevel()
+        {
+            //Subtitles = new SubtitleManager();
+        }
+
         // some default colors and settings that may be changed by Level subclasses
         public static Color PIXIE_COLOR = new Color(251, 101, 159); // pink
         public float DEFAULT_SCALE = 20.0f;
@@ -36,6 +39,8 @@ namespace Game1
         /// </summary>
         public Color BackgroundColor = Color.White;
 
+        public PixieFactory Factory = PixieFactory.Instance;
+
         /// <summary>
         /// level music
         /// </summary> 
@@ -49,14 +54,9 @@ namespace Game1
         /// <summary>
         /// our heroine Pixie
         /// </summary>
-        //public Pixie pixie;
+        public Entity Pixie;
 
         //public SubtitleManager Subtitles;
-
-        public PixieLevel(): base()
-        {
-            //Subtitles = new SubtitleManager();
-        }
 
         /// <summary>
         /// Init: the scrolling level itself. First Init method that is called
@@ -69,11 +69,11 @@ namespace Game1
         }
 
         /// <summary>
-        /// Init: pixie herself (a default implementation is in Level)
+        /// Init: pixie herself (a default implementation is in PixieLevel class)
         /// </summary>
         protected virtual void InitPixie()
         {
-            //pixie = new Pixie();      
+            Pixie = Factory.CreatePixie();
             //pixie.PositionAndTarget = PIXIE_STARTING_POS;
             //pixie.TargetSpeed = PIXIE_TARGETSPEED;
         }

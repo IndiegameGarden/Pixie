@@ -12,7 +12,7 @@ namespace TTengine.Core
     /// optional base class for components that implement IComponent. This provides SimTime time
     /// counter and optional parent/child component relations.
     /// </summary>
-    public abstract class Comp: IComponent
+    public abstract class Comp: IComponent, IUpdate
     {
         /// <summary>Amount of time this instance has spent in simulation, since its creation, in seconds.
         /// Value may be changed by others (e.g. script, modifier).</summary>
@@ -35,7 +35,7 @@ namespace TTengine.Core
 
         /// <summary>Called by Systems, to conveniently update any of the Comp members that need updating each cycle.</summary>
         /// <param name="dt">Time delta in seconds for current Update round</param>
-        public void UpdateComp(double dt)
+        public void OnUpdate(double dt, double simTime=0)
         {
             Dt = dt;
             SimTime += dt;                

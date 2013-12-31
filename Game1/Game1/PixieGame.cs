@@ -35,14 +35,12 @@ namespace Game1
             IsAudio = true;
         }
 
-        public PixieFactory Factory;
         public Channel GameChannel;
         public PixieLevel Level;
 
         protected override void Initialize()
         {
             base.Initialize();
-            Factory = PixieFactory.Instance;
         }
 
         protected override void LoadContent()
@@ -63,6 +61,9 @@ namespace Game1
             Level = new Level1();
             Level.Init();
             TTFactory.CreateScriptlet(Level);
+
+            // inits based on level
+            GameChannel.Screen.BackgroundColor = Level.BackgroundColor;
          
         }       
 
