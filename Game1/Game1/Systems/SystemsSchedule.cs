@@ -1,0 +1,16 @@
+﻿
+namespace Game1.Systems
+{
+    /// <summary>
+    /// Defines the order in which all Systems are executed
+    /// </summary>
+    public class SystemsSchedule
+    {
+        // Systems in UPDATE loop
+        public const int
+            UserControlSystem = 1;
+
+        // Systems in DRAW loop
+        //public const int 
+    }
+}

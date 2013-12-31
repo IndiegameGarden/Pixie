@@ -74,8 +74,8 @@ namespace Game1
         protected virtual void InitPixie()
         {
             Pixie = Factory.CreatePixie();
-            //pixie.PositionAndTarget = PIXIE_STARTING_POS;
-            //pixie.TargetSpeed = PIXIE_TARGETSPEED;
+            Pixie.GetComponent<PositionComp>().Position2D = PIXIE_STARTING_POS;
+            Pixie.GetComponent<TargetMotionComp>().Target.Speed = PIXIE_TARGETSPEED;
         }
 
         /// <summary>

@@ -43,6 +43,7 @@ namespace Game1
         {
             Entity e = TTFactory.CreateSpritelet("pixie");
             e.AddComponent(new UserControlComp());
+            e.AddComponent(new TargetMotionComp());
             return e;
         }
 
