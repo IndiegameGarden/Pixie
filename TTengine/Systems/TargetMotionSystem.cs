@@ -1,19 +1,15 @@
 
+using System;
+using Microsoft.Xna.Framework;
+
+using Artemis;
+using Artemis.Attributes;
+using Artemis.Manager;
+using Artemis.System;
+using TTengine.Comps;
+
 namespace TTengine.Systems
 {
-    #region Using statements
-
-    using System;
-    using Microsoft.Xna.Framework;
-
-    using Artemis;
-    using Artemis.Attributes;
-    using Artemis.Manager;
-    using Artemis.System;
-    using TTengine.Comps;
-
-    #endregion
-
     /// <summary>'Motion towards a target' system.</summary>
     [ArtemisEntitySystem(GameLoopType = GameLoopType.Update, Layer = SystemsSchedule.TargetMotionSystem)]
     public class TargetMotionSystem : EntityComponentProcessingSystem<PositionComp, TargetMotionComp>
