@@ -10,7 +10,6 @@ namespace Game1.Core
     /// </summary>
     public abstract class Behavior: TreeNode
     {
-        /// <summary>The time (seconds) between two successive moves for this Behavior</summary>
-        public double DeltaTimeBetweenMoves = 0.2;
+        //
     }
 }

@@ -29,12 +29,14 @@ namespace Game1
     {
         public PixieGame()
         {
+            Instance = this;
             GraphicsMgr.IsFullScreen = false;
             GraphicsMgr.PreferredBackBufferWidth = 640; 
             GraphicsMgr.PreferredBackBufferHeight = 640;
             IsAudio = true;
         }
 
+        public static new PixieGame Instance;
         public Channel GameChannel;
         public PixieLevel Level;
 

@@ -13,7 +13,7 @@ using TTengine.Util;
 namespace Game1.Systems
 {
     [ArtemisEntitySystem(GameLoopType = GameLoopType.Update, Layer = 3)]
-    public class ThingControlSystem : EntityComponentProcessingSystem<ThingComp,ThingControlComp>
+    public class ThingControlSystem : EntityComponentProcessingSystem<ThingComp,ControlComp,TargetMotionComp>
     {
         double dt = 0;
 
@@ -22,15 +22,15 @@ namespace Game1.Systems
             dt = TimeSpan.FromTicks(EntityWorld.Delta).TotalSeconds;
         }
 
-        public override void Process(Entity entity, ThingComp tc, ThingControlComp tcc)
+        public override void Process(Entity entity, ThingComp tc, ControlComp tcc, TargetMotionComp targetPosComp)
         {
             tcc.TimeBeforeNextMove -= dt;
 
             // check how much push I get. If get pushed, try to move
-            if (tcc.PushFromOthers.LengthSquared() > tcc.PushingForce)
+            if (tcc.PushFromOthers.LengthSquared() > tcc.PushForce)
             {
-                tcc.TargetMove = tcc.PushFromOthers;
-                tcc.TargetMove.Normalize();
+                tcc.Move = tcc.PushFromOthers;
+                tcc.Move.Normalize();
             }
             else
             {
@@ -41,26 +41,28 @@ namespace Game1.Systems
 
             // reset the countdown timer back to its value
             if (tcc.TimeBeforeNextMove <= 0)
-                tcc.TimeBeforeNextMove = tcc.DeltaTimeBetweenMoves;
+                tcc.TimeBeforeNextMove = tcc.TimeBetweenMoves;
 
             // if no move to make, return
-            if (tcc.TargetMove.LengthSquared() == 0f)
+            if (tcc.Move.LengthSquared() == 0f)
                 return;
 
             // compute new facingDirection from final TargetMove
-            tc.FacingDirection = tcc.TargetMove;
+            tc.FacingDirection = tcc.Move;
             tc.FacingDirection.Normalize();
 
             // check if passable...
+            // FIXME
+            /*
             List<Entity> cols = tc.DetectCollisions(entity,tcc.TargetMove);
-            if (!tc.IsCollisionFree && cols.Count > 0 && tcc.PushingForce > 0f)
+            if (!tc.IsCollisionFree && cols.Count > 0 && tcc.PushForce > 0f)
             {
                 // no - so try to push neighbouring things away
                 foreach (Entity t in cols)
                 {
-                    if (t.HasComponent<ThingControlComp>())
+                    if (t.HasComponent<ControlComp>())
                     {
-                        t.GetComponent<ThingControlComp>().BePushed(tcc.TargetMove, tcc.PushingForce);
+                        t.GetComponent<ControlComp>().BePushed(tcc.TargetMove, tcc.PushForce);
                     }
                 }
             }
@@ -71,7 +73,9 @@ namespace Game1.Systems
                 tc.Target += tcc.TargetMove;
                 TTutil.Round(ref tc.Target);
             }
+             */
 
+            targetPosComp.Target.AddToTarget(tcc.Move);
         }
     }
 }

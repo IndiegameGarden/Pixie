@@ -14,7 +14,18 @@ namespace TTengine.Core
         public Vector3  Current = Vector3.Zero;
         public double   Speed   = 1;
 
-        public void OnUpdate(double dt, double simTime=0)
+        public void AddToTarget(Vector2 v)
+        {
+            Target.X += v.X;
+            Target.Y += v.Y;
+        }
+
+        public void AddToTarget(Vector3 v)
+        {
+            Target += v;
+        }
+
+        public void OnUpdate(double dt, double simTime = 0)
         {
             if (!IsActive)
                 return;

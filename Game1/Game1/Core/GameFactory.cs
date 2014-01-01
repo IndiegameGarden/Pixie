@@ -47,23 +47,18 @@ namespace Game1.Core
             return e;
         }
 
-        protected static Random rnd = new Random();
-
         public Entity CreateThing(ThingType tp, bool hasControls, string bitmap)
         {
             var e = TTFactory.CreateSpritelet(bitmap);
             var sc = e.GetComponent<SpriteComp>();
-            var tc = new ThingComp(tp, Level.Current.Background, sc.Texture);
+            var tc = new ThingComp(tp);
             e.AddComponent(tc);
             if (hasControls)
             {
-                var tcc = new ThingControlComp();
+                var tcc = new ControlComp();
                 e.AddComponent(tcc);
             }
-            tc.PassableIntensityThreshold = Level.Current.DefaultPassableIntensityThreshold;
-            var textureData = new Color[tc.BoundingRectangle.Width * tc.BoundingRectangle.Height];
-            sc.Texture.GetData(textureData);
-            sc.Center = Vector2.Zero;
+            tc.PassableIntensityThreshold = PixieGame.Instance.Level.DefaultPassableIntensityThreshold;
 
             return e;
         }

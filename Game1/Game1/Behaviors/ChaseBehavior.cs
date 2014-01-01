@@ -1,9 +1,13 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
-using TTengine.Core;
 using Microsoft.Xna.Framework;
+
 using TreeSharp;
 using Artemis;
+using TTengine.Core;
+using TTengine.Comps;
+
 using Game1.Core;
 using Game1.Comps;
 
@@ -23,9 +27,6 @@ namespace Game1.Behaviors
         /// <summary>range reached when chaser is satisfied and stops chasing (0 means chase all the way)</summary>
         public float SatisfiedRange = 0f;
 
-        /// <summary>if true, inverts the Chase into an Avoid behavior</summary>
-        public bool Avoidance = false;
-
         public ChaseBehavior(Entity chaseTarget)
         {
             this.ChaseTarget = chaseTarget;
@@ -35,24 +36,22 @@ namespace Game1.Behaviors
         {
             var ctx = context as BTAIContext;
             var tc = ctx.Entity.GetComponent<ThingComp>();
+            var pc = ctx.Entity.GetComponent<PositionComp>();
 
             if (ChaseTarget != null && ChaseTarget.IsActive)
             {
                 var targetTc = ChaseTarget.GetComponent<ThingComp>();
+                var targetPc = ChaseTarget.GetComponent<PositionComp>();
                 Vector2 dif;
                 if (targetTc.Visible)
                 {
-                    dif = targetTc.Position - tc.Target;
+                    dif = targetPc.Position2D - pc.Position2D;
                     float dist = dif.Length();
                     if (dist > 0f && dist <= ChaseRange && dist > SatisfiedRange)
                     {
-                        // compute direction towards chase-target
-                        dif = targetTc.Position - tc.Target;
-                        if (Avoidance)
-                            dif = -dif;
-                        var tcc = ctx.Entity.GetComponent<ThingControlComp>();
-                        tcc.TargetMove = dif;
-                        tcc.DeltaTimeBetweenMoves = this.DeltaTimeBetweenMoves;
+                        // set control direction towards chase-target
+                        var tcc = ctx.Entity.GetComponent<ControlComp>();
+                        tcc.Move = dif;
                         yield return RunStatus.Success;
                     }
                 }

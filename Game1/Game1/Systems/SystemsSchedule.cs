@@ -8,7 +8,8 @@ namespace Game1.Systems
     {
         // Systems in UPDATE loop
         public const int
-            UserControlSystem = 1;
+            UserControlSystem = 1,
+            ThingSystem = 1;
 
         // Systems in DRAW loop
         //public const int 

@@ -82,19 +82,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actors\Block.cs" />
-    <Compile Include="Actors\BombMissile.cs" />
     <Compile Include="Actors\Pixie.cs" />
-    <Compile Include="Actors\RedGuard.cs" />
-    <Compile Include="Behaviors\AlwaysTurnRightBehavior.cs" />
-    <Compile Include="Behaviors\AttackEnemyBehavior.cs" />
     <Compile Include="Behaviors\ChaseBehavior.cs" />
-    <Compile Include="Behaviors\RandomWanderBehavior.cs" />
     <Compile Include="Comps\ColorCycleComp.cs" />
     <Compile Include="Comps\ControlComp.cs" />
     <Compile Include="Comps\HealthComp.cs" />
     <Compile Include="Comps\RandomWanderComp.cs" />
     <Compile Include="Comps\ThingComp.cs" />
-    <Compile Include="Comps\ThingControlComp.cs" />
     <Compile Include="Comps\UserControlComp.cs" />
     <Compile Include="Core\Behavior.cs" />
     <Compile Include="Core\GameMusic.cs" />
@@ -112,8 +106,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PixieGame.cs" />
     <Compile Include="Systems\ColorCycleSystem.cs" />
-    <Compile Include="Systems\LevelSystem.cs" />
-    <Compile Include="Systems\RandomWanderSystem.cs" />
     <Compile Include="Systems\SystemsSchedule.cs" />
     <Compile Include="Systems\ThingControlSystem.cs" />
     <Compile Include="Systems\ThingSystem.cs" />

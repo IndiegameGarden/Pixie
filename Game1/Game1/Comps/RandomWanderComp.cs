@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
+using System;
 using Microsoft.Xna.Framework;
-using TTengine.Core;
-using TTengine.Util;
+
+using Artemis.Interface;
 
 namespace Game1.Comps
 {
-    public class RandomWanderComp: ThingControlComp
+    public class RandomWanderComp: IComponent
     {
         public RandomWanderComp()
         {

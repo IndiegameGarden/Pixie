@@ -36,14 +36,14 @@ namespace Game1.Core
 
         public void Show(int priority, SubtitleText st)
         {
-            var e = GameFactory.CreateSubtitle(st);
+            var e = GameFactory.Instance.CreateSubtitle(st);
             q.Add(new QueuedText(priority, e));
             e.IsEnabled = false;
         }
 
         public Entity Show(int priority, string txt, double duration, Color color)
         {
-            var st = GameFactory.CreateSubtitle(txt,color);
+            var st = GameFactory.Instance.CreateSubtitle(txt, color);
             st.AddComponent(new ExpiresComp(duration));
             q.Add(new QueuedText(priority,st));
             st.IsEnabled = false;
