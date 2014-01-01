@@ -91,18 +91,13 @@ namespace Game1.Core
             return e;
         }
 
-        /*
-        public Entity CreateLevelet(Level lev)
+        public Entity CreateLevelet(string bitmapFile)
         {
-            var e = TTFactory.CreateDrawlet();
-            e.AddComponent(new ScaleComp());
-            e.AddComponent(new ThingComp(ThingType.OTHER, null, lev.Background.Texture));
-            e.AddComponent(new ScriptComp());
-            e.AddComponent(lev.Background);
+            var e = TTFactory.CreateSpritelet(bitmapFile);
+            //e.AddComponent(new ScaleComp());
             e.Refresh();
             return e;
         }
-         */
         
     }
 }

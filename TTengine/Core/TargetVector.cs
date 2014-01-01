@@ -25,6 +25,16 @@ namespace TTengine.Core
             Target += v;
         }
 
+        public Vector2 Target2D
+        {
+            get { return new Vector2(Target.X, Target.Y); }
+            set
+            {
+                Target.X = value.X;
+                Target.Y = value.Y;
+            }
+        }
+
         public void OnUpdate(double dt, double simTime = 0)
         {
             if (!IsActive)

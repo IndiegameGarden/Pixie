@@ -15,12 +15,14 @@ namespace Game1.Core
     {
         public PixieLevel()
         {
-            //Subtitles = new SubtitleManager();
+            Subtitles = new SubtitleManager();
         }
+
+        public string LevelBitmapFile = "";
 
         // some default colors and settings that may be changed by Level subclasses
         public static Color PIXIE_COLOR = new Color(251, 101, 159); // pink
-        public float DEFAULT_SCALE = 20.0f;
+        public float DEFAULT_SCALE = 1.0f;
         public float SCREEN_MOTION_SPEED = 15.0f;
         public float PIXIE_TARGETSPEED = 5.0f;
         public int DefaultPassableIntensityThreshold = 380;
@@ -39,30 +41,34 @@ namespace Game1.Core
         /// </summary>
         public Color BackgroundColor = Color.White;
 
+        /// <summary>
+        /// The factory for creating new entities in the game
+        /// </summary>
         public GameFactory Factory = GameFactory.Instance;
 
         /// <summary>
         /// level music
         /// </summary> 
-        //public GameMusic Music;
+        public GameMusic Music;
 
         /// <summary>
         /// background bitmap
         /// </summary>
-        //public LevelBackground Background;
+        public Entity Background;
 
         /// <summary>
         /// our heroine Pixie
         /// </summary>
         public Entity Pixie;
 
-        //public SubtitleManager Subtitles;
+        public SubtitleManager Subtitles;
 
         /// <summary>
         /// Init: the scrolling level itself. First Init method that is called
         /// </summary>
         protected virtual void InitLevel()
         {
+            Background = Factory.CreateLevelet(LevelBitmapFile);
             //Motion.Scale = DEFAULT_SCALE;
             //Motion.ScaleTarget = DEFAULT_SCALE;
             //MySpriteBatch = new TTSpriteBatch(Screen.graphicsDevice, SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
@@ -75,6 +81,7 @@ namespace Game1.Core
         {
             Pixie = Factory.CreatePixie();
             Pixie.GetComponent<PositionComp>().Position2D = PIXIE_STARTING_POS;
+            Pixie.GetComponent<TargetMotionComp>().Target.Target2D = PIXIE_STARTING_POS;
             Pixie.GetComponent<TargetMotionComp>().Target.Speed = PIXIE_TARGETSPEED;
         }
 

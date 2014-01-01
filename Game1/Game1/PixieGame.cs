@@ -63,6 +63,7 @@ namespace Game1
             Level = new Level1();
             Level.Init();
             TTFactory.CreateScriptlet(Level);
+            GameChannel.Screen.Zoom = Level.DEFAULT_SCALE;
 
             // inits based on level
             GameChannel.Screen.BackgroundColor = Level.BackgroundColor;
