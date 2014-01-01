@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-using Game1;
+using Game1.Core;
 
 namespace Game1.Levels
 {

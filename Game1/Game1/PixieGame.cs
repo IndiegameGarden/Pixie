@@ -1,6 +1,5 @@
 // (c) 2010-2013 TranceTrance.com. Distributed under the FreeBSD license in LICENSE.txt
 
-#region Using statements
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +16,9 @@ using TTengine.Util;
 using Artemis;
 using Artemis.Interface;
 using TreeSharp;
+
+using Game1.Core;
 using Game1.Levels;
-#endregion
 
 namespace Game1
 {

@@ -81,17 +81,42 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actors\Block.cs" />
+    <Compile Include="Actors\BombMissile.cs" />
+    <Compile Include="Actors\Pixie.cs" />
+    <Compile Include="Actors\RedGuard.cs" />
+    <Compile Include="Behaviors\AlwaysTurnRightBehavior.cs" />
+    <Compile Include="Behaviors\AttackEnemyBehavior.cs" />
+    <Compile Include="Behaviors\ChaseBehavior.cs" />
+    <Compile Include="Behaviors\RandomWanderBehavior.cs" />
+    <Compile Include="Comps\ColorCycleComp.cs" />
     <Compile Include="Comps\ControlComp.cs" />
+    <Compile Include="Comps\HealthComp.cs" />
+    <Compile Include="Comps\RandomWanderComp.cs" />
+    <Compile Include="Comps\ThingComp.cs" />
+    <Compile Include="Comps\ThingControlComp.cs" />
     <Compile Include="Comps\UserControlComp.cs" />
+    <Compile Include="Core\Behavior.cs" />
+    <Compile Include="Core\GameMusic.cs" />
+    <Compile Include="Core\GameSound.cs" />
+    <Compile Include="Core\LevelBackgroundComp.cs" />
+    <Compile Include="Core\SubtitleManager.cs" />
+    <Compile Include="Core\SubtitleText.cs" />
+    <Compile Include="Core\Toy.cs" />
     <Compile Include="Levels\Level1.cs" />
-    <Compile Include="PixieLevel.cs" />
-    <Compile Include="PixieFactory.cs" />
+    <Compile Include="Core\PixieLevel.cs" />
+    <Compile Include="Core\GameFactory.cs" />
     <Compile Include="Program.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PixieGame.cs" />
+    <Compile Include="Systems\ColorCycleSystem.cs" />
+    <Compile Include="Systems\LevelSystem.cs" />
+    <Compile Include="Systems\RandomWanderSystem.cs" />
     <Compile Include="Systems\SystemsSchedule.cs" />
+    <Compile Include="Systems\ThingControlSystem.cs" />
+    <Compile Include="Systems\ThingSystem.cs" />
     <Compile Include="Systems\UserControlSystem.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +131,10 @@
     <ProjectReference Include="..\..\TTengine\TTengine.csproj">
       <Project>{616035D5-3927-44CD-BD41-2EEE846AC3A3}</Project>
       <Name>TTengine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TTMusicEngine\TTMusicEngine.csproj">
+      <Project>{cb99d0c9-fd0e-4b90-91bd-7d5816b38a2c}</Project>
+      <Name>TTMusicEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\Game1Content\Game1Content.contentproj">
       <Name>Game1Content %28Content%29</Name>

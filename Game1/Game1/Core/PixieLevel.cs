@@ -6,7 +6,7 @@ using TTengine.Core;
 using TTengine.Comps;
 using TTengine.Util;
 
-namespace Game1
+namespace Game1.Core
 {
     /// <summary>
     /// base class for all Pixie levels (common functions)
@@ -39,7 +39,7 @@ namespace Game1
         /// </summary>
         public Color BackgroundColor = Color.White;
 
-        public PixieFactory Factory = PixieFactory.Instance;
+        public GameFactory Factory = GameFactory.Instance;
 
         /// <summary>
         /// level music
