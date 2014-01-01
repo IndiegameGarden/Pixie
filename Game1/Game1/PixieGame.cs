@@ -33,7 +33,7 @@ namespace Game1
             GraphicsMgr.IsFullScreen = false;
             GraphicsMgr.PreferredBackBufferWidth = 640; 
             GraphicsMgr.PreferredBackBufferHeight = 640;
-            IsAudio = true;
+            IsAudio = false;
         }
 
         public static new PixieGame Instance;
@@ -51,6 +51,7 @@ namespace Game1
 
             // create a default Channel
             GameChannel = TTFactory.CreateChannel(Color.White, false);
+            TTFactory.BuildTo(GameChannel);
             // PointClamp to let all grahics be sharp and blocky (non-interpolated pixels)
             GameChannel.Screen.SpriteBatch.samplerState = SamplerState.PointClamp;
             ChannelMgr.AddChannel(GameChannel);
@@ -63,10 +64,6 @@ namespace Game1
             Level = new Level1();
             Level.Init();
             TTFactory.CreateScriptlet(Level);
-            GameChannel.Screen.Zoom = Level.DEFAULT_SCALE;
-
-            // inits based on level
-            GameChannel.Screen.BackgroundColor = Level.BackgroundColor;
          
         }       
 

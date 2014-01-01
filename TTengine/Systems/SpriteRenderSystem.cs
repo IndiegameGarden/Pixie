@@ -86,8 +86,9 @@ namespace TTengine.Systems
             TTSpriteBatch sb = screen.SpriteBatch;
 
             // draw sprite
+            var sc = drawComp.DrawScale * screen.Zoom;
             sb.Draw(spriteComp.Texture, drawComp.DrawPosition, null, drawComp.DrawColor,
-                drawComp.DrawRotation, spriteComp.Center, drawComp.DrawScale, SpriteEffects.None, drawComp.LayerDepth);
+                drawComp.DrawRotation, spriteComp.Center, sc, SpriteEffects.None, drawComp.LayerDepth);
 
         }
 

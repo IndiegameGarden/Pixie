@@ -22,7 +22,7 @@ namespace Game1.Core
 
         // some default colors and settings that may be changed by Level subclasses
         public static Color PIXIE_COLOR = new Color(251, 101, 159); // pink
-        public float DEFAULT_SCALE = 1.0f;
+        public float DEFAULT_SCALE = 2f;
         public float SCREEN_MOTION_SPEED = 15.0f;
         public float PIXIE_TARGETSPEED = 5.0f;
         public int DefaultPassableIntensityThreshold = 380;
@@ -72,6 +72,11 @@ namespace Game1.Core
             //Motion.Scale = DEFAULT_SCALE;
             //Motion.ScaleTarget = DEFAULT_SCALE;
             //MySpriteBatch = new TTSpriteBatch(Screen.graphicsDevice, SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
+            TTFactory.BuildScreen.Zoom = this.DEFAULT_SCALE;
+
+            // inits based on level
+            TTFactory.BuildScreen.BackgroundColor = this.BackgroundColor;
+
         }
 
         /// <summary>

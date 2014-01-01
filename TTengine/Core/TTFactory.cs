@@ -19,8 +19,7 @@ namespace TTengine.Core
         /// <summary>The Artemis entity world that is currently used for building/creating new Entities in</summary>
         public static EntityWorld BuildWorld;
 
-        /// <summary>The screen that newly built Entities by default will render to.
-        /// Value null is used to denote "default".</summary>
+        /// <summary>The screen that newly built Entities by default will render to</summary>
         public static ScreenComp BuildScreen;
 
         /// <summary>
@@ -42,7 +41,7 @@ namespace TTengine.Core
         public static void BuildTo(Channel channel)
         {
             BuildWorld = channel.World;
-            BuildScreen = null; // channel.Screen;
+            BuildScreen = channel.Screen;
             BuildChannel = channel;
         }
 
