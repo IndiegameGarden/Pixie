@@ -6,6 +6,8 @@ using TTengine.Core;
 using TTengine.Comps;
 using TTengine.Util;
 
+using Game1.Comps;
+
 namespace Game1.Core
 {
     /// <summary>
@@ -64,11 +66,15 @@ namespace Game1.Core
         public SubtitleManager Subtitles;
 
         /// <summary>
-        /// Init: the scrolling level itself. First Init method that is called
+        /// Init: the scrolling level itself.
         /// </summary>
         protected virtual void InitLevel()
         {
             Background = Factory.CreateLevelet(LevelBitmapFile);
+            var sc = new ScrollingComp(Pixie.GetComponent<PositionComp>(), TTFactory.BuildChannel.Screen);
+            Background.AddComponent(sc);
+            sc.Scrolling.Current2D = this.BG_STARTING_POS;
+
             //Motion.Scale = DEFAULT_SCALE;
             //Motion.ScaleTarget = DEFAULT_SCALE;
             //MySpriteBatch = new TTSpriteBatch(Screen.graphicsDevice, SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
@@ -111,8 +117,8 @@ namespace Game1.Core
 
         public void Init()
         {
-            InitLevel();
             InitPixie();
+            InitLevel();
             InitBadPixels();
             InitToys();
             InitLevelSpecific();

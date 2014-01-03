@@ -9,10 +9,27 @@ namespace TTengine.Core
     /// </summary>
     public class TargetVector: IUpdate
     {
+        /// <summary>
+        /// Create with Vector3.Zero initial values
+        /// </summary>
+        public TargetVector()
+        {
+        }
+
+        /// <summary>
+        /// Create with given initial values
+        /// </summary>
+        /// <param name="initialValue">Value for Target and Current</param>
+        public TargetVector(Vector3 initialValue)
+        {
+            Target = initialValue;
+            Current = initialValue;
+        }
+
         public bool     IsActive = false;
         public Vector3  Target  = Vector3.Zero;
         public Vector3  Current = Vector3.Zero;
-        public double   Speed   = 1;
+        public double   Speed   = 10;
 
         public void AddToTarget(Vector2 v)
         {
@@ -32,6 +49,16 @@ namespace TTengine.Core
             {
                 Target.X = value.X;
                 Target.Y = value.Y;
+            }
+        }
+
+        public Vector2 Current2D
+        {
+            get { return new Vector2(Current.X, Current.Y); }
+            set
+            {
+                Current.X = value.X;
+                Current.Y = value.Y;
             }
         }
 
