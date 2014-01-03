@@ -13,13 +13,6 @@ namespace Game1.Systems
     [ArtemisEntitySystem(GameLoopType = GameLoopType.Update, Layer = SystemsSchedule.ThingSystem)]
     public class ThingSystem : EntityComponentProcessingSystem<ThingComp,PositionComp>
     {
-        protected double dt = 0;
-
-        protected override void Begin()
-        {
-            dt = TimeSpan.FromTicks(EntityWorld.Delta).TotalSeconds;
-        }
-
         public override void Process(Entity entity, ThingComp tc, PositionComp pc)
         {
         }

@@ -16,7 +16,6 @@ namespace TTengine.Systems
     [ArtemisEntitySystem(GameLoopType = GameLoopType.Draw, Layer = SystemsSchedule.AudioSystem)]
     public class AudioSystem : EntityComponentProcessingSystem<AudioComp>
     {
-        double dt = 0;
         RenderParams rp = new RenderParams();
         MusicEngine audioEngine = null;
 
@@ -31,14 +30,13 @@ namespace TTengine.Systems
 
         protected override void Begin()
         {
-            audioEngine = TTGame.Instance.AudioEngine;
-            dt = TimeSpan.FromTicks(EntityWorld.Delta).TotalSeconds;
+            audioEngine = TTGame.Instance.AudioEngine;     
             audioEngine.Update(); // to be called once every frame
         }
 
         public override void Process(Entity entity, AudioComp ac)
         {
-            ac.OnUpdate(dt);
+            ac.OnUpdate(this.Dt);
             rp.Time = ac.SimTime;
             rp.Ampl = ac.Ampl;
             audioEngine.Render(ac.AudioScript, rp);

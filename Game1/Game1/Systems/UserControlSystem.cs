@@ -15,13 +15,6 @@ namespace Game1.Systems
     [ArtemisEntitySystem(GameLoopType = GameLoopType.Update, Layer = SystemsSchedule.UserControlSystem)]
     public class UserControlSystem : EntityComponentProcessingSystem<UserControlComp>
     {
-        double dt = 0;
-
-        protected override void Begin()
-        {
-            dt = TimeSpan.FromTicks(EntityWorld.Delta).TotalSeconds;
-        }
-
         public override void Process(Entity entity, UserControlComp uc)
         {
             float dx = 0f, dy = 0f;

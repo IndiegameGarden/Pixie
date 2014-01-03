@@ -15,17 +15,10 @@ namespace TTengine.Systems
     [ArtemisEntitySystem(GameLoopType = GameLoopType.Update, Layer = SystemsSchedule.BlinkSystem)]
     public class BlinkSystem : EntityComponentProcessingSystem<BlinkComp>
     {
-        double dt = 0;
-
-        protected override void Begin()
-        {
-            dt = TimeSpan.FromTicks(EntityWorld.Delta).TotalSeconds;
-        }
-
         // TODO: check if non-active entities are also called in this process method. For all systems.
         public override void Process(Entity entity, BlinkComp bcomp)
         {
-            bcomp.OnUpdate(dt);
+            bcomp.OnUpdate(Dt);
             double t = bcomp.SimTime % bcomp.TimePeriod;
             bool isVisible;
             if (t <= bcomp.TimeOn)

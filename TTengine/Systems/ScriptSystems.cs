@@ -16,12 +16,6 @@ namespace TTengine.Systems
     public class ScriptSystemUpdate : EntityComponentProcessingSystem<ScriptComp>
     {
         ScriptContext ctx = new ScriptContext();
-        double dt = 0;
-
-        protected override void Begin()
-        {
-            dt = TimeSpan.FromTicks(EntityWorld.Delta).TotalSeconds;
-        }
 
         public override void Process(Entity entity, ScriptComp sc)
         {

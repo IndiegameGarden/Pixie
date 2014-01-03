@@ -15,16 +15,9 @@ namespace Game1.Systems
     [ArtemisEntitySystem(GameLoopType = GameLoopType.Update, Layer = 3)]
     public class ThingControlSystem : EntityComponentProcessingSystem<ThingComp,ControlComp,TargetMotionComp>
     {
-        double dt = 0;
-
-        protected override void Begin()
-        {
-            dt = TimeSpan.FromTicks(EntityWorld.Delta).TotalSeconds;
-        }
-
         public override void Process(Entity entity, ThingComp tc, ControlComp tcc, TargetMotionComp targetPosComp)
         {
-            tcc.TimeBeforeNextMove -= dt;
+            tcc.TimeBeforeNextMove -= Dt;
 
             // check how much push I get. If get pushed, try to move
             if (tcc.PushFromOthers.LengthSquared() > tcc.PushForce)
