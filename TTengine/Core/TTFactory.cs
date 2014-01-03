@@ -16,12 +16,6 @@ namespace TTengine.Core
     /// </summary>
     public sealed class TTFactory
     {
-        /// <summary>The Artemis entity world that is currently used for building/creating new Entities in</summary>
-        public static EntityWorld BuildWorld;
-
-        /// <summary>The screen that newly built Entities by default will render to</summary>
-        public static ScreenComp BuildScreen;
-
         /// <summary>
         /// The Channel to which TTFactory builds new entities
         /// </summary>
@@ -33,21 +27,9 @@ namespace TTengine.Core
             _game = TTGame.Instance;
         }
 
-        public static void BuildTo(EntityWorld world)
-        {
-            BuildWorld = world;
-        }
-
         public static void BuildTo(Channel channel)
         {
-            BuildWorld = channel.World;
-            BuildScreen = channel.Screen;
             BuildChannel = channel;
-        }
-
-        public static void BuildTo(ScreenComp screen)
-        {
-            BuildScreen = screen;
         }
 
         /// <summary>
@@ -57,7 +39,7 @@ namespace TTengine.Core
         /// <returns></returns>
         public static Entity CreateEntity()
         {
-            return BuildWorld.CreateEntity();
+            return BuildChannel.World.CreateEntity();
         }
 
         /// <summary>
@@ -80,7 +62,7 @@ namespace TTengine.Core
         public static Entity CreateDrawlet()
         {
             Entity e = CreateGamelet();
-            e.AddComponent(new DrawComp(BuildScreen));
+            e.AddComponent(new DrawComp(BuildChannel.Screen));
             e.Refresh();
             return e;
         }
@@ -183,7 +165,7 @@ namespace TTengine.Core
             var sc = new ScreenComp(hasRenderBuffer);
             var e = CreateEntity();
             e.AddComponent(sc);
-            e.AddComponent(new DrawComp(BuildScreen));
+            e.AddComponent(new DrawComp(BuildChannel.Screen));
             e.Refresh();
             return e;
         }
@@ -198,7 +180,7 @@ namespace TTengine.Core
             var sc = new ScreenComp(hasRenderBuffer, width, height);
             var e = CreateEntity();
             e.AddComponent(sc);
-            e.AddComponent(new DrawComp(BuildScreen));
+            e.AddComponent(new DrawComp(BuildChannel.Screen));
             e.Refresh();
             return e;
         }

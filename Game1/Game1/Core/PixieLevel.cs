@@ -72,10 +72,10 @@ namespace Game1.Core
             //Motion.Scale = DEFAULT_SCALE;
             //Motion.ScaleTarget = DEFAULT_SCALE;
             //MySpriteBatch = new TTSpriteBatch(Screen.graphicsDevice, SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
-            TTFactory.BuildScreen.Zoom = this.DEFAULT_SCALE;
+            TTFactory.BuildChannel.Screen.Zoom = this.DEFAULT_SCALE;
 
             // inits based on level
-            TTFactory.BuildScreen.BackgroundColor = this.BackgroundColor;
+            TTFactory.BuildChannel.Screen.BackgroundColor = this.BackgroundColor;
 
         }
 
