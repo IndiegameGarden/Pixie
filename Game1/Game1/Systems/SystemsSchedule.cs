@@ -9,6 +9,7 @@ namespace Game1.Systems
         // Systems in UPDATE loop
         public const int
             UserControlSystem = 1,
+            ScrollingSystem = 1,
             ThingSystem = 1;
 
         // Systems in DRAW loop

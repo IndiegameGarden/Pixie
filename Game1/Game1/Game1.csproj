@@ -88,6 +88,7 @@
     <Compile Include="Comps\ControlComp.cs" />
     <Compile Include="Comps\HealthComp.cs" />
     <Compile Include="Comps\RandomWanderComp.cs" />
+    <Compile Include="Comps\ScrollingComp.cs" />
     <Compile Include="Comps\ThingComp.cs" />
     <Compile Include="Comps\UserControlComp.cs" />
     <Compile Include="Core\Behavior.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PixieGame.cs" />
     <Compile Include="Systems\ColorCycleSystem.cs" />
+    <Compile Include="Systems\ScrollingSystem.cs" />
     <Compile Include="Systems\SystemsSchedule.cs" />
     <Compile Include="Systems\ThingControlSystem.cs" />
     <Compile Include="Systems\ThingSystem.cs" />
