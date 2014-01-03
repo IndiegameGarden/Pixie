@@ -19,13 +19,13 @@ namespace TTengine.Systems
 
         public override void Process(Entity entity, ScriptComp sc)
         {
-            sc.OnUpdate(dt);
+            sc.OnUpdate(Dt);
             ctx.ScriptComp = sc;
             ctx.Entity = entity;
             foreach(IScript script in sc.Scripts)
                 script.OnUpdate(ctx);
             foreach (IUpdate upd in sc.Updateables)
-                upd.OnUpdate(dt,sc.SimTime);
+                upd.OnUpdate(Dt,sc.SimTime);
         }
 
     }

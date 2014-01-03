@@ -58,7 +58,7 @@ namespace TTengine.Systems
         /// <param name="entity">The entity.</param>
         public override void Process(Entity entity, ExpiresComp expiresComponent)
         {
-            expiresComponent.ReduceLifeTime(dt);
+            expiresComponent.ReduceLifeTime(Dt);
 
             if (expiresComponent.IsExpired)
             {
