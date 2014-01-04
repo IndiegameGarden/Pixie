@@ -31,6 +31,7 @@ namespace Game1
         {
             Instance = this;
             GraphicsMgr.IsFullScreen = false;
+            //this.IsMouseVisible = false;
             GraphicsMgr.PreferredBackBufferWidth = 640; 
             GraphicsMgr.PreferredBackBufferHeight = 640;
             IsAudio = false;

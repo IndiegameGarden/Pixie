@@ -104,6 +104,7 @@ namespace TTengine.Core
             {
                 c.Update();
             }            
+            // FIXME: use ticks argument, to have fixed time step properties!!! put that code at highest level TTGame.
             this.World.Update();
         }
 
