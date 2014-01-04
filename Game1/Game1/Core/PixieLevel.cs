@@ -26,7 +26,7 @@ namespace Game1.Core
         public static Color PIXIE_COLOR = new Color(251, 101, 159); // pink
         public float DEFAULT_SCALE = 2f;
         public float SCREEN_MOTION_SPEED = 15.0f;
-        public float PIXIE_TARGETSPEED = 5.0f;
+        public float PIXIE_TARGETSPEED = 15.0f;
         public int DefaultPassableIntensityThreshold = 380;
         public Vector2 PIXIE_STARTING_POS = Vector2.Zero; // in pixels        
         public Vector2 BG_STARTING_POS = Vector2.Zero;    // in pixels; bg=background
@@ -90,9 +90,10 @@ namespace Game1.Core
         /// </summary>
         protected virtual void InitPixie()
         {
-            Pixie = Factory.CreatePixie();
-            Pixie.GetComponent<PositionComp>().Position2D = PIXIE_STARTING_POS;
+            Pixie = Factory.CreatePixie(PIXIE_COLOR);
+            //Pixie.GetComponent<PositionComp>().Position2D = PIXIE_STARTING_POS;
             Pixie.GetComponent<TargetMotionComp>().Target.Target2D = PIXIE_STARTING_POS;
+            Pixie.GetComponent<TargetMotionComp>().Target.Current2D = PIXIE_STARTING_POS;
             Pixie.GetComponent<TargetMotionComp>().Target.Speed = PIXIE_TARGETSPEED;
         }
 

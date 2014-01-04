@@ -81,8 +81,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actors\Block.cs" />
-    <Compile Include="Actors\Pixie.cs" />
     <Compile Include="Behaviors\ChaseBehavior.cs" />
     <Compile Include="Comps\ColorCycleComp.cs" />
     <Compile Include="Comps\ControlComp.cs" />

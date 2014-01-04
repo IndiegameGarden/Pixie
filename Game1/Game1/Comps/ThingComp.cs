@@ -12,7 +12,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Game1.Core;
 using Game1.Behaviors;
-using Game1.Actors;
 using TreeSharp;
 using Artemis;
 using Artemis.Interface;

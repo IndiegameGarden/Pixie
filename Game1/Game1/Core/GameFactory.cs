@@ -39,20 +39,22 @@ namespace Game1.Core
             }
         }
 
-        public Entity CreatePixie()
+        public Entity CreatePixie(Color color)
         {
-            Entity e = TTFactory.CreateSpritelet("pixie");
+            Entity e = CreateThing(ThingType.HERO, true, color);
             e.AddComponent(new UserControlComp());
-            e.AddComponent(new TargetMotionComp());
             return e;
         }
 
-        public Entity CreateThing(ThingType tp, bool hasControls, string bitmap)
+        public Entity CreateThing(ThingType tp, bool hasControls, string bitmap, Color color)
         {
             var e = TTFactory.CreateSpritelet(bitmap);
             var sc = e.GetComponent<SpriteComp>();
             var tc = new ThingComp(tp);
+            var dc = e.GetComponent<DrawComp>();
+            dc.DrawColor = color;
             e.AddComponent(tc);
+            e.AddComponent(new TargetMotionComp());
             if (hasControls)
             {
                 var tcc = new ControlComp();
@@ -63,9 +65,9 @@ namespace Game1.Core
             return e;
         }
 
-        public Entity CreateThing(ThingType tp, bool hasControls)
+        public Entity CreateThing(ThingType tp, bool hasControls, Color color)
         {
-            return CreateThing(tp, hasControls, "pixie");
+            return CreateThing(tp, hasControls, "pixie", color);
         }
 
         public ColorCycleComp CreateColorCycling(float cyclePeriod, Color minColor, Color maxColor)

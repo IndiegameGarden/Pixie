@@ -13,9 +13,9 @@ namespace Game1.Systems
 {
     /// <summary>'Motion towards a target' system.</summary>
     [ArtemisEntitySystem(GameLoopType = GameLoopType.Update, Layer = SystemsSchedule.UserControlSystem)]
-    public class UserControlSystem : EntityComponentProcessingSystem<UserControlComp>
+    public class UserControlSystem : EntityComponentProcessingSystem<UserControlComp, ControlComp>
     {
-        public override void Process(Entity entity, UserControlComp uc)
+        public override void Process(Entity entity, UserControlComp uc, ControlComp cc)
         {
             float dx = 0f, dy = 0f;
             var kb = Keyboard.GetState();
@@ -36,8 +36,8 @@ namespace Game1.Systems
                                     kb.IsKeyDown(Keys.X) ||
                                     kb.IsKeyDown(Keys.LeftControl);
 
-            uc.Move = new Vector2(dx, dy);
-            uc.IsSteering = true;
+            cc.Move = new Vector2(dx, dy);
+            cc.IsSteering = true;
 
         }
     }

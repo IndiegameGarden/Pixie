@@ -15,33 +15,33 @@ namespace Game1.Systems
     [ArtemisEntitySystem(GameLoopType = GameLoopType.Update, Layer = 3)]
     public class ThingControlSystem : EntityComponentProcessingSystem<ThingComp,ControlComp,TargetMotionComp>
     {
-        public override void Process(Entity entity, ThingComp tc, ControlComp tcc, TargetMotionComp targetPosComp)
+        public override void Process(Entity entity, ThingComp tc, ControlComp cc, TargetMotionComp targetPosComp)
         {
-            tcc.TimeBeforeNextMove -= Dt;
+            cc.TimeBeforeNextMove -= Dt;
 
             // check how much push I get. If get pushed, try to move
-            if (tcc.PushFromOthers.LengthSquared() > tcc.PushForce)
+            if (cc.PushFromOthers.LengthSquared() > cc.PushForce)
             {
-                tcc.Move = tcc.PushFromOthers;
-                tcc.Move.Normalize();
+                cc.Move = cc.PushFromOthers;
+                cc.Move.Normalize();
             }
             else
             {
                 // if not yet time to make my move, return
-                if (tcc.TimeBeforeNextMove > 0)
+                if (cc.TimeBeforeNextMove > 0)
                     return;
             }
 
             // reset the countdown timer back to its value
-            if (tcc.TimeBeforeNextMove <= 0)
-                tcc.TimeBeforeNextMove = tcc.TimeBetweenMoves;
+            if (cc.TimeBeforeNextMove <= 0)
+                cc.TimeBeforeNextMove += cc.TimeBetweenMoves;
 
             // if no move to make, return
-            if (tcc.Move.LengthSquared() == 0f)
+            if (cc.Move.LengthSquared() == 0f)
                 return;
 
             // compute new facingDirection from final TargetMove
-            tc.FacingDirection = tcc.Move;
+            tc.FacingDirection = cc.Move;
             tc.FacingDirection.Normalize();
 
             // check if passable...
@@ -68,7 +68,7 @@ namespace Game1.Systems
             }
              */
 
-            targetPosComp.Target.AddToTarget(tcc.Move);
+            targetPosComp.Target.AddToTarget(cc.Move);
         }
     }
 }

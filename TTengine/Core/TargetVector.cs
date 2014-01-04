@@ -26,7 +26,7 @@ namespace TTengine.Core
             Current = initialValue;
         }
 
-        public bool     IsActive = false;
+        public bool     IsActive = true;
         public Vector3  Target  = Vector3.Zero;
         public Vector3  Current = Vector3.Zero;
         public double   Speed   = 10;

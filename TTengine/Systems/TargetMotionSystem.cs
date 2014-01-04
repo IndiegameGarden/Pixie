@@ -17,6 +17,10 @@ namespace TTengine.Systems
         public override void Process(Entity entity, PositionComp posComp, TargetMotionComp targetComp)
         {
             targetComp.Target.OnUpdate(Dt);
+            if (targetComp.Target.IsActive)
+            {
+                posComp.Position = targetComp.Target.Current;
+            }
         }
     }
 
