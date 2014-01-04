@@ -17,6 +17,16 @@ namespace TTengine.Core
         }
 
         /// <summary>
+        /// Create with given initial values in Vector2
+        /// </summary>
+        /// <param name="initialValue">Value for Target and Current</param>
+        public TargetVector(Vector2 initialValue)
+        {
+            Target2D = initialValue;
+            Current2D = initialValue;
+        }
+
+        /// <summary>
         /// Create with given initial values
         /// </summary>
         /// <param name="initialValue">Value for Target and Current</param>

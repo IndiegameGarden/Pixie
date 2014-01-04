@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.Xna.Framework;
+
 using Artemis.Interface;
 using TTengine.Core;
 using TTengine.Comps;
@@ -10,15 +12,12 @@ namespace Game1.Comps
     /// </summary>
     public class ScrollingComp: IComponent
     {
-        public ScrollingComp(PositionComp positionToTrack, ScreenComp screenToScroll)
+        public ScrollingComp(Vector2 initialPosition)
         {
-            this.PositionToTrack = positionToTrack;
-            this.ScreenToScroll = screenToScroll;
-            Scrolling = new TargetVector(positionToTrack.Position);
+            Scrolling = new TargetVector(initialPosition);
         }
 
         public TargetVector Scrolling;
-        public PositionComp PositionToTrack;
-        public ScreenComp ScreenToScroll;
+
     }
 }

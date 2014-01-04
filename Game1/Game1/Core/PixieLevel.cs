@@ -71,8 +71,8 @@ namespace Game1.Core
         protected virtual void InitLevel()
         {
             Background = Factory.CreateLevelet(LevelBitmapFile);
-            var sc = new ScrollingComp(Pixie.GetComponent<PositionComp>(), TTFactory.BuildChannel.Screen);
-            Background.AddComponent(sc);
+            var sc = new ScrollingComp(this.PIXIE_STARTING_POS);
+            Pixie.AddComponent(sc);
             sc.Scrolling.Current2D = this.BG_STARTING_POS;
 
             //Motion.Scale = DEFAULT_SCALE;
