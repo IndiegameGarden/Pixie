@@ -24,9 +24,10 @@ namespace Game1.Core
 
         // some default colors and settings that may be changed by Level subclasses
         public static Color PIXIE_COLOR = new Color(251, 101, 159); // pink
-        public float DEFAULT_SCALE = 2f;
-        public float SCREEN_MOTION_SPEED = 15.0f;
-        public float PIXIE_TARGETSPEED = 15.0f;
+        public float  DEFAULT_SCALE = 2f;
+        public double  SCREEN_SCROLLING_SPEED = 10.0;
+        public double PIXIE_TARGETSPEED = 10.0;
+        public double PIXIE_SPEED = 10.0;
         public int DefaultPassableIntensityThreshold = 380;
         public Vector2 PIXIE_STARTING_POS = Vector2.Zero; // in pixels        
         public Vector2 BG_STARTING_POS = Vector2.Zero;    // in pixels; bg=background
@@ -74,6 +75,7 @@ namespace Game1.Core
             var sc = new ScrollingComp(this.PIXIE_STARTING_POS);
             Pixie.AddComponent(sc);
             sc.Scrolling.Current2D = this.BG_STARTING_POS;
+            sc.Scrolling.Speed = this.SCREEN_SCROLLING_SPEED;
 
             //Motion.Scale = DEFAULT_SCALE;
             //Motion.ScaleTarget = DEFAULT_SCALE;
@@ -95,6 +97,7 @@ namespace Game1.Core
             Pixie.GetComponent<TargetMotionComp>().Target.Target2D = PIXIE_STARTING_POS;
             Pixie.GetComponent<TargetMotionComp>().Target.Current2D = PIXIE_STARTING_POS;
             Pixie.GetComponent<TargetMotionComp>().Target.Speed = PIXIE_TARGETSPEED;
+            Pixie.GetComponent<ControlComp>().TimeBetweenMoves = (1 / PIXIE_SPEED);
         }
 
         /// <summary>

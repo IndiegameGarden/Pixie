@@ -8,7 +8,7 @@ using TTengine.Comps;
 namespace Game1.Comps
 {
     /// <summary>
-    /// Scrolls the ZoomCenter of a Screen to track a Position of given Entity
+    /// Scrolls the ZoomCenter of Screen to track the Position of this Entity
     /// </summary>
     public class ScrollingComp: IComponent
     {
