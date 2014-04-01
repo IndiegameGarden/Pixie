@@ -22,7 +22,7 @@ using System.Collections;
 using System.Collections.Generic;
 #endregion
 
-// NOTE Modified by trancetrance@github - namespace change
+// NOTE Modified by me - namespace change
 namespace TTMusicEngine.Impl
 {
     /// <summary>
