@@ -48,8 +48,6 @@ namespace Game1
 
         protected override void LoadContent()
         {
-            base.LoadContent();
-
             // create a default Channel
             GameChannel = TTFactory.CreateChannel(Color.White, false);
             TTFactory.BuildTo(GameChannel);
@@ -65,7 +63,8 @@ namespace Game1
             Level = new Level1();
             Level.Init();
             TTFactory.CreateScriptlet(Level);
-         
+
+            base.LoadContent();
         }       
 
     }
