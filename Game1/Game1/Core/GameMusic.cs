@@ -44,7 +44,7 @@ namespace Game1
 
         public void OnUpdate(ScriptContext ctx)
         {
-            rp.Time = ctx.ScriptComp.SimTime; // gameTime.ElapsedGameTime.TotalSeconds;
+            rp.Time = ctx.SimTime; // gameTime.ElapsedGameTime.TotalSeconds;
             MusicEngine.GetInstance().Render(soundScript, rp);
         }
 

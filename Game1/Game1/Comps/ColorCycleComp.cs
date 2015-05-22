@@ -10,6 +10,7 @@ namespace Game1.Comps
 {
     public class ColorCycleComp: Comp
     {
+        public double SimTime = 0.0;
         public double timePeriod;
         public double timePeriodR, timePeriodG, timePeriodB, timePeriodA;
         public Color minColor;

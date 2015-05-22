@@ -68,7 +68,7 @@ namespace Game1.Systems
             }
              */
 
-            targetPosComp.Target.AddToTarget(cc.Move);
+            targetPosComp.Target += cc.Move;
         }
     }
 }

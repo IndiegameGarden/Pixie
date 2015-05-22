@@ -45,7 +45,7 @@ namespace Game1.Behaviors
                 Vector2 dif;
                 if (targetTc.Visible)
                 {
-                    dif = targetPc.Position2D - pc.Position2D;
+                    dif = targetPc.Position - pc.Position;
                     float dist = dif.Length();
                     if (dist > 0f && dist <= ChaseRange && dist > SatisfiedRange)
                     {

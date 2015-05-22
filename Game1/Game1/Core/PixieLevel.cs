@@ -74,7 +74,7 @@ namespace Game1.Core
             Background = Factory.CreateLevelet(LevelBitmapFile);
             var sc = new ScrollingComp(this.PIXIE_STARTING_POS);
             Pixie.AddComponent(sc);
-            sc.Scrolling.Current2D = this.BG_STARTING_POS;
+            sc.Scrolling.Current = this.BG_STARTING_POS;
             sc.Scrolling.Speed = this.SCREEN_SCROLLING_SPEED;
 
             //Motion.Scale = DEFAULT_SCALE;
@@ -94,9 +94,9 @@ namespace Game1.Core
         {
             Pixie = Factory.CreatePixie(PIXIE_COLOR);
             //Pixie.GetComponent<PositionComp>().Position2D = PIXIE_STARTING_POS;
-            Pixie.GetComponent<TargetMotionComp>().Target.Target2D = PIXIE_STARTING_POS;
-            Pixie.GetComponent<TargetMotionComp>().Target.Current2D = PIXIE_STARTING_POS;
-            Pixie.GetComponent<TargetMotionComp>().Target.Speed = PIXIE_TARGETSPEED;
+            Pixie.GetComponent<TargetMotionComp>().Target = PIXIE_STARTING_POS;
+            //Pixie.GetComponent<TargetMotionComp>().Target.Current = PIXIE_STARTING_POS;
+            Pixie.GetComponent<TargetMotionComp>().TargetVelocity = PIXIE_TARGETSPEED;
             Pixie.GetComponent<ControlComp>().TimeBetweenMoves = (1 / PIXIE_SPEED);
         }
 

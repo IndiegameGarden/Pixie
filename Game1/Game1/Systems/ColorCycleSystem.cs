@@ -17,7 +17,7 @@ namespace Game1.Systems
     {
         public override void Process(Entity entity, ColorCycleComp comp)
         {
-            comp.OnUpdate(Dt);
+            comp.SimTime += Dt;
 
             double t = 2 * (comp.SimTime % comp.timePeriod); // TODO SimTime is not the time related to the Draw!
             if (t > comp.timePeriod) // gen sawtooth wave

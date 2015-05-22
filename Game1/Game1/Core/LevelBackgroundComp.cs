@@ -45,18 +45,6 @@ namespace Game1.Core
             return data[0];
         }
 
-        public void SetPixel(Vector2 pos, Color color)
-        {
-            if (pos.X < 0f || pos.X > (Texture.Width - 1) ||
-                pos.Y < 0f || pos.Y > (Texture.Height - 1))
-            {
-                return;
-            }
-            Color[] data = new Color[1];
-            data[0] = color;
-            Texture.SetData<Color>(0, new Rectangle((int)Math.Round(pos.X), (int)Math.Round(pos.Y), 1, 1), data, 0, 1);
-        }
-
         /*
         protected override void OnUpdate(ref UpdateParams p)
         {

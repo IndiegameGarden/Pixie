@@ -116,15 +116,15 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Artemis_XNA_INDEPENDENT\Artemis.csproj">
+    <ProjectReference Include="..\..\TTengine\Artemis_XNA_INDEPENDENT\Artemis.csproj">
       <Project>{22C89AF2-E1CF-4976-91B9-7D33773DC6E7}</Project>
       <Name>Artemis</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\TTengine\TTengine.csproj">
+    <ProjectReference Include="..\..\TTengine\TTengine\TTengine.csproj">
       <Project>{616035D5-3927-44CD-BD41-2EEE846AC3A3}</Project>
       <Name>TTengine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\TTMusicEngine\TTMusicEngine.csproj">
+    <ProjectReference Include="..\..\TTengine\TTMusicEngine\TTMusicEngine.csproj">
       <Project>{cb99d0c9-fd0e-4b90-91bd-7d5816b38a2c}</Project>
       <Name>TTMusicEngine</Name>
     </ProjectReference>

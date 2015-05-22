@@ -51,7 +51,7 @@ namespace Game1.Core
 
         public void OnUpdate(ScriptContext p)
         {
-            SimTime = p.ScriptComp.SimTime;
+            SimTime = p.SimTime;
             rp.Time = SimTime; 
             MusicEngine.GetInstance().Render(soundScript, rp);
 
