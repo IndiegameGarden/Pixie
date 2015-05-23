@@ -1,11 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-
+using Microsoft.Xna.Framework.Input;
 using Artemis;
 using TTengine.Core;
 using TTengine.Comps;
 using TTengine.Util;
-
 using Game1.Comps;
 
 namespace Game1.Core
@@ -24,7 +23,7 @@ namespace Game1.Core
 
         // some default colors and settings that may be changed by Level subclasses
         public static Color PIXIE_COLOR = new Color(251, 101, 159); // pink
-        public float  DEFAULT_SCALE = 2f;
+        public float  DEFAULT_SCALE = 1f;
         public double  SCREEN_SCROLLING_SPEED = 10.0;
         public double PIXIE_TARGETSPEED = 10.0;
         public double PIXIE_SPEED = 10.0;
@@ -66,6 +65,8 @@ namespace Game1.Core
 
         public SubtitleManager Subtitles;
 
+        protected double timeEscDown = 0.0;
+
         /// <summary>
         /// Init: the scrolling level itself.
         /// </summary>
@@ -93,9 +94,8 @@ namespace Game1.Core
         protected virtual void InitPixie()
         {
             Pixie = Factory.CreatePixie(PIXIE_COLOR);
-            //Pixie.GetComponent<PositionComp>().Position2D = PIXIE_STARTING_POS;
+            Pixie.GetComponent<PositionComp>().Position = PIXIE_STARTING_POS;
             Pixie.GetComponent<TargetMotionComp>().Target = PIXIE_STARTING_POS;
-            //Pixie.GetComponent<TargetMotionComp>().Target.Current = PIXIE_STARTING_POS;
             Pixie.GetComponent<TargetMotionComp>().TargetVelocity = PIXIE_TARGETSPEED;
             Pixie.GetComponent<ControlComp>().TimeBetweenMoves = (1 / PIXIE_SPEED);
         }
@@ -129,28 +129,27 @@ namespace Game1.Core
         }
 
         /// check keys specific for level
-        protected virtual void LevelKeyControl(/*ref UpdateParams p*/)
+        protected virtual void LevelKeyControl(ScriptContext ctx)
         {
-            /*
             KeyboardState st = Keyboard.GetState();
             if (st.IsKeyDown(Keys.Escape))
             {
-                timeEscDown += p.Dt;
-                MotionB.ScaleTarget = 1.5f*DEFAULT_SCALE;
-                MotionB.ScaleSpeed = 0.0004f;
-                //Motion.RotateModifier = timeEscDown * 0.05f;
-                PixieGame.Instance.Exit();
+                timeEscDown += ctx.Dt;
+                //MotionB.ScaleTarget = 1.5f*DEFAULT_SCALE;
+                //MotionB.ScaleSpeed = 0.0004f;
+                //Motion.RotateModifier = timeEscDown * 0.05f;                
             }
             else
             {
                 timeEscDown = 0f;
-                MotionB.ScaleTarget = DEFAULT_SCALE; // TODO
+                //MotionB.ScaleTarget = DEFAULT_SCALE; // TODO
             }
             if (timeEscDown > 1.0f)
             {
-                PixieGame.Instance.StopPlay();
+                PixieGame.Instance.Exit();
             }
 
+            /*
             // FIXME remove debug keys
             if (st.IsKeyDown(Keys.PageUp) && Motion.Zoom == Motion.ZoomTarget)
             {
@@ -198,21 +197,16 @@ namespace Game1.Core
 
         public void OnUpdate(ScriptContext ctx)
         {
+            LevelKeyControl(ctx);
             /*
             base.OnUpdate(ref p);
 
             // important: reflect the global viewpos (for sprites to use)
             Thing.ViewPos = Background.Position;
 
-            // do some level tasks
-            LevelKeyControl(ref p);
+            // do some level tasks            
             if (isBackgroundScrollingOn)
                 ScrollBackground(ref p);
-
-            debugMsg.Text = "Pixie: trg=" + pixie.Target +", pos=" + pixie.Position;
-            // DEBUG sample pixel
-            Color c= Background.SamplePixel(pixie.Target);
-            debugMsg.Text += "Color: " + c.R + "," + c.G + "," + c.B + "," + c.A;
             */
         }
 

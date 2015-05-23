@@ -32,8 +32,9 @@ namespace Game1
             Instance = this;
             GraphicsMgr.IsFullScreen = false;
             //this.IsMouseVisible = false;
-            GraphicsMgr.PreferredBackBufferWidth = 640; 
-            GraphicsMgr.PreferredBackBufferHeight = 640;
+            GraphicsMgr.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            GraphicsMgr.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            Window.IsBorderless = true;
             IsAudio = false;
         }
 
