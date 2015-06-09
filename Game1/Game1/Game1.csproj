@@ -87,35 +87,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Behaviors\ChaseBehavior.cs" />
-    <Compile Include="Comps\ColorCycleComp.cs" />
-    <Compile Include="Comps\ControlComp.cs" />
-    <Compile Include="Comps\HealthComp.cs" />
-    <Compile Include="Comps\RandomWanderComp.cs" />
-    <Compile Include="Comps\ScrollingComp.cs" />
-    <Compile Include="Comps\ThingComp.cs" />
-    <Compile Include="Comps\UserControlComp.cs" />
-    <Compile Include="Core\Behavior.cs" />
-    <Compile Include="Core\GameMusic.cs" />
     <Compile Include="Core\GameSound.cs" />
     <Compile Include="Core\LevelBackgroundComp.cs" />
-    <Compile Include="Core\SubtitleManager.cs" />
-    <Compile Include="Core\SubtitleText.cs" />
-    <Compile Include="Core\Toy.cs" />
+    <Compile Include="Core\PixieGame.cs" />
     <Compile Include="Levels\Level1.cs" />
-    <Compile Include="Core\PixieLevel.cs" />
-    <Compile Include="Core\GameFactory.cs" />
     <Compile Include="Program.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PixieGame.cs" />
-    <Compile Include="Systems\ColorCycleSystem.cs" />
-    <Compile Include="Systems\ScrollingSystem.cs" />
-    <Compile Include="Systems\SystemsSchedule.cs" />
-    <Compile Include="Systems\ThingControlSystem.cs" />
-    <Compile Include="Systems\ThingSystem.cs" />
-    <Compile Include="Systems\UserControlSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
@@ -125,6 +104,10 @@
     <ProjectReference Include="..\..\TTengine\Artemis_XNA_INDEPENDENT\Artemis.csproj">
       <Project>{22C89AF2-E1CF-4976-91B9-7D33773DC6E7}</Project>
       <Name>Artemis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TTengine\PXengine\PXengine.csproj">
+      <Project>{2bc0a7bf-fe80-450b-9a9e-e8ec91ed5646}</Project>
+      <Name>PXengine</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\TTengine\TTengine\TTengine.csproj">
       <Project>{616035D5-3927-44CD-BD41-2EEE846AC3A3}</Project>
@@ -167,7 +150,11 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Behaviors\" />
+    <Folder Include="Comps\" />
+    <Folder Include="Systems\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

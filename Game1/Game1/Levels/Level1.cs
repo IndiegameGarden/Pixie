@@ -3,10 +3,11 @@ using System;
 using Microsoft.Xna.Framework;
 
 using Game1.Core;
+using PXengine.Core;
 
 namespace Game1.Levels
 {
-    public class Level1: PixieLevel
+    public class Level1: PXLevel
     {
         public Level1()
         {

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("Pixie")]
 [assembly: AssemblyDescription("Pixie the Pixel")]
 [assembly: AssemblyCompany("IndiegameGarden.com")]
-[assembly: AssemblyCopyright("Copyright © IndiegameGarden.com 2014 and others")]
+[assembly: AssemblyCopyright("Copyright © IndiegameGarden.com 2014-2015 and others!")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

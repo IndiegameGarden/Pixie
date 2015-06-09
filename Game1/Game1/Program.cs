@@ -1,5 +1,6 @@
 // (c) 2010-2014 IndiegameGarden.com. Distributed under the FreeBSD license in LICENSE.txt
 using System;
+using Game1.Core;
 
 namespace Game1
 {
