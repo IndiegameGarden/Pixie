@@ -14,7 +14,7 @@ namespace Game1.Levels
             LevelBitmapFile = "Level1";
             PIXIE_STARTING_POS = new Vector2(380f,200f); // in pixels        
             BG_STARTING_POS = new Vector2(360f, 200f);    // in pixels; bg=background
-            DEFAULT_SCALE = 15f;
+            DEFAULT_SCALE = 2f;
         }
 
         protected override void InitLevelSpecific()
