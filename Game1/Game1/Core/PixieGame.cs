@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using PXengine.Core;
 using TTengine.Core;
 using Game1.Levels;
